@@ -3,168 +3,491 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blumenatelier – Handgebundene Blumensträuße &amp; florale Kreationen</title>
-<meta name="description" content="Blumenatelier – individuelle, handgebundene Blumensträuße und florale Kreationen für jeden Anlass. Bestellungen bequem per Instagram-DM.">
+<title>Schnitzer's Blumenwerkstatt – Blumenladen in Frankfurt-Kalbach</title>
+<meta name="description" content="Schnitzer's Blumenwerkstatt in Frankfurt-Kalbach-Riedberg: handgebundene Sträuße mit Blumen der Saison. Vor Ort in der Kalbacher Hauptstraße 31 oder telefonisch unter 069 503185.">
+<meta property="og:title" content="Schnitzer's Blumenwerkstatt">
+<meta property="og:description" content="Handgebundene Sträuße mit Blumen der Saison – Ihr Blumenladen in Frankfurt-Kalbach-Riedberg.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Blumenatelier – Handgebundene Blumensträuße">
-<meta property="og:description" content="Individuelle, handgebundene Blumensträuße und florale Kreationen für jeden Anlass.">
 <link rel="icon" type="image/svg+xml" href="images/icons/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2B22;
+    --ink-soft:#33422F;
+    --paper:#F7F2E9;
+    --paper-2:#EFE7D8;
+    --sage:#7C8B72;
+    --mauve:#B9788F;
+    --gold:#A98953;
+    --line: rgba(31,43,34,0.15);
+    --maxw: 1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+
+  /* subtle focus visibility */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--mauve);
+    outline-offset:3px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(120% 140% at 18% 0%, rgba(185,120,143,0.28), transparent 55%),
+      linear-gradient(180deg, var(--ink) 0%, #16201A 100%);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+    padding:96px 0 64px;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap:40px;
+    align-items:center;
+    position:relative;
+    z-index:2;
+  }
+  .eyebrow{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    color:var(--mauve);
+    margin-bottom:22px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px;height:1px;
+    background:var(--mauve);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(48px, 8vw, 84px);
+    font-style:italic;
+    font-weight:400;
+    line-height:0.98;
+    color:var(--paper);
+  }
+  .hero .sub{
+    margin-top:26px;
+    font-size:18px;
+    max-width:34ch;
+    color:#D9D3C4;
+    font-weight:300;
+  }
+  .hero .cta-row{
+    margin-top:38px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 28px;
+    border-radius:2px;
+    font-family:'Work Sans', sans-serif;
+    font-size:15px;
+    font-weight:500;
+    text-decoration:none;
+    border:1px solid transparent;
+    transition:transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+  }
+  .btn-primary{
+    background:var(--mauve);
+    color:var(--ink);
+  }
+  .btn-primary:hover{ background:#c98ca1; transform:translateY(-1px); }
+  .btn-ghost{
+    color:var(--paper);
+    border-color:rgba(247,242,233,0.35);
+  }
+  .btn-ghost:hover{ border-color:var(--paper); }
+
+  .hero-art{ position:relative; }
+  .hero-art svg{ width:100%; height:auto; }
+  .hero-line{
+    fill:none;
+    stroke:#E7C9D2;
+    stroke-width:1.4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .hero-line.thick{ stroke:var(--mauve); stroke-width:2; }
+  .hero-line.gold{ stroke:var(--gold); }
+
+  @media (prefers-reduced-motion:no-preference){
+    .draw{
+      stroke-dasharray:900;
+      stroke-dashoffset:900;
+      animation:draw 2.6s ease forwards 0.2s;
+    }
+    @keyframes draw{ to{ stroke-dashoffset:0; } }
+  }
+
+  /* ---------- SECTION shared ---------- */
+  section{ padding:96px 0; }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:56px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:26px;
+  }
+  .section-head .num{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--sage);
+    font-size:15px;
+  }
+  .section-head h2{
+    font-size:clamp(28px,4vw,40px);
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{
+    display:grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap:60px;
+    align-items:center;
+  }
+  .about .quote{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:clamp(22px,2.6vw,30px);
+    color:var(--ink-soft);
+    line-height:1.35;
+  }
+  .about p{
+    color:#4B564A;
+    font-weight:300;
+    font-size:16px;
+  }
+  .about .sprig{ width:120px; opacity:0.85; }
+
+  /* ---------- KOLLEKTION (Bildergalerie) ---------- */
+  .photo-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+  }
+  .photo-tile{
+    aspect-ratio:1/1;
+    background:
+      linear-gradient(135deg, var(--paper-2) 0%, #E3D9C4 100%);
+    border:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .photo-tile svg{
+    width:34%; height:34%;
+    opacity:0.35;
+  }
+  .photo-tile span{
+    position:absolute;
+    bottom:10px; left:10px;
+    font-size:11px;
+    letter-spacing:0.04em;
+    color:#6E7A67;
+    background:rgba(247,242,233,0.85);
+    padding:3px 8px;
+    border-radius:100px;
+  }
+
+  /* ---------- PROCESS ---------- */
+  .process{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .process .section-head{ border-color:rgba(247,242,233,0.18); }
+  .process .section-head .num{ color:var(--mauve); }
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:36px;
+  }
+  .step .n{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:15px;
+    color:var(--mauve);
+    margin-bottom:14px;
+    display:block;
+  }
+  .step h3{
+    font-size:19px;
+    margin-bottom:10px;
+    color:var(--paper);
+  }
+  .step p{
+    font-size:14.5px;
+    color:#C9C2B2;
+    font-weight:300;
+    margin:0;
+  }
+  .step-line{ width:34px; height:34px; margin-bottom:14px; }
+
+  /* ---------- KONTAKT ---------- */
+  .contact{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:60px;
+  }
+  .hours-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:15px;
+  }
+  .hours-table td{
+    padding:9px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .hours-table td:first-child{
+    color:#5B655A;
+    width:40%;
+  }
+  .hours-table tr:last-child td{ border-bottom:none; }
+  .contact-info p{
+    font-size:15.5px;
+    color:#3E473C;
+    font-weight:300;
+    margin:0 0 18px;
+  }
+  .contact-info a{
+    text-decoration:underline;
+    text-underline-offset:2px;
+  }
+  .contact-info .btn{ margin-top:8px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--paper-2);
+    padding:48px 0 32px;
+    font-size:13.5px;
+    color:#5B655A;
+  }
+  footer .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    border-top:1px solid var(--line);
+    padding-top:24px;
+  }
+  footer .brand{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:16px;
+    color:var(--ink);
+  }
+  footer .fnote{
+    max-width:640px;
+    margin:0 auto 24px;
+    text-align:center;
+    font-size:12.5px;
+    color:#7A8377;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .hero .wrap{ grid-template-columns:1fr; }
+    .hero-art{ order:-1; max-width:280px; margin:0 auto; }
+    .about{ grid-template-columns:1fr; }
+    .photo-grid{ grid-template-columns:repeat(2,1fr); }
+    .steps{ grid-template-columns:repeat(2,1fr); }
+    .contact{ grid-template-columns:1fr; gap:36px; }
+    section{ padding:64px 0; }
+    footer .wrap{ flex-direction:column; text-align:center; }
+  }
+  @media (max-width:480px){
+    .photo-grid{ grid-template-columns:repeat(2,1fr); }
+    .steps{ grid-template-columns:1fr; }
+    .wrap{ padding:0 22px; }
+  }
+</style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="#start" class="logo">Blumenatelier</a>
-
-    <nav class="main-nav" id="main-nav">
-      <ul>
-        <li><a href="#start">Start</a></li>
-        <li><a href="#ueber-uns">Über uns</a></li>
-        <li><a href="#galerie">Galerie</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
-      </ul>
-    </nav>
-
-    <div class="header-actions">
-      <a class="icon-link" href="https://instagram.com/blumenatelier__" target="_blank" rel="noopener" aria-label="Blumenatelier auf Instagram">
-        <img src="images/icons/instagram.svg" alt="" width="22" height="22">
-      </a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="main-nav">
-        <span></span><span></span><span></span>
-      </button>
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Ihr Blumenladen in Frankfurt-Kalbach</p>
+      <h1>Schnitzer's<br>Blumenwerkstatt</h1>
+      <p class="sub">Handgebundene Sträuße mit Blumen der Saison — vor Ort in Kalbach-Riedberg oder telefonisch bestellt.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="tel:+4969503185">
+          Jetzt anrufen · 069 503185
+        </a>
+        <a class="btn btn-ghost" href="#kontakt">Öffnungszeiten &amp; Adresse</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg">
+        <path class="hero-line draw" d="M150 320 C150 250 130 210 150 160 C170 110 150 70 150 20" />
+        <path class="hero-line draw" d="M150 210 C120 195 95 200 75 175" />
+        <path class="hero-line draw" d="M150 240 C182 222 205 228 225 205" />
+        <path class="hero-line thick draw" d="M150 20 C120 20 108 45 130 62 C150 76 168 60 150 20 Z" />
+        <path class="hero-line gold draw" d="M75 175 C60 165 55 148 68 138 C82 128 95 142 88 160 C84 170 78 174 75 175 Z" />
+        <path class="hero-line thick draw" d="M225 205 C238 192 238 175 222 170 C207 166 200 184 212 198 C217 204 222 206 225 205 Z" />
+      </svg>
     </div>
   </div>
 </header>
 
-<main>
-
-  <section id="start" class="hero">
-    <div class="hero-placeholder" role="img" aria-label="Platzhalter: Hero-Bild folgt – großformatiges Blumenfoto">
-      <span>Foto folgt</span>
+<!-- ================= ABOUT ================= -->
+<section>
+  <div class="wrap about">
+    <div>
+      <svg class="sprig" viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+        <path class="hero-line" style="stroke:var(--sage)" d="M60 195 C60 140 45 110 60 70 C75 35 60 10 60 5"/>
+        <path class="hero-line" style="stroke:var(--sage)" d="M60 120 C40 108 25 112 12 95"/>
+        <path class="hero-line" style="stroke:var(--sage)" d="M60 90 C80 78 92 82 105 65"/>
+        <path class="hero-line thick" d="M60 5 C42 5 35 22 50 34 C62 43 72 30 60 5 Z"/>
+      </svg>
     </div>
-    <div class="hero-content container">
-      <h1>Frische Blumen für jeden Anlass</h1>
-      <p class="hero-sub">Handgebundene Sträuße und florale Kreationen – mit Liebe zum Detail gestaltet.</p>
-      <div class="hero-actions">
-        <a href="#kontakt" class="btn btn-primary">Zum Kontakt</a>
-        <a href="https://instagram.com/blumenatelier__" target="_blank" rel="noopener" class="btn btn-secondary">Auf Instagram ansehen</a>
-      </div>
+    <div>
+      <p class="quote">„Blumen sollen aussehen, als wären sie gerade eben gepflückt worden — nicht wie aus dem Katalog.“</p>
+      <p style="margin-top:22px;">Wir binden jeden Strauß einzeln, mit dem, was die Saison gerade hergibt. Kein festes Sortiment, keine Massenware — sondern Sträuße, die auf ein Gespräch, einen Anlass oder eine Idee zugeschnitten sind. Vorbeikommen, anrufen oder online Kontakt aufnehmen.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="ueber-uns" class="section ueber-uns">
-    <div class="container two-col">
-      <div class="placeholder-block placeholder-portrait" role="img" aria-label="Platzhalter: Porträtfoto der Floristin folgt">
-        <span>Foto folgt</span>
-      </div>
-      <div class="ueber-uns-text">
-        <h2>Über uns</h2>
-        <p>Willkommen im Blumenatelier! Hier entstehen individuelle Blumensträuße und florale Kreationen für Hochzeiten, besondere Anlässe oder einfach für den Alltag. Jeder Strauß wird von Hand gebunden – mit saisonalen, frischen Blumen und viel Liebe zum Detail.</p>
-        <p>Dieser Text ist ein Platzhalter und wird gemeinsam mit der Kundin final formuliert.</p>
-        <ul class="feature-list">
-          <li>Handgebunden</li>
-          <li>Frisch &amp; saisonal</li>
-          <li>Individuell gestaltet</li>
-        </ul>
-      </div>
+<!-- ================= SORTIMENT (Bildergalerie) ================= -->
+<section id="kollektion">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Unser Sortiment</h2>
+      <span class="num">Impressionen aus dem Laden</span>
     </div>
-  </section>
-
-  <section id="galerie" class="section galerie">
-    <div class="container">
-      <h2>Galerie</h2>
-      <p class="section-sub">Ein Einblick in unsere Arbeiten – echte Fotos folgen in Kürze.</p>
-      <div class="gallery-grid">
-        <button type="button" class="placeholder-block placeholder-gallery" data-lightbox aria-label="Platzhalter: Galeriebild 1 folgt – wird vergrößert angezeigt">
-          <span>Foto folgt</span>
-        </button>
-        <button type="button" class="placeholder-block placeholder-gallery" data-lightbox aria-label="Platzhalter: Galeriebild 2 folgt – wird vergrößert angezeigt">
-          <span>Foto folgt</span>
-        </button>
-        <button type="button" class="placeholder-block placeholder-gallery" data-lightbox aria-label="Platzhalter: Galeriebild 3 folgt – wird vergrößert angezeigt">
-          <span>Foto folgt</span>
-        </button>
-        <button type="button" class="placeholder-block placeholder-gallery" data-lightbox aria-label="Platzhalter: Galeriebild 4 folgt – wird vergrößert angezeigt">
-          <span>Foto folgt</span>
-        </button>
-        <button type="button" class="placeholder-block placeholder-gallery" data-lightbox aria-label="Platzhalter: Galeriebild 5 folgt – wird vergrößert angezeigt">
-          <span>Foto folgt</span>
-        </button>
-        <button type="button" class="placeholder-block placeholder-gallery" data-lightbox aria-label="Platzhalter: Galeriebild 6 folgt – wird vergrößert angezeigt">
-          <span>Foto folgt</span>
-        </button>
-        <button type="button" class="placeholder-block placeholder-gallery" data-lightbox aria-label="Platzhalter: Galeriebild 7 folgt – wird vergrößert angezeigt">
-          <span>Foto folgt</span>
-        </button>
-        <button type="button" class="placeholder-block placeholder-gallery" data-lightbox aria-label="Platzhalter: Galeriebild 8 folgt – wird vergrößert angezeigt">
-          <span>Foto folgt</span>
-        </button>
+  </div>
+  <div class="wrap" style="padding:0;">
+    <div class="photo-grid">
+      <div class="photo-tile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Beispielfoto</span>
+      </div>
+      <div class="photo-tile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Beispielfoto</span>
+      </div>
+      <div class="photo-tile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Beispielfoto</span>
+      </div>
+      <div class="photo-tile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Beispielfoto</span>
       </div>
     </div>
-  </section>
 
-  <section id="kontakt" class="section kontakt">
-    <div class="container two-col">
-      <div class="kontakt-form-wrap">
-        <h2>Kontakt</h2>
-        <p class="section-sub">Schreiben Sie uns eine Nachricht – wir melden uns schnellstmöglich zurück.</p>
+  </div>
+</section>
 
-        <form id="contact-form" class="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_ID" method="POST">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required autocomplete="name">
-
-          <label for="email">E-Mail</label>
-          <input type="email" id="email" name="email" required autocomplete="email">
-
-          <label for="telefon">Telefon (optional)</label>
-          <input type="tel" id="telefon" name="telefon" autocomplete="tel">
-
-          <label for="nachricht">Nachricht</label>
-          <textarea id="nachricht" name="nachricht" rows="5" required></textarea>
-
-          <button type="submit" class="btn btn-primary">Nachricht senden</button>
-
-          <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
-        </form>
+<!-- ================= ABLAUF / PROCESS ================= -->
+<section class="process" id="ablauf">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>So einfach ist es</h2>
+      <span class="num">In drei Schritten</span>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <svg class="step-line" viewBox="0 0 34 34"><path class="hero-line" style="stroke:var(--mauve)" d="M4 8 h26 v16 h-16 l-6 6 v-6 h-4 z"/></svg>
+        <span class="n">01</span>
+        <h3>Anrufen oder vorbeikommen</h3>
+        <p>Ruf uns an unter <a href="tel:+4969503185" style="text-decoration:underline; text-underline-offset:2px;">069 503185</a> oder komm direkt in der <a href="https://www.google.com/maps/search/?api=1&query=Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener" style="text-decoration:underline; text-underline-offset:2px;">Kalbacher Hauptstraße 31</a> vorbei.</p>
       </div>
-
-      <div class="instagram-card">
-        <img src="images/icons/instagram.svg" alt="" width="36" height="36">
-        <h3>Bestellungen bevorzugt per Instagram-DM</h3>
-        <p>Am schnellsten erreichen Sie uns direkt über Instagram.</p>
-        <a class="btn btn-secondary" href="https://instagram.com/blumenatelier__" target="_blank" rel="noopener">@blumenatelier__ öffnen</a>
+      <div class="step">
+        <svg class="step-line" viewBox="0 0 34 34"><path class="hero-line" style="stroke:var(--mauve)" d="M6 17 l8 8 L28 8"/></svg>
+        <span class="n">02</span>
+        <h3>Wünsche besprechen</h3>
+        <p>Anlass, Farben und Budget gemeinsam abstimmen — persönlich oder am Telefon.</p>
+      </div>
+      <div class="step">
+        <svg class="step-line" viewBox="0 0 34 34"><path class="hero-line" style="stroke:var(--mauve)" d="M6 14 h22 l-3 14 h-16 z M12 14 v-4 a5 5 0 0 1 10 0 v4"/></svg>
+        <span class="n">03</span>
+        <h3>Abholen oder liefern lassen</h3>
+        <p>Dein Strauß wird frisch gebunden — zur Abholung im Laden oder zur Lieferung.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-</main>
+<!-- ================= KONTAKT & ÖFFNUNGSZEITEN ================= -->
+<section id="kontakt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Öffnungszeiten &amp; Kontakt</h2>
+      <span class="num">Kalbach-Riedberg</span>
+    </div>
+    <div class="contact">
+      <div class="contact-info">
+        <p><strong>Schnitzer's Blumenwerkstatt</strong><br>
+        <a href="https://www.google.com/maps/search/?api=1&query=Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener">Kalbacher Hauptstraße 31<br>
+        60437 Frankfurt am Main-Kalbach-Riedberg</a></p>
+        <p>Telefon: <a href="tel:+4969503185">069 503185</a></p>
+        <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener">Route berechnen</a>
+      </div>
+      <table class="hours-table">
+        <tr><td>Montag</td><td>08:30–13:00, 15:00–18:30</td></tr>
+        <tr><td>Dienstag</td><td>08:30–13:00, 15:00–18:30</td></tr>
+        <tr><td>Mittwoch</td><td>08:30–13:00</td></tr>
+        <tr><td>Donnerstag</td><td>08:30–13:00, 15:00–18:30</td></tr>
+        <tr><td>Freitag</td><td>08:30–13:00, 15:00–18:30</td></tr>
+        <tr><td>Samstag</td><td>08:00–13:00</td></tr>
+        <tr><td>Sonntag</td><td>Geschlossen</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <span class="logo">Blumenatelier</span>
-    <a class="icon-link" href="https://instagram.com/blumenatelier__" target="_blank" rel="noopener" aria-label="Blumenatelier auf Instagram">
-      <img src="images/icons/instagram.svg" alt="" width="20" height="20">
-    </a>
-    <nav class="footer-legal">
+<!-- ================= FOOTER ================= -->
+<footer>
+  <p class="fnote">Schnitzer's Blumenwerkstatt · <a href="https://www.google.com/maps/search/?api=1&query=Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener">Kalbacher Hauptstraße 31, 60437 Frankfurt am Main-Kalbach-Riedberg</a> · Telefon <a href="tel:+4969503185">069 503185</a></p>
+  <div class="wrap">
+    <span class="brand">Schnitzer's Blumenwerkstatt</span>
+    <span>© 2026 · Handgebunden mit Sorgfalt</span>
+    <span style="display:flex; gap:18px;">
+      <a href="#kontakt">Kontakt</a>
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
-    </nav>
-    <span class="copyright">&copy; <span id="year"></span> Blumenatelier</span>
+    </span>
   </div>
 </footer>
 
-<!-- Lightbox-Overlay -->
-<div id="lightbox" class="lightbox" hidden>
-  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Schließen">&times;</button>
-  <div class="lightbox-content placeholder-block placeholder-gallery">
-    <span>Foto folgt</span>
-  </div>
-</div>
-
-<script src="js/main.js"></script>
 </body>
 </html>
