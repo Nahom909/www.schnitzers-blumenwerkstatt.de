@@ -2,492 +2,1000 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- ============================================================
+     SCHNITZER'S BLUMENWERKSTATT – Vorschau-Website
+     eine Datei, kein Build-Step
+     ------------------------------------------------------------
+     BILDER:  Alle Fotos in  images/  stammen aus dem öffentlichen
+     Google-Unternehmensprofil bzw. Yelp-Eintrag des Ladens.
+     Vor dem Launch bitte durch eigene Dateien gleichen Namens
+     ersetzen, wenn bessere Aufnahmen vorliegen.
+
+     Offene Angaben stehen in eckigen Klammern:  [ … ]
+       [E-Mail] · [Gründungsjahr] · Rezensionstexte (Platzhalter)
+     ============================================================ -->
+
 <title>Schnitzer's Blumenwerkstatt – Blumenladen in Frankfurt-Kalbach</title>
-<meta name="description" content="Schnitzer's Blumenwerkstatt in Frankfurt-Kalbach-Riedberg: handgebundene Sträuße mit Blumen der Saison. Vor Ort in der Kalbacher Hauptstraße 31 oder telefonisch unter 069 503185.">
-<meta property="og:title" content="Schnitzer's Blumenwerkstatt">
-<meta property="og:description" content="Handgebundene Sträuße mit Blumen der Saison – Ihr Blumenladen in Frankfurt-Kalbach-Riedberg.">
+<meta name="description" content="Schnitzer's Blumenwerkstatt in Frankfurt-Kalbach-Riedberg: handgebundene Sträuße aus Blumen der Saison, Trauerfloristik, Tisch- und Raumschmuck sowie Fleurop-Versand. Kalbacher Hauptstraße 31 – oder telefonisch unter 069 503185.">
+<meta property="og:title" content="Schnitzer's Blumenwerkstatt – Blumenladen in Frankfurt-Kalbach">
+<meta property="og:description" content="Handgebundene Sträuße aus Blumen der Saison – Ihr Blumenladen in Frankfurt-Kalbach-Riedberg.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="images/hero.jpg">
+<meta name="theme-color" content="#F3EEE6">
 <link rel="icon" type="image/svg+xml" href="images/icons/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* =========================================================
+     1 · TOKENS  –  alle Flächen einfarbig, keine Farbverläufe.
+     Einzige Ausnahme: Schwarz-Scrims über Fotos (Lesbarkeit).
+     ========================================================= */
   :root{
-    --ink:#1F2B22;
-    --ink-soft:#33422F;
-    --paper:#F7F2E9;
-    --paper-2:#EFE7D8;
-    --sage:#7C8B72;
-    --mauve:#B9788F;
-    --gold:#A98953;
-    --line: rgba(31,43,34,0.15);
-    --maxw: 1080px;
+    --paper:#F3EEE6;      /* warmes Papier – Seitenhintergrund */
+    --paper-2:#EAE3D8;    /* zweite Fläche */
+    --card:#FFFFFF;
+    --black:#000000;      /* dunkle Bänder */
+    --ink:#17140F;
+    --ink-2:#6E675C;
+    --accent:#9E3B4E;     /* eine einzige Akzentfarbe */
+    --accent-hi:#B0445A;
+    --line:rgba(23,20,15,.13);
+    --line-2:rgba(23,20,15,.26);
+    --line-dark:rgba(255,255,255,.16);
+    --maxw:1180px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --spring:cubic-bezier(.34,1.2,.4,1);
+    --p:0;                /* Scroll-Fortschritt, per JS gesetzt */
   }
 
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
   body{
     margin:0;
+    /* overflow-x:clip statt hidden – hidden würde position:sticky brechen */
+    overflow-x:clip;
     background:var(--paper);
     color:var(--ink);
-    font-family:'Work Sans', sans-serif;
+    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", system-ui, sans-serif;
     font-weight:400;
-    line-height:1.6;
+    font-size:17px;
+    line-height:1.62;
+    letter-spacing:-0.011em;
     -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
   }
-  h1,h2,h3{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    margin:0;
-    letter-spacing:-0.01em;
-  }
-  a{color:inherit;}
-  img,svg{display:block;max-width:100%;}
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
-
-  /* subtle focus visibility */
+  h1,h2,h3,h4{ margin:0; font-weight:600; letter-spacing:-0.033em; line-height:1.06; }
+  p{ margin:0; }
+  a{ color:inherit; }
+  img{ display:block; max-width:100%; }
+  figure{ margin:0; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 34px; }
+  section{ padding:120px 0; position:relative; }
   a:focus-visible, button:focus-visible{
-    outline:2px solid var(--mauve);
-    outline-offset:3px;
+    outline:2px solid var(--accent); outline-offset:4px; border-radius:6px;
   }
 
-  /* ---------- HERO ---------- */
-  .hero{
-    background:
-      radial-gradient(120% 140% at 18% 0%, rgba(185,120,143,0.28), transparent 55%),
-      linear-gradient(180deg, var(--ink) 0%, #16201A 100%);
-    color:var(--paper);
-    position:relative;
-    overflow:hidden;
-    padding:96px 0 64px;
+  /* =========================================================
+     2 · BUTTONS
+     ========================================================= */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:9px;
+    padding:14px 26px; border-radius:100px;
+    font-size:16px; font-weight:500; letter-spacing:-0.015em;
+    text-decoration:none; border:1px solid transparent; cursor:pointer;
+    transition:background .25s ease, color .25s ease, border-color .25s ease, transform .3s var(--spring);
   }
-  .hero .wrap{
-    display:grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap:40px;
-    align-items:center;
-    position:relative;
-    z-index:2;
+  .btn svg{ width:18px; height:18px; flex:0 0 auto; }
+  .btn:active{ transform:scale(.97); }
+  .btn-primary{ background:var(--accent); color:#fff; }
+  .btn-primary:hover{ background:var(--accent-hi); }
+  .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--line-2); }
+  .btn-ghost:hover{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .btn-light{ background:#fff; color:var(--ink); }
+  .btn-light:hover{ background:var(--paper-2); }
+  .btn-outline-light{ background:transparent; color:#fff; border-color:rgba(255,255,255,.55); }
+  .btn-outline-light:hover{ background:#fff; color:var(--ink); border-color:#fff; }
+
+  /* =========================================================
+     3 · FORTSCHRITTSLINIE + NAVIGATION
+     ========================================================= */
+  .progress{
+    position:fixed; top:0; left:0; height:2px; width:100%;
+    transform:scaleX(var(--scroll,0)); transform-origin:0 50%;
+    background:var(--accent); z-index:90; pointer-events:none;
+  }
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:80;
+    border-bottom:1px solid transparent;
+    transition:background .35s ease, border-color .35s ease;
+  }
+  .nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:66px; }
+  .nav.scrolled{
+    background:rgba(243,238,230,.82);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    backdrop-filter:saturate(180%) blur(20px);
+    border-bottom-color:var(--line);
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-size:17px; font-weight:600; letter-spacing:-0.025em;
+    text-decoration:none; color:#fff; transition:color .35s ease;
+  }
+  .nav.scrolled .logo{ color:var(--ink); }
+  .logo .mark{
+    width:28px; height:28px; border-radius:50%; flex:0 0 auto;
+    background:var(--accent); display:grid; place-items:center;
+  }
+  .logo .mark svg{ width:16px; height:16px; color:#fff; }
+  .nav-links{ display:flex; align-items:center; gap:30px; }
+  .nav-links a{
+    font-size:15px; font-weight:400; text-decoration:none;
+    color:rgba(255,255,255,.86); transition:color .25s ease, opacity .25s ease;
+  }
+  .nav-links a:hover{ color:#fff; }
+  .nav.scrolled .nav-links a{ color:var(--ink-2); }
+  .nav.scrolled .nav-links a:hover{ color:var(--ink); }
+  .nav-links a.btn{ color:#fff; padding:9px 19px; font-size:15px; }
+  .nav.scrolled .nav-links a.btn{ color:#fff; }
+  .nav-toggle{ display:none; background:none; border:none; padding:6px; cursor:pointer; color:#fff; }
+  .nav.scrolled .nav-toggle{ color:var(--ink); }
+  .nav-toggle svg{ width:26px; height:26px; }
+
+  /* =========================================================
+     4 · HERO  –  Foto füllt die ganze Sektion,
+     minimalistische Scroll-Animation über --p (0 → 1)
+     ========================================================= */
+  .hero-stage{ position:relative; height:210vh; }
+  .hero{
+    position:sticky; top:0;
+    height:100svh; min-height:560px;
+    overflow:hidden;
+    display:flex; align-items:flex-end;
+    background:var(--black);
+  }
+  .hero-media{ position:absolute; inset:0; z-index:0; overflow:hidden; }
+  .hero-media img{
+    width:100%; height:100%; object-fit:cover; object-position:center 45%;
+    transform:scale(calc(1 + var(--p) * .14)) translate3d(0, calc(var(--p) * -3vh), 0);
+    transform-origin:50% 50%;
+    will-change:transform;
+  }
+  /* Schwarz-Scrim: nur zum Abdunkeln, damit weiße Schrift lesbar bleibt */
+  .hero-scrim{
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.22) 30%, rgba(0,0,0,.52) 62%, rgba(0,0,0,.88) 100%);
+  }
+  /* flache Abdunklung, damit weiße Schrift auf dem hellen Foto trägt */
+  .hero-veil{
+    position:absolute; inset:0; z-index:1;
+    background:var(--black); opacity:calc(.26 + var(--p) * .5);
+  }
+  .hero-inner{
+    position:relative; z-index:2; width:100%;
+    padding-top:120px; padding-bottom:104px;
+    transform:translate3d(0, calc(var(--p) * -8vh), 0);
+    opacity:calc(1 - var(--p) * 1.45);
+    will-change:transform, opacity;
   }
   .eyebrow{
-    font-size:13px;
-    text-transform:uppercase;
-    letter-spacing:0.16em;
-    color:var(--mauve);
-    margin-bottom:22px;
-    display:flex;
-    align-items:center;
-    gap:10px;
+    display:inline-flex; align-items:center; gap:11px;
+    font-size:13px; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+    color:#fff; opacity:.86; margin-bottom:24px;
   }
-  .eyebrow::before{
-    content:"";
-    width:26px;height:1px;
-    background:var(--mauve);
-    display:inline-block;
-  }
+  .eyebrow::before{ content:""; width:26px; height:1px; background:#fff; opacity:.7; }
   .hero h1{
-    font-size:clamp(48px, 8vw, 84px);
-    font-style:italic;
-    font-weight:400;
-    line-height:0.98;
-    color:var(--paper);
+    font-size:clamp(44px, 8.4vw, 104px);
+    font-weight:600; letter-spacing:-0.042em; color:#fff;
+    max-width:15ch;
   }
   .hero .sub{
-    margin-top:26px;
-    font-size:18px;
-    max-width:34ch;
-    color:#D9D3C4;
-    font-weight:300;
+    margin-top:24px; max-width:46ch;
+    font-size:clamp(17px, 2vw, 21px); font-weight:300;
+    color:rgba(255,255,255,.9);
   }
-  .hero .cta-row{
-    margin-top:38px;
-    display:flex;
-    gap:18px;
-    flex-wrap:wrap;
-    align-items:center;
+  .cta-row{ margin-top:36px; display:flex; gap:12px; flex-wrap:wrap; }
+  .hero-meta{
+    margin-top:40px; display:flex; gap:14px 30px; flex-wrap:wrap;
+    font-size:14.5px; color:rgba(255,255,255,.8); font-weight:400;
   }
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:15px 28px;
-    border-radius:2px;
-    font-family:'Work Sans', sans-serif;
-    font-size:15px;
-    font-weight:500;
-    text-decoration:none;
-    border:1px solid transparent;
-    transition:transform 0.25s ease, background 0.25s ease, color 0.25s ease;
-  }
-  .btn-primary{
-    background:var(--mauve);
-    color:var(--ink);
-  }
-  .btn-primary:hover{ background:#c98ca1; transform:translateY(-1px); }
-  .btn-ghost{
-    color:var(--paper);
-    border-color:rgba(247,242,233,0.35);
-  }
-  .btn-ghost:hover{ border-color:var(--paper); }
+  .hero-meta span{ display:inline-flex; align-items:center; gap:8px; }
+  .hero-meta svg{ width:16px; height:16px; opacity:.9; }
+  .hero-meta .rate b{ color:#fff; font-weight:600; }
 
-  .hero-art{ position:relative; }
-  .hero-art svg{ width:100%; height:auto; }
-  .hero-line{
-    fill:none;
-    stroke:#E7C9D2;
-    stroke-width:1.4;
-    stroke-linecap:round;
-    stroke-linejoin:round;
+  .scroll-cue{
+    position:absolute; z-index:2; left:50%; bottom:30px;
+    transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:9px;
+    color:rgba(255,255,255,.75); text-decoration:none;
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    opacity:calc(1 - var(--p) * 3);
   }
-  .hero-line.thick{ stroke:var(--mauve); stroke-width:2; }
-  .hero-line.gold{ stroke:var(--gold); }
+  .scroll-cue .rail{
+    width:22px; height:34px; border:1px solid rgba(255,255,255,.45); border-radius:20px; position:relative;
+  }
+  .scroll-cue .rail::after{
+    content:""; position:absolute; left:50%; top:7px;
+    width:3px; height:7px; border-radius:3px; background:#fff;
+    transform:translateX(-50%); animation:cue 1.8s var(--ease) infinite;
+  }
+  /* Einblenden beim Laden */
+  .anim{ opacity:0; transform:translateY(22px); animation:fadeUp .95s var(--ease) forwards; }
+  .a1{ animation-delay:.12s; } .a2{ animation-delay:.26s; } .a3{ animation-delay:.4s; }
+  .a4{ animation-delay:.54s; } .a5{ animation-delay:.68s; }
 
-  @media (prefers-reduced-motion:no-preference){
-    .draw{
-      stroke-dasharray:900;
-      stroke-dashoffset:900;
-      animation:draw 2.6s ease forwards 0.2s;
-    }
-    @keyframes draw{ to{ stroke-dashoffset:0; } }
+  /* =========================================================
+     5 · SECTION-KÖPFE
+     ========================================================= */
+  .kicker{
+    display:inline-block; margin-bottom:16px;
+    font-size:13px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent);
   }
+  .section-head{ max-width:720px; margin-bottom:60px; }
+  .section-head.center{ margin-left:auto; margin-right:auto; text-align:center; }
+  .section-head h2{ font-size:clamp(32px, 5vw, 58px); }
+  .section-head p{ margin-top:18px; font-size:18px; font-weight:300; color:var(--ink-2); }
 
-  /* ---------- SECTION shared ---------- */
-  section{ padding:96px 0; }
-  .section-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:24px;
-    margin-bottom:56px;
-    border-bottom:1px solid var(--line);
-    padding-bottom:26px;
+  /* =========================================================
+     6 · ÜBER UNS
+     ========================================================= */
+  .about{ display:grid; grid-template-columns:1.05fr .95fr; gap:70px; align-items:center; }
+  .about-media{
+    position:relative; border-radius:24px; overflow:hidden;
+    aspect-ratio:4/5; background:var(--paper-2);
   }
-  .section-head .num{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    color:var(--sage);
-    font-size:15px;
-  }
-  .section-head h2{
-    font-size:clamp(28px,4vw,40px);
-  }
-
-  /* ---------- ABOUT ---------- */
-  .about{
-    display:grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap:60px;
-    align-items:center;
-  }
-  .about .quote{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:clamp(22px,2.6vw,30px);
-    color:var(--ink-soft);
-    line-height:1.35;
-  }
-  .about p{
-    color:#4B564A;
-    font-weight:300;
-    font-size:16px;
-  }
-  .about .sprig{ width:120px; opacity:0.85; }
-
-  /* ---------- KOLLEKTION (Bildergalerie) ---------- */
-  .photo-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-  }
-  .photo-tile{
-    aspect-ratio:1/1;
-    background:
-      linear-gradient(135deg, var(--paper-2) 0%, #E3D9C4 100%);
-    border:1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    overflow:hidden;
-  }
-  .photo-tile svg{
-    width:34%; height:34%;
-    opacity:0.35;
-  }
-  .photo-tile span{
-    position:absolute;
-    bottom:10px; left:10px;
-    font-size:11px;
-    letter-spacing:0.04em;
-    color:#6E7A67;
-    background:rgba(247,242,233,0.85);
-    padding:3px 8px;
-    border-radius:100px;
-  }
-
-  /* ---------- PROCESS ---------- */
-  .process{
-    background:var(--ink);
-    color:var(--paper);
-  }
-  .process .section-head{ border-color:rgba(247,242,233,0.18); }
-  .process .section-head .num{ color:var(--mauve); }
-  .steps{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:36px;
-  }
-  .step .n{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:15px;
-    color:var(--mauve);
-    margin-bottom:14px;
-    display:block;
-  }
-  .step h3{
-    font-size:19px;
-    margin-bottom:10px;
-    color:var(--paper);
-  }
-  .step p{
-    font-size:14.5px;
-    color:#C9C2B2;
-    font-weight:300;
-    margin:0;
-  }
-  .step-line{ width:34px; height:34px; margin-bottom:14px; }
-
-  /* ---------- KONTAKT ---------- */
-  .contact{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap:60px;
-  }
-  .hours-table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:15px;
-  }
-  .hours-table td{
-    padding:9px 0;
-    border-bottom:1px solid var(--line);
-  }
-  .hours-table td:first-child{
-    color:#5B655A;
-    width:40%;
-  }
-  .hours-table tr:last-child td{ border-bottom:none; }
-  .contact-info p{
-    font-size:15.5px;
-    color:#3E473C;
-    font-weight:300;
-    margin:0 0 18px;
-  }
-  .contact-info a{
-    text-decoration:underline;
-    text-underline-offset:2px;
-  }
-  .contact-info .btn{ margin-top:8px; }
-
-  /* ---------- FOOTER ---------- */
-  footer{
-    background:var(--paper-2);
-    padding:48px 0 32px;
-    font-size:13.5px;
-    color:#5B655A;
-  }
-  footer .wrap{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:16px;
+  .about-media img{ width:100%; height:100%; object-fit:cover; }
+  .about h2{ font-size:clamp(30px, 4.2vw, 50px); }
+  .about p{ margin-top:20px; font-size:17.5px; font-weight:300; color:var(--ink-2); }
+  .about .facts{
+    margin-top:36px; display:grid; grid-template-columns:repeat(3,1fr);
     border-top:1px solid var(--line);
-    padding-top:24px;
   }
-  footer .brand{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:16px;
-    color:var(--ink);
+  .about .facts div{ padding:20px 16px 0 0; }
+  .about .facts .n{ font-size:26px; font-weight:600; letter-spacing:-0.03em; }
+  .about .facts .t{ margin-top:2px; font-size:13.5px; color:var(--ink-2); }
+
+  /* =========================================================
+     7 · SORTIMENT / LEISTUNGEN
+     ========================================================= */
+  .services{ background:var(--paper-2); }
+  .svc-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .svc{
+    background:var(--card); border:1px solid var(--line); border-radius:22px;
+    padding:30px 26px 32px;
+    transition:transform .45s var(--ease), border-color .3s ease;
   }
-  footer .fnote{
-    max-width:640px;
-    margin:0 auto 24px;
-    text-align:center;
-    font-size:12.5px;
-    color:#7A8377;
+  .svc:hover{ transform:translateY(-6px); border-color:var(--line-2); }
+  .svc .ic{
+    width:42px; height:42px; border-radius:12px; display:grid; place-items:center;
+    background:var(--accent); color:#fff; margin-bottom:20px;
+  }
+  .svc .ic svg{ width:21px; height:21px; }
+  .svc h3{ font-size:20px; letter-spacing:-0.025em; }
+  .svc p{ margin-top:10px; font-size:15.5px; font-weight:300; color:var(--ink-2); }
+
+  /* =========================================================
+     8 · SCROLL-BAND  –  Bild wächst beim Scrollen ins Vollbild
+     ========================================================= */
+  .band{ padding:0; height:230vh; position:relative; }
+  .band-sticky{
+    position:sticky; top:0; height:100svh; min-height:520px;
+    overflow:hidden; display:grid; place-items:center; background:var(--black);
+  }
+  .band-media{
+    position:absolute; inset:0;
+    clip-path:inset(
+      calc((1 - var(--p)) * 11vh) calc((1 - var(--p)) * 9vw)
+      round calc(6px + (1 - var(--p)) * 26px)
+    );
+    will-change:clip-path;
+  }
+  .band-media img{
+    width:100%; height:100%; object-fit:cover;
+    transform:scale(calc(1.12 - var(--p) * .12));
+    will-change:transform;
+  }
+  .band-media::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,.46) 0%, rgba(0,0,0,.44) 48%, rgba(0,0,0,.78) 100%);
+  }
+  .band-copy{
+    position:relative; z-index:2; width:100%; text-align:center; color:#fff;
+    opacity:calc((var(--p) - .32) * 2.6);
+    transform:translate3d(0, calc((1 - var(--p)) * 4vh), 0);
+  }
+  .band-copy .kicker{ color:#fff; opacity:.82; }
+  .band-copy h2{ font-size:clamp(30px, 5.4vw, 62px); color:#fff; }
+  .band-copy p{
+    margin:20px auto 0; max-width:48ch;
+    font-size:clamp(16px,2vw,19px); font-weight:300; color:rgba(255,255,255,.9);
+  }
+  .band-copy .cta-row{ justify-content:center; }
+
+  /* =========================================================
+     9 · IMPRESSIONEN (Bento-Galerie)
+     ========================================================= */
+  .gallery-grid{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:265px; gap:16px;
+  }
+  .tile{
+    position:relative; overflow:hidden; border-radius:20px;
+    background:var(--paper-2);
+  }
+  .tile img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .8s var(--ease);
+  }
+  .tile:hover img{ transform:scale(1.06); }
+  .tile figcaption{
+    position:absolute; left:0; right:0; bottom:0; z-index:2;
+    padding:44px 18px 16px;
+    font-size:14px; font-weight:500; color:#fff;
+    background:linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.62));
+    opacity:0; transform:translateY(8px);
+    transition:opacity .4s var(--ease), transform .4s var(--ease);
+  }
+  .tile:hover figcaption{ opacity:1; transform:none; }
+  .g-tall{ grid-row:span 2; }
+  .g-wide{ grid-column:span 2; }
+
+  /* =========================================================
+     10 · ABLAUF
+     ========================================================= */
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .step{ border-top:1px solid var(--line-dark); padding-top:26px; }
+  .step .n{
+    display:inline-block; font-size:13px; font-weight:600;
+    letter-spacing:.12em; color:var(--accent); margin-bottom:14px;
+  }
+  .step h3{ font-size:22px; color:#fff; }
+  .step p{ margin-top:10px; font-size:15.5px; font-weight:300; color:rgba(255,255,255,.68); }
+  .step a{ color:#fff; text-decoration:underline; text-underline-offset:3px; }
+  .dark{ background:var(--black); color:#fff; }
+  .dark .kicker{ color:#fff; opacity:.7; }
+  .dark .section-head h2{ color:#fff; }
+  .dark .section-head p{ color:rgba(255,255,255,.66); }
+
+  /* =========================================================
+     11 · REZENSIONEN (zwei gegenläufige Laufbänder)
+     ========================================================= */
+  .reviews{ overflow:hidden; background:var(--paper-2); }
+  .rating-line{
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    flex-wrap:wrap; margin-bottom:52px;
+  }
+  .rating-line .score{ font-size:34px; font-weight:600; letter-spacing:-0.03em; }
+  .rating-line .stars{ display:flex; gap:3px; color:var(--accent); }
+  .rating-line .stars svg{ width:19px; height:19px; }
+  .rating-line .meta{ font-size:15px; color:var(--ink-2); }
+  .marquee{
+    overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee + .marquee{ margin-top:18px; }
+  .track{ display:flex; gap:18px; width:max-content; padding:4px 0; }
+  .track.ready{ animation:marquee-left 64s linear infinite; }
+  .track.ready.rev{ animation-name:marquee-right; animation-duration:76s; }
+  .marquee:hover .track.ready{ animation-play-state:paused; }
+  .rev-card{
+    flex:0 0 320px; width:320px;
+    background:var(--card); border:1px solid var(--line); border-radius:20px;
+    padding:26px 26px 24px;
+  }
+  .rev-card .stars{ display:flex; gap:3px; color:var(--accent); margin-bottom:15px; }
+  .rev-card .stars svg{ width:17px; height:17px; }
+  .rev-card p{ font-size:16px; font-weight:300; color:var(--ink); }
+  .rev-card .who{ margin-top:16px; font-size:14px; font-weight:500; color:var(--ink-2); }
+  .rev-note{ margin-top:34px; text-align:center; font-size:13.5px; color:var(--ink-2); }
+
+  /* =========================================================
+     12 · KONTAKT & ÖFFNUNGSZEITEN
+     ========================================================= */
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+  .contact-info p{ font-size:17px; font-weight:300; color:var(--ink); margin-bottom:20px; }
+  .contact-info strong{ font-weight:600; }
+  .contact-info a.u{ text-decoration:underline; text-underline-offset:3px; }
+  .contact-info .cta-row{ margin-top:26px; }
+  .hours-card{
+    background:var(--card); border:1px solid var(--line); border-radius:24px; padding:32px 30px;
+  }
+  .hours-card h3{ font-size:19px; margin-bottom:18px; }
+  .hours-table{ width:100%; border-collapse:collapse; font-size:16px; }
+  .hours-table td{ padding:12px 0; border-bottom:1px solid var(--line); }
+  .hours-table td:first-child{ color:var(--ink-2); font-weight:300; }
+  .hours-table td:last-child{ text-align:right; font-variant-numeric:tabular-nums; }
+  .hours-table tr:last-child td{ border-bottom:none; }
+  .hours-table tr.today td{ color:var(--accent); font-weight:600; }
+  .hours-foot{
+    margin-top:18px; display:flex; align-items:center; gap:9px;
+    font-size:13.5px; color:var(--ink-2);
+  }
+  .hours-foot .dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); flex:0 0 auto; }
+
+  /* =========================================================
+     13 · CTA + FOOTER
+     ========================================================= */
+  .cta-band{ background:var(--black); color:#fff; text-align:center; }
+  .cta-band h2{ font-size:clamp(32px,5vw,58px); color:#fff; }
+  .cta-band p{ margin:20px auto 32px; max-width:44ch; font-size:18px; font-weight:300; color:rgba(255,255,255,.7); }
+  .cta-band .cta-row{ justify-content:center; }
+
+  footer{ background:var(--black); color:rgba(255,255,255,.66); padding:0 0 34px; font-size:15px; }
+  footer a{ color:rgba(255,255,255,.66); text-decoration:none; }
+  footer a:hover{ color:#fff; }
+  .footer-top{
+    display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:44px;
+    padding:56px 0 42px; border-top:1px solid var(--line-dark);
+  }
+  .footer-brand{ font-size:19px; font-weight:600; color:#fff; letter-spacing:-0.025em; margin-bottom:14px; }
+  .footer-top p{ max-width:38ch; font-weight:300; }
+  .footer-col h4{
+    font-size:12.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase;
+    color:rgba(255,255,255,.42); margin-bottom:16px;
+  }
+  .footer-col a{ display:block; margin-bottom:11px; font-weight:300; }
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+    padding-top:26px; border-top:1px solid var(--line-dark);
+    font-size:13.5px; color:rgba(255,255,255,.42);
+  }
+  .footer-bottom a{ color:rgba(255,255,255,.42); }
+  .footer-note{
+    max-width:760px; margin:0 auto; padding:26px 0 0; text-align:center;
+    font-size:13px; color:rgba(255,255,255,.42);
   }
 
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width:860px){
-    .hero .wrap{ grid-template-columns:1fr; }
-    .hero-art{ order:-1; max-width:280px; margin:0 auto; }
-    .about{ grid-template-columns:1fr; }
-    .photo-grid{ grid-template-columns:repeat(2,1fr); }
-    .steps{ grid-template-columns:repeat(2,1fr); }
-    .contact{ grid-template-columns:1fr; gap:36px; }
-    section{ padding:64px 0; }
-    footer .wrap{ flex-direction:column; text-align:center; }
+  /* =========================================================
+     15 · REVEAL
+     ========================================================= */
+  .reveal{
+    opacity:0; transform:translateY(26px);
+    transition:opacity .85s var(--ease), transform .85s var(--ease);
   }
-  @media (max-width:480px){
-    .photo-grid{ grid-template-columns:repeat(2,1fr); }
-    .steps{ grid-template-columns:1fr; }
+  .reveal.in{ opacity:1; transform:none; }
+  .d1{ transition-delay:.08s; } .d2{ transition-delay:.16s; } .d3{ transition-delay:.24s; }
+
+  /* =========================================================
+     16 · KEYFRAMES
+     ========================================================= */
+  @keyframes fadeUp{ to{ opacity:1; transform:none; } }
+  @keyframes cue{ 0%,100%{ transform:translate(-50%,0); opacity:1; } 50%{ transform:translate(-50%,9px); opacity:.3; } }
+  @keyframes marquee-left{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  @keyframes marquee-right{ from{ transform:translateX(-50%); } to{ transform:translateX(0); } }
+
+  /* =========================================================
+     17 · REDUZIERTE BEWEGUNG
+     ========================================================= */
+  html.no-scrub .hero-media img,
+  html.no-scrub .hero-inner,
+  html.no-scrub .band-media img{ transform:none !important; }
+  html.no-scrub .hero-inner,
+  html.no-scrub .band-copy{ opacity:1 !important; }
+  html.no-scrub .band-media{ clip-path:none !important; }
+
+  @media (prefers-reduced-motion:reduce){
+    html{ scroll-behavior:auto; }
+    .anim{ opacity:1; transform:none; animation:none; }
+    .scroll-cue .rail::after{ animation:none; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .track.ready{ animation:none; }
+    .tile:hover img, .svc:hover{ transform:none; }
+    .hero-stage{ height:auto; }
+    .hero{ position:relative; }
+    .band{ height:auto; }
+    .band-sticky{ position:relative; }
+  }
+
+  /* =========================================================
+     18 · RESPONSIVE
+     ========================================================= */
+  @media (max-width:1000px){
+    section{ padding:86px 0; }
+    .nav-links{
+      position:fixed; top:66px; left:0; right:0; display:none;
+      flex-direction:column; align-items:stretch; gap:0; padding:10px 0 18px;
+      background:rgba(243,238,230,.97);
+      -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-links.open{ display:flex; }
+    .nav-links a{ padding:14px 34px; color:var(--ink) !important; font-size:17px; }
+    .nav-links a.btn{ margin:12px 34px 0; color:#fff !important; }
+    .nav-toggle{ display:inline-flex; }
+    .about{ grid-template-columns:1fr; gap:44px; }
+    .about-media{ max-width:480px; aspect-ratio:4/3; }
+    .svc-grid{ grid-template-columns:repeat(2,1fr); }
+    .gallery-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:220px; }
+    .steps{ grid-template-columns:1fr; gap:0; }
+    .step{ padding:24px 0; border-top:1px solid var(--line-dark); }
+    .contact-grid{ grid-template-columns:1fr; gap:40px; }
+    .footer-top{ grid-template-columns:1fr; gap:34px; }
+    .hero-stage{ height:190vh; }
+    .band{ height:200vh; }
+  }
+  @media (max-width:620px){
+    body{ font-size:16.5px; }
     .wrap{ padding:0 22px; }
+    section{ padding:72px 0; }
+    .section-head{ margin-bottom:42px; }
+    .hero-inner{ padding-bottom:88px; }
+    .hero-meta{ gap:10px 20px; font-size:13.5px; }
+    .cta-row .btn{ flex:1 1 100%; }
+    .svc-grid{ grid-template-columns:1fr; }
+    .gallery-grid{ grid-template-columns:1fr; grid-auto-rows:250px; }
+    .g-wide{ grid-column:auto; } .g-tall{ grid-row:auto; }
+    .tile figcaption{ opacity:1; transform:none; }
+    .about .facts{ grid-template-columns:1fr 1fr; }
+    .rev-card{ flex-basis:280px; width:280px; padding:22px; }
+    .hours-card{ padding:26px 22px; }
+    .band-media{ clip-path:inset(calc((1 - var(--p)) * 7vh) calc((1 - var(--p)) * 6vw) round calc(6px + (1 - var(--p)) * 22px)); }
   }
 </style>
 </head>
 <body>
 
-<!-- ================= HERO ================= -->
-<header class="hero">
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" id="nav">
   <div class="wrap">
-    <div>
-      <p class="eyebrow">Ihr Blumenladen in Frankfurt-Kalbach</p>
-      <h1>Schnitzer's<br>Blumenwerkstatt</h1>
-      <p class="sub">Handgebundene Sträuße mit Blumen der Saison — vor Ort in Kalbach-Riedberg oder telefonisch bestellt.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="tel:+4969503185">
-          Jetzt anrufen · 069 503185
+    <a class="logo" href="#top">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V10"/><path d="M12 10c0-3 2-5 5-5 0 3-2 5-5 5Z"/><path d="M12 10c0-3-2-5-5-5 0 3 2 5 5 5Z"/><path d="M12 16c3 0 5-1.6 5-4-3 0-5 1.6-5 4Z"/></svg>
+      </span>
+      Schnitzer's Blumenwerkstatt
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+    <div class="nav-links" id="navlinks">
+      <a href="#ueber">Über uns</a>
+      <a href="#sortiment">Sortiment</a>
+      <a href="#impressionen">Impressionen</a>
+      <a href="#rezensionen">Rezensionen</a>
+      <a href="#kontakt">Kontakt</a>
+      <a class="btn btn-primary" href="tel:+4969503185">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+        Anrufen
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO =====
+     Das Foto füllt die komplette Sektion. Beim Scrollen bleibt der Hero
+     stehen (sticky) und wird über die Variable --p sanft skaliert,
+     abgedunkelt und ausgeblendet. -->
+<div class="hero-stage" data-scrub id="heroStage">
+  <header class="hero" id="top">
+    <div class="hero-media">
+      <img src="images/hero.jpg" alt="Handgebundener Strauß mit weißen Rosen und Gerbera aus Schnitzer's Blumenwerkstatt" fetchpriority="high" decoding="async">
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-veil" aria-hidden="true"></div>
+
+    <div class="wrap hero-inner">
+      <p class="eyebrow anim a1">Blumenladen · Frankfurt-Kalbach-Riedberg</p>
+      <h1 class="anim a2">Schnitzer's Blumenwerkstatt</h1>
+      <p class="sub anim a3">Handgebundene Sträuße aus Blumen der Saison. Dazu Trauerfloristik, Tisch- und Raumschmuck und Fleurop-Versand.</p>
+      <div class="cta-row anim a4">
+        <a class="btn btn-light" href="tel:+4969503185">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+          069 503185
         </a>
-        <a class="btn btn-ghost" href="#kontakt">Öffnungszeiten &amp; Adresse</a>
+        <a class="btn btn-outline-light" href="#kontakt">Öffnungszeiten &amp; Adresse</a>
+      </div>
+      <div class="hero-meta anim a5">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Kalbacher Hauptstraße 31
+        </span>
+        <span class="rate">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg>
+          <b>4,5</b>&nbsp;bei Google · 37 Bewertungen
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h13l3 4h2v5h-3"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6"/><path d="M3 8v9h2"/></svg>
+          Fleurop-Partner
+        </span>
       </div>
     </div>
-    <div class="hero-art">
-      <svg viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg">
-        <path class="hero-line draw" d="M150 320 C150 250 130 210 150 160 C170 110 150 70 150 20" />
-        <path class="hero-line draw" d="M150 210 C120 195 95 200 75 175" />
-        <path class="hero-line draw" d="M150 240 C182 222 205 228 225 205" />
-        <path class="hero-line thick draw" d="M150 20 C120 20 108 45 130 62 C150 76 168 60 150 20 Z" />
-        <path class="hero-line gold draw" d="M75 175 C60 165 55 148 68 138 C82 128 95 142 88 160 C84 170 78 174 75 175 Z" />
-        <path class="hero-line thick draw" d="M225 205 C238 192 238 175 222 170 C207 166 200 184 212 198 C217 204 222 206 225 205 Z" />
-      </svg>
-    </div>
-  </div>
-</header>
 
-<!-- ================= ABOUT ================= -->
-<section>
+    <a class="scroll-cue" href="#ueber" aria-label="Weiter zum Inhalt">
+      <span class="rail" aria-hidden="true"></span>
+      Scrollen
+    </a>
+  </header>
+</div>
+
+<!-- ===== ÜBER UNS ===== -->
+<section id="ueber">
   <div class="wrap about">
-    <div>
-      <svg class="sprig" viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
-        <path class="hero-line" style="stroke:var(--sage)" d="M60 195 C60 140 45 110 60 70 C75 35 60 10 60 5"/>
-        <path class="hero-line" style="stroke:var(--sage)" d="M60 120 C40 108 25 112 12 95"/>
-        <path class="hero-line" style="stroke:var(--sage)" d="M60 90 C80 78 92 82 105 65"/>
-        <path class="hero-line thick" d="M60 5 C42 5 35 22 50 34 C62 43 72 30 60 5 Z"/>
-      </svg>
+    <div class="reveal">
+      <span class="kicker">Über uns</span>
+      <h2>Ein kleiner Laden mit eigener Werkstatt.</h2>
+      <p>Schnitzer's Blumenwerkstatt liegt in der Kalbacher Hauptstraße, mitten im alten Ortskern von Kalbach. Gebunden wird hier von Hand — jeder Strauß einzeln, mit dem, was die Saison gerade hergibt.</p>
+      <p>Neben Sträußen und Gestecken kommen Trauerfloristik, Tisch- und Raumschmuck für Feiern sowie Zimmer- und Beetpflanzen aus dem Laden. Als Fleurop-Partner verschicken wir Blumen deutschlandweit.</p>
+      <div class="facts">
+        <div>
+          <div class="n">4,5 ★</div>
+          <div class="t">37 Google-Bewertungen</div>
+        </div>
+        <div>
+          <div class="n">6 Tage</div>
+          <div class="t">pro Woche geöffnet</div>
+        </div>
+        <div>
+          <div class="n">Fleurop</div>
+          <div class="t">Partnerflorist</div>
+        </div>
+      </div>
     </div>
-    <div>
-      <p class="quote">„Blumen sollen aussehen, als wären sie gerade eben gepflückt worden — nicht wie aus dem Katalog.“</p>
-      <p style="margin-top:22px;">Wir binden jeden Strauß einzeln, mit dem, was die Saison gerade hergibt. Kein festes Sortiment, keine Massenware — sondern Sträuße, die auf ein Gespräch, einen Anlass oder eine Idee zugeschnitten sind. Vorbeikommen, anrufen oder online Kontakt aufnehmen.</p>
+    <figure class="about-media reveal d1">
+      <img src="images/gerbera.jpg" alt="Handgebundener Strauß mit pinken Gerbera, Rosen und Schleierkraut" loading="lazy" decoding="async">
+    </figure>
+  </div>
+</section>
+
+<!-- ===== SORTIMENT ===== -->
+<section class="services" id="sortiment">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Sortiment</span>
+      <h2>Was es bei uns gibt.</h2>
+      <p>Vom einzelnen Strauß bis zur kompletten Tischdekoration — alles wird im Laden gebunden.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <div class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11"/><path d="M12 11c0-3.3 2.2-5.5 5.5-5.5C17.5 8.8 15.3 11 12 11Z"/><path d="M12 11C12 7.7 9.8 5.5 6.5 5.5 6.5 8.8 8.7 11 12 11Z"/><path d="M8 21h8"/></svg>
+        </div>
+        <h3>Sträuße</h3>
+        <p>Handgebunden aus Blumen der Saison — vom kleinen Mitbringsel bis zum großen Strauß.</p>
+      </div>
+      <div class="svc reveal d1">
+        <div class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Trauerfloristik</h3>
+        <p>Kränze, Gestecke und Sargschmuck. Auf Wunsch mit Schleife und eigenem Text.</p>
+      </div>
+      <div class="svc reveal d2">
+        <div class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M7 19v-4h10v4"/><path d="M12 15V9"/><path d="M12 9c0-2.2 1.5-3.5 3.5-3.5C15.5 7.7 14 9 12 9Z"/><path d="M12 9C12 6.8 10.5 5.5 8.5 5.5 8.5 7.7 10 9 12 9Z"/></svg>
+        </div>
+        <h3>Tisch- &amp; Raumschmuck</h3>
+        <p>Für Geburtstage, Hochzeiten und Feiern — abgestimmt auf Anlass, Farben und Raum.</p>
+      </div>
+      <div class="svc reveal d3">
+        <div class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h13l3 4h2v5h-3"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6"/><path d="M3 8v9h2"/></svg>
+        </div>
+        <h3>Fleurop-Versand</h3>
+        <p>Als Fleurop-Partner schicken wir Blumen deutschlandweit — auch kurzfristig.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= SORTIMENT (Bildergalerie) ================= -->
-<section id="kollektion">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Unser Sortiment</h2>
-      <span class="num">Impressionen aus dem Laden</span>
-    </div>
-  </div>
-  <div class="wrap" style="padding:0;">
-    <div class="photo-grid">
-      <div class="photo-tile">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Beispielfoto</span>
-      </div>
-      <div class="photo-tile">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Beispielfoto</span>
-      </div>
-      <div class="photo-tile">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Beispielfoto</span>
-      </div>
-      <div class="photo-tile">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Beispielfoto</span>
+<!-- ===== SCROLL-BAND =====
+     Das Bild wächst beim Scrollen aus einem gerundeten Rahmen ins Vollbild. -->
+<section class="band" data-scrub>
+  <div class="band-sticky">
+    <figure class="band-media">
+      <img src="images/laden.jpg" alt="Schnitzer's Blumenwerkstatt in der Kalbacher Hauptstraße mit Blumen vor dem Schaufenster" loading="lazy" decoding="async">
+    </figure>
+    <div class="wrap band-copy">
+      <span class="kicker">Der Laden</span>
+      <h2>Kalbacher Hauptstraße 31.</h2>
+      <p>Vor der Tür stehen die Pflanzen der Saison, drinnen wird gebunden. Vorbeikommen, aussuchen, mitnehmen — oder vorher kurz anrufen.</p>
+      <div class="cta-row">
+        <a class="btn btn-light" href="https://www.google.com/maps/search/?api=1&query=Schnitzer%27s+Blumenwerkstatt+Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener">Route berechnen</a>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ================= ABLAUF / PROCESS ================= -->
-<section class="process" id="ablauf">
+<!-- ===== IMPRESSIONEN ===== -->
+<section id="impressionen">
   <div class="wrap">
-    <div class="section-head">
-      <h2>So einfach ist es</h2>
-      <span class="num">In drei Schritten</span>
+    <div class="section-head reveal">
+      <span class="kicker">Impressionen</span>
+      <h2>Aus dem Laden.</h2>
+      <p>Aufnahmen aus dem Geschäft und von Arbeiten der letzten Zeit.</p>
+    </div>
+    <div class="gallery-grid">
+      <figure class="tile g-tall reveal">
+        <img src="images/kranz.jpg" alt="Trauerkranz mit gelben Rosen und weißen Chrysanthemen" loading="lazy" decoding="async">
+        <figcaption>Trauerkranz</figcaption>
+      </figure>
+      <figure class="tile g-wide reveal d1">
+        <img src="images/tischdeko.jpg" alt="Festlich eingedeckter Tisch mit Blumengesteck und Kerzen" loading="lazy" decoding="async">
+        <figcaption>Tischdekoration für eine Feier</figcaption>
+      </figure>
+      <figure class="tile reveal d2">
+        <img src="images/strauss-bunt.jpg" alt="Bunter Strauß mit Rosen und Alstromerien im Laden" loading="lazy" decoding="async">
+        <figcaption>Bunt gemischt</figcaption>
+      </figure>
+      <figure class="tile reveal">
+        <img src="images/fleurop.jpg" alt="Fleurop-Tasche mit Strauß und Grußkarte zum Geburtstag" loading="lazy" decoding="async">
+        <figcaption>Fleurop-Versand</figcaption>
+      </figure>
+      <figure class="tile reveal d1">
+        <img src="images/hero.jpg" alt="Weißer Strauß mit Rosen, Gerbera und Eukalyptus" loading="lazy" decoding="async">
+        <figcaption>Weiß gebunden</figcaption>
+      </figure>
+      <figure class="tile reveal d2">
+        <img src="images/laden.jpg" alt="Ladenfront von Schnitzer's Blumenwerkstatt mit Beetpflanzen" loading="lazy" decoding="async">
+        <figcaption>Vor dem Schaufenster</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABLAUF ===== -->
+<section class="dark" id="ablauf">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Ablauf</span>
+      <h2>In drei Schritten.</h2>
     </div>
     <div class="steps">
-      <div class="step">
-        <svg class="step-line" viewBox="0 0 34 34"><path class="hero-line" style="stroke:var(--mauve)" d="M4 8 h26 v16 h-16 l-6 6 v-6 h-4 z"/></svg>
+      <div class="step reveal">
         <span class="n">01</span>
         <h3>Anrufen oder vorbeikommen</h3>
-        <p>Ruf uns an unter <a href="tel:+4969503185" style="text-decoration:underline; text-underline-offset:2px;">069 503185</a> oder komm direkt in der <a href="https://www.google.com/maps/search/?api=1&query=Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener" style="text-decoration:underline; text-underline-offset:2px;">Kalbacher Hauptstraße 31</a> vorbei.</p>
+        <p>Telefonisch unter <a href="tel:+4969503185">069 503185</a> oder direkt in der Kalbacher Hauptstraße 31.</p>
       </div>
-      <div class="step">
-        <svg class="step-line" viewBox="0 0 34 34"><path class="hero-line" style="stroke:var(--mauve)" d="M6 17 l8 8 L28 8"/></svg>
+      <div class="step reveal d1">
         <span class="n">02</span>
         <h3>Wünsche besprechen</h3>
-        <p>Anlass, Farben und Budget gemeinsam abstimmen — persönlich oder am Telefon.</p>
+        <p>Anlass, Farben und Budget abstimmen — persönlich im Laden oder am Telefon.</p>
       </div>
-      <div class="step">
-        <svg class="step-line" viewBox="0 0 34 34"><path class="hero-line" style="stroke:var(--mauve)" d="M6 14 h22 l-3 14 h-16 z M12 14 v-4 a5 5 0 0 1 10 0 v4"/></svg>
+      <div class="step reveal d2">
         <span class="n">03</span>
-        <h3>Im Laden abholen</h3>
-        <p>Dein Strauß wird frisch gebunden — zur Abholung direkt im Laden.</p>
+        <h3>Abholen oder verschicken</h3>
+        <p>Frisch gebunden zur Abholung im Laden, per Lieferung oder über Fleurop deutschlandweit.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= KONTAKT & ÖFFNUNGSZEITEN ================= -->
+<!-- ===== REZENSIONEN =====
+     Zwei gegenläufige Laufbänder. Die Karten werden per JS einmal
+     dupliziert, damit die Schleife nahtlos läuft.
+     Die Texte sind bewusst Platzhalter – hier später echte
+     Google-Rezensionen des Ladens eintragen. -->
+<section class="reviews" id="rezensionen">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="kicker">Rezensionen</span>
+      <h2>Was Kundinnen und Kunden schreiben.</h2>
+    </div>
+    <div class="rating-line reveal">
+      <span class="score">4,5</span>
+      <span class="stars" aria-label="4,5 von 5 Sternen">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg>
+      </span>
+      <span class="meta">37 Bewertungen bei Google</span>
+    </div>
+  </div>
+
+  <div class="marquee reveal">
+    <div class="track" data-track>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+    </div>
+  </div>
+
+  <div class="marquee reveal">
+    <div class="track rev" data-track>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+      <div class="rev-card"><div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></div><p>Platzhalter</p><div class="who">Platzhalter</div></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <p class="rev-note">Hier später echte Google-Rezensionen des Ladens einsetzen.</p>
+  </div>
+</section>
+
+<!-- ===== KONTAKT & ÖFFNUNGSZEITEN ===== -->
 <section id="kontakt">
   <div class="wrap">
-    <div class="section-head">
-      <h2>Öffnungszeiten &amp; Kontakt</h2>
-      <span class="num">Kalbach-Riedberg</span>
+    <div class="section-head reveal">
+      <span class="kicker">Kontakt</span>
+      <h2>Öffnungszeiten &amp; Adresse.</h2>
     </div>
-    <div class="contact">
-      <div class="contact-info">
-        <p><strong>Schnitzer's Blumenwerkstatt</strong><br>
-        <a href="https://www.google.com/maps/search/?api=1&query=Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener">Kalbacher Hauptstraße 31<br>
-        60437 Frankfurt am Main-Kalbach-Riedberg</a></p>
-        <p>Telefon: <a href="tel:+4969503185">069 503185</a></p>
-        <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener">Route berechnen</a>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p>
+          <strong>Schnitzer's Blumenwerkstatt</strong><br>
+          <a class="u" href="https://www.google.com/maps/search/?api=1&query=Schnitzer%27s+Blumenwerkstatt+Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener">Kalbacher Hauptstraße 31<br>60437 Frankfurt am Main-Kalbach-Riedberg</a>
+        </p>
+        <p>
+          Telefon: <a class="u" href="tel:+4969503185">069 503185</a><br>
+          E-Mail: <a class="u" href="mailto:[E-Mail]">[E-Mail]</a>
+        </p>
+        <p>Mittwochnachmittag und sonntags ist der Laden geschlossen. Für größere Aufträge — Trauerfloristik, Hochzeiten, Tischschmuck — am besten vorher kurz anrufen.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="tel:+4969503185">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+            069 503185
+          </a>
+          <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Schnitzer%27s+Blumenwerkstatt+Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener">Route berechnen</a>
+        </div>
       </div>
-      <table class="hours-table">
-        <tr><td>Montag</td><td>08:30–13:00, 15:00–18:30</td></tr>
-        <tr><td>Dienstag</td><td>08:30–13:00, 15:00–18:30</td></tr>
-        <tr><td>Mittwoch</td><td>08:30–13:00</td></tr>
-        <tr><td>Donnerstag</td><td>08:30–13:00, 15:00–18:30</td></tr>
-        <tr><td>Freitag</td><td>08:30–13:00, 15:00–18:30</td></tr>
-        <tr><td>Samstag</td><td>08:00–13:00</td></tr>
-        <tr><td>Sonntag</td><td>Geschlossen</td></tr>
-      </table>
+      <div class="hours-card reveal d1">
+        <h3>Öffnungszeiten</h3>
+        <table class="hours-table">
+          <tr data-day="1"><td>Montag</td><td>08:30–13:00 · 15:00–18:30</td></tr>
+          <tr data-day="2"><td>Dienstag</td><td>08:30–13:00 · 15:00–18:30</td></tr>
+          <tr data-day="3"><td>Mittwoch</td><td>08:30–13:00</td></tr>
+          <tr data-day="4"><td>Donnerstag</td><td>08:30–13:00 · 15:00–18:30</td></tr>
+          <tr data-day="5"><td>Freitag</td><td>08:30–13:00 · 15:00–18:30</td></tr>
+          <tr data-day="6"><td>Samstag</td><td>08:00–13:00</td></tr>
+          <tr data-day="0"><td>Sonntag</td><td>Geschlossen</td></tr>
+        </table>
+        <div class="hours-foot"><span class="dot" aria-hidden="true"></span>Heutiger Tag ist hervorgehoben.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
+<!-- ===== CTA ===== -->
+<section class="cta-band">
+  <div class="wrap reveal">
+    <h2>Kurz anrufen genügt.</h2>
+    <p>Wir binden den Strauß, während Sie unterwegs sind — oder Sie schauen einfach im Laden vorbei.</p>
+    <div class="cta-row">
+      <a class="btn btn-light" href="tel:+4969503185">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+        069 503185
+      </a>
+      <a class="btn btn-outline-light" href="https://www.google.com/maps/search/?api=1&query=Schnitzer%27s+Blumenwerkstatt+Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener">Route berechnen</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
 <footer>
-  <p class="fnote">Schnitzer's Blumenwerkstatt · <a href="https://www.google.com/maps/search/?api=1&query=Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener">Kalbacher Hauptstraße 31, 60437 Frankfurt am Main-Kalbach-Riedberg</a> · Telefon <a href="tel:+4969503185">069 503185</a></p>
   <div class="wrap">
-    <span class="brand">Schnitzer's Blumenwerkstatt</span>
-    <span>© 2026 · Handgebunden mit Sorgfalt</span>
-    <span style="display:flex; gap:18px;">
-      <a href="#kontakt">Kontakt</a>
-      <a href="impressum.html">Impressum</a>
-      <a href="datenschutz.html">Datenschutz</a>
-    </span>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Schnitzer's Blumenwerkstatt</div>
+        <p>Blumenladen in Frankfurt-Kalbach-Riedberg. Handgebundene Sträuße, Trauerfloristik, Tisch- und Raumschmuck, Fleurop-Versand.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Seite</h4>
+        <a href="#ueber">Über uns</a>
+        <a href="#sortiment">Sortiment</a>
+        <a href="#impressionen">Impressionen</a>
+        <a href="#rezensionen">Rezensionen</a>
+        <a href="#kontakt">Öffnungszeiten</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <a href="https://www.google.com/maps/search/?api=1&query=Schnitzer%27s+Blumenwerkstatt+Kalbacher+Hauptstra%C3%9Fe+31+60437+Frankfurt+am+Main" target="_blank" rel="noopener">Kalbacher Hauptstraße 31<br>60437 Frankfurt am Main</a>
+        <a href="tel:+4969503185">069 503185</a>
+        <a href="mailto:[E-Mail]">[E-Mail]</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Schnitzer's Blumenwerkstatt</span>
+      <span style="display:flex; gap:20px;">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </span>
+    </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) document.documentElement.classList.add('no-scrub');
+
+  var nav      = document.getElementById('nav');
+  var toggle   = document.getElementById('navToggle');
+  var links    = document.getElementById('navlinks');
+  var progress = document.getElementById('progress');
+  var stages   = Array.prototype.slice.call(document.querySelectorAll('[data-scrub]'));
+
+  /* ---- Scroll-Scrubbing: schreibt --p (0 → 1) auf jede Stage ---- */
+  function frame(){
+    var vh = window.innerHeight;
+
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - vh;
+    progress.style.setProperty('--scroll', max > 0 ? (window.scrollY / max).toFixed(4) : 0);
+
+    if (!reduce){
+      for (var i = 0; i < stages.length; i++){
+        var el    = stages[i];
+        var rect  = el.getBoundingClientRect();
+        var span  = el.offsetHeight - vh;
+        var p     = span > 0 ? (-rect.top) / span : 0;
+        if (p < 0) p = 0; else if (p > 1) p = 1;
+        el.style.setProperty('--p', p.toFixed(4));
+      }
+    }
+    ticking = false;
+  }
+
+  var ticking = false;
+  function onScroll(){
+    if (!ticking){ ticking = true; window.requestAnimationFrame(frame); }
+  }
+  frame();
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', onScroll, { passive:true });
+
+  /* ---- Reveal beim Hereinscrollen ---- */
+  if (reduce || !('IntersectionObserver' in window)){
+    Array.prototype.forEach.call(document.querySelectorAll('.reveal'), function(el){ el.classList.add('in'); });
+  } else {
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    }, { threshold:0.1, rootMargin:'0px 0px -8% 0px' });
+    Array.prototype.forEach.call(document.querySelectorAll('.reveal'), function(el){ obs.observe(el); });
+  }
+
+  /* ---- Mobiles Menü ---- */
+  toggle.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  Array.prototype.forEach.call(links.querySelectorAll('a'), function(a){
+    a.addEventListener('click', function(){
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+    });
+  });
+
+  /* ---- Heutiger Öffnungstag hervorheben ---- */
+  try {
+    var row = document.querySelector('.hours-table tr[data-day="' + new Date().getDay() + '"]');
+    if (row) row.classList.add('today');
+  } catch(e){}
+
+  /* ---- Rezensions-Laufbänder: Karten einmal duplizieren ---- */
+  if (!reduce){
+    Array.prototype.forEach.call(document.querySelectorAll('[data-track]'), function(track){
+      var copy = track.innerHTML;
+      track.insertAdjacentHTML('beforeend', copy);
+      Array.prototype.slice.call(track.children, track.children.length / 2).forEach(function(c){
+        c.setAttribute('aria-hidden','true');
+      });
+      track.classList.add('ready');
+    });
+  }
+})();
+</script>
 
 </body>
 </html>
