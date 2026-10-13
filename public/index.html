@@ -896,6 +896,7 @@ const ORT  = "Egelsbach";
     state.slot = null; render();
   }
   document.querySelectorAll("[data-anliegen]").forEach(l => l.addEventListener("click", () => pick(ANLIEGEN.find(a => a.id === l.dataset.anliegen))));
+  window.pickAnliegen = (id) => { const a = ANLIEGEN.find(x => x.id === id); if (a) pick(a); };
 
   document.getElementById("calPrev").addEventListener("click", () => { state.view.setMonth(state.view.getMonth() - 1); renderCal(); });
   document.getElementById("calNext").addEventListener("click", () => { state.view.setMonth(state.view.getMonth() + 1); renderCal(); });
@@ -997,10 +998,12 @@ const ORT  = "Egelsbach";
     log.appendChild(el); log.scrollTop = log.scrollHeight;
     return el;
   }
-  function cta() {
+  const ANL = [[/hu|au|tüv|hauptunters/i, "hu"], [/reifen|räder|rad|winter|sommer/i, "reifen"], [/unfall|karosser|delle|kratzer|versicherung|glas|scheibe/i, "unfall"], [/transporter|flotte|firm/i, "flotte"], [/inspektion|wartung|service|öl/i, "inspektion"], [/diagnos|reparat|geräusch|warnleucht|brems|motor|kupplung|zahnriem|klima|batterie|auspuff/i, "diagnose"]];
+  function cta(context) {
+    const hit = ANL.find(([re]) => re.test(context));
     const box = document.createElement("div"); box.className = "msg-cta";
-    box.innerHTML = '<a href="#termin">Termin buchen</a><a href="tel:+496103731200">06103 731200 anrufen</a>';
-    box.querySelector('a[href="#termin"]').addEventListener("click", () => toggle(false));
+    box.innerHTML = '<a href="#termin">Termin buchen</a><a href="tel:+496103731200">Anrufen</a>';
+    box.querySelector('a[href="#termin"]').addEventListener("click", () => { if (hit && window.pickAnliegen) window.pickAnliegen(hit[1]); toggle(false); });
     log.appendChild(box); log.scrollTop = log.scrollHeight;
   }
   function toggle(open) {
@@ -1035,7 +1038,7 @@ const ORT  = "Egelsbach";
     }
     answer = answer.replace("\u0000FEHLER", "").trim();
     history.push({ role: "assistant", content: answer });
-    if (/termin|buchen|vereinbar|anruf|06103/i.test(q + " " + answer)) cta();
+    if (/termin|buchen|vereinbar|vorbeikommen|vorbei kommen|wann kann ich/i.test(q) || /„Termin buchen“/.test(answer)) cta(history.filter(m => m.role === "user").map(m => m.content).join(" "));
     busy = false; send.disabled = !input.value.trim();
   }
 
