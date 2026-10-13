@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>[Autohausname] – Neuwagen, Gebrauchtwagen & Service</title>
-<meta name="description" content="Neuwagen, Gebrauchtwagen, Leasing und Meisterwerkstatt. Werkstatttermin und Probefahrt online buchen.">
+<title>Autohaus Sollath GmbH – Bosch Car Service in Egelsbach</title>
+<meta name="description" content="Bosch Car Service in Egelsbach: Meisterwerkstatt für alle Marken. Inspektion, HU/AU, Reifen, Diagnose und Reparatur. Werkstatttermin online buchen.">
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,8 @@
   --shell:#f3f3f2;
   --core:#ffffff;
   --soft:#f7f7f6;
-  --ok:#0b0b0c;
+  --brand:#103c3e;
+  --brand-2:#185052;
   --radius:28px;
   --ease:cubic-bezier(.32,.72,0,1);
   --ease-out:cubic-bezier(.16,1,.3,1);
@@ -48,7 +49,7 @@ h1,h2,h3,p{margin:0}
 /* ---------- Typo ---------- */
 .eyebrow{width:max-content;justify-self:start;display:inline-flex;align-items:center;gap:.6em;padding:6px 12px;border-radius:999px;
   background:var(--shell);font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--ink-2)}
-.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--ink);display:block}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--brand);display:block}
 .h2{font-size:clamp(2.1rem,4.6vw,4rem);line-height:1.02;letter-spacing:-.035em;font-weight:600;text-wrap:balance}
 .lead{font-size:clamp(1rem,1.3vw,1.15rem);color:var(--muted);max-width:44ch}
 .mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted)}
@@ -63,9 +64,9 @@ h1,h2,h3,p{margin:0}
 .btn .ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;transition:transform .55s var(--ease)}
 .btn:hover .ic{transform:translate(2px,-1px) scale(1.06)}
 .btn svg{width:16px;height:16px}
-.btn-dark{background:var(--ink);color:#fff}
+.btn-dark{background:var(--brand);color:#fff}
 .btn-dark .ic{background:rgba(255,255,255,.14)}
-.btn-dark:hover{background:#2a2a2d}
+.btn-dark:hover{background:var(--brand-2)}
 .btn-light{background:var(--shell);color:var(--ink)}
 .btn-light .ic{background:#fff}
 .btn-light:hover{background:#e9e9e7}
@@ -81,7 +82,7 @@ h1,h2,h3,p{margin:0}
   box-shadow:0 0 0 1px var(--line),0 12px 40px -18px rgba(11,11,12,.18);transition:transform .6s var(--ease)}
 .nav.is-hidden{transform:translate(-50%,-140%)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.02em;font-size:16px;min-width:0}
-.brand-mark{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600;flex:none;letter-spacing:0}
+.brand-mark{width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600;flex:none;letter-spacing:0}
 .brand-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:34ch}
 .nav-links{display:flex;gap:4px;font-size:14px;font-weight:450}
 .nav-links a{padding:9px 14px;border-radius:999px;color:var(--ink-2);transition:background-color .35s var(--ease),color .35s var(--ease)}
@@ -110,7 +111,9 @@ h1,h2,h3,p{margin:0}
 .hero-copy{position:relative;z-index:2;padding:120px 40px 64px var(--gutter);align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:28px;
   max-width:calc(var(--max)*.42 + var(--gutter))}
 @media (min-width:1400px){.hero-copy{margin-left:calc((100vw - var(--max))/2 - var(--gutter))}}
-.hero-copy > *{align-self:flex-start}
+.hero-copy{min-width:0}
+.hero-copy > *{align-self:flex-start;max-width:100%}
+.hero-copy > h1{align-self:stretch}
 .hero h1{font-size:clamp(2.6rem,5.4vw,6rem);line-height:.96;letter-spacing:-.05em;font-weight:600;text-wrap:balance;hyphens:manual}
 .hero .sub{font-size:clamp(1.02rem,1.35vw,1.2rem);color:var(--ink-2);max-width:30ch}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:10px}
@@ -125,7 +128,7 @@ h1,h2,h3,p{margin:0}
 @media (min-width:1400px){.hero-meta{left:calc((100vw - var(--max))/2);right:calc((100vw - var(--max))/2)}}
 .scrub{display:flex;align-items:center;gap:14px;flex:1;max-width:420px}
 .scrub-track{position:relative;flex:1;height:1px;background:var(--line-2)}
-.scrub-bar{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(0)}
+.scrub-bar{position:absolute;inset:0;background:var(--brand);transform-origin:left;transform:scaleX(0)}
 .facts{display:flex;gap:28px}
 .fact{display:grid;gap:2px}
 .fact b{font-size:15px;font-weight:600;letter-spacing:-.01em}
@@ -152,7 +155,7 @@ h1,h2,h3,p{margin:0}
 .tile-text p{color:var(--muted);opacity:1}
 .tile-text .go{background:var(--shell);color:var(--ink)}
 .tile-text:hover .go{background:var(--ink);color:#fff}
-.tile-dark .core{background:var(--ink)}
+.tile-dark .core{background:var(--brand)}
 .tile-dark h3{color:#fff}.tile-dark p{color:rgba(255,255,255,.62)}
 .tile-dark .go{background:rgba(255,255,255,.12);color:#fff}
 .tile-dark:hover .go{background:#fff;color:var(--ink)}
@@ -191,7 +194,7 @@ figure{margin:0}
 .booker > .col{padding:clamp(22px,2.6vw,36px);border-right:1px solid var(--line);min-width:0}
 .booker > .col:last-child{border-right:0}
 .step{display:flex;align-items:center;gap:10px;margin-bottom:20px}
-.step .n{width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;font-weight:600;display:grid;place-items:center;flex:none}
+.step .n{width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;font-size:12px;font-weight:600;display:grid;place-items:center;flex:none}
 .step h3{font-size:15px;font-weight:600;letter-spacing:-.01em}
 .opts{display:grid;gap:8px}
 .opt{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:16px;background:var(--soft);text-align:left;
@@ -202,7 +205,7 @@ figure{margin:0}
 .opt .ico svg{width:19px;height:19px}
 .opt b{display:block;font-size:14.5px;font-weight:550;letter-spacing:-.01em}
 .opt small{display:block;font-size:12.5px;color:var(--muted)}
-.opt[aria-pressed="true"]{background:var(--ink);color:#fff}
+.opt[aria-pressed="true"]{background:var(--brand);color:#fff}
 .opt[aria-pressed="true"] small{color:rgba(255,255,255,.6)}
 .opt[aria-pressed="true"] .ico{background:rgba(255,255,255,.12)}
 .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
@@ -220,7 +223,7 @@ figure{margin:0}
 .day.free::after{content:"";position:absolute;bottom:16%;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--ink)}
 .day.off{color:#c3c3c6;cursor:default}
 .day.full{color:#b3b3b7;text-decoration:line-through;text-decoration-thickness:1px;cursor:default}
-.day.sel{background:var(--ink);color:#fff}
+.day.sel{background:var(--brand);color:#fff}
 .day.sel::after{background:#fff}
 .day.today{box-shadow:inset 0 0 0 1px var(--line-2)}
 .legend{display:flex;gap:16px;margin-top:14px;font-size:12px;color:var(--muted);flex-wrap:wrap}
@@ -231,7 +234,7 @@ figure{margin:0}
   transition:background-color .3s var(--ease),color .3s var(--ease)}
 .slot:hover{background:#ececea}
 .slot:disabled{color:#bdbdc1;text-decoration:line-through;cursor:default;background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
-.slot[aria-pressed="true"]{background:var(--ink);color:#fff}
+.slot[aria-pressed="true"]{background:var(--brand);color:#fff}
 .slots-empty{font-size:14px;color:var(--muted);padding:18px;border-radius:16px;background:var(--soft)}
 .form{display:grid;gap:8px;margin-top:22px}
 .field{display:grid;gap:4px}
@@ -246,7 +249,7 @@ figure{margin:0}
 .booker .btn:disabled{opacity:.35;cursor:not-allowed}
 .note{font-size:12px;color:var(--muted);margin-top:12px}
 .done{display:none;text-align:center;padding:clamp(40px,6vw,80px) 24px}
-.done .tick{width:64px;height:64px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;margin:0 auto 22px}
+.done .tick{width:64px;height:64px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;margin:0 auto 22px}
 .done .tick svg{width:28px;height:28px}
 .done h3{font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.03em;font-weight:600}
 .done p{color:var(--muted);margin:10px auto 26px;max-width:44ch}
@@ -290,6 +293,7 @@ figure{margin:0}
 .contact .core{padding:clamp(24px,3vw,44px)}
 .hours{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
 .hours h3{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--muted);margin-bottom:14px}
+.hours.one{grid-template-columns:minmax(0,420px)}
 .hours dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:15px}
 .hours dt{color:var(--ink-2)}
 .hours dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -301,7 +305,7 @@ figure{margin:0}
 .contact-list a,.contact-list div{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);font-size:16px}
 .contact-list span{color:var(--muted);font-size:13px}
 .contact-list a:hover b{text-decoration:underline;text-underline-offset:4px}
-.contact-dark .core{background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:space-between;gap:40px}
+.contact-dark .core{background:var(--brand);color:#fff;display:flex;flex-direction:column;justify-content:space-between;gap:40px}
 .contact-dark .h2{color:#fff}
 .contact-dark .lead{color:rgba(255,255,255,.62)}
 .contact-dark .contact-list a,.contact-dark .contact-list div{border-color:rgba(255,255,255,.12)}
@@ -338,6 +342,7 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
   .hero-stage{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;align-items:stretch}
   .hero-copy{padding:92px var(--gutter) 0;justify-content:flex-start;gap:16px;max-width:none;text-align:center;align-items:center}
   .hero-copy > *{align-self:center}
+  .hero-copy > h1{align-self:stretch}
   .hero h1{font-size:clamp(2.3rem,11.5vw,4rem)}
   .hero .sub{max-width:28ch}
   .hero-ctas{justify-content:center;flex-wrap:nowrap;gap:8px}
@@ -386,23 +391,23 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
 
 <!-- ================= Navigation ================= -->
 <header class="nav" id="nav">
-  <a href="#top" class="brand" aria-label="Startseite"><span class="brand-mark" data-initial>A</span><span class="brand-name" data-name>[Autohausname]</span></a>
+  <a href="#top" class="brand" aria-label="Startseite"><span class="brand-mark" data-initial>S</span><span class="brand-name" data-name>Autohaus Sollath GmbH</span></a>
   <nav class="nav-links" aria-label="Hauptmenü">
-    <a href="#fahrzeuge">Fahrzeuge</a>
-    <a href="#service">Service</a>
+    <a href="#leistungen">Leistungen</a>
     <a href="#termin">Termin</a>
+    <a href="#bewertungen">Bewertungen</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
   <a href="#termin" class="btn btn-dark">Termin buchen <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
   <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span></button>
 </header>
 <div class="overlay" id="overlay" aria-hidden="true">
-  <a class="big" href="#fahrzeuge">Fahrzeuge</a>
-  <a class="big" href="#service">Service</a>
+  <a class="big" href="#leistungen">Leistungen</a>
+  <a class="big" href="#service">Werkstatt</a>
   <a class="big" href="#termin">Termin buchen</a>
   <a class="big" href="#bewertungen">Bewertungen</a>
   <a class="big" href="#kontakt">Kontakt</a>
-  <div class="meta"><span>[Straße Nr.], [PLZ] <span data-ort>[Ort]</span></span><a href="tel:+490000000000">[Telefonnummer]</a></div>
+  <div class="meta"><span>Kurt-Schumacher-Ring 8, 63329 <span data-ort>Egelsbach</span></span><a href="tel:+496103731200">06103 731200</a></div>
 </div>
 
 <main id="top">
@@ -411,12 +416,12 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
 <section class="hero" id="hero" aria-label="Start">
   <div class="hero-stage">
     <div class="hero-copy">
-      <span class="eyebrow rv"><i></i>Autohaus in <span data-ort>[Ort]</span></span>
-      <h1 class="rv d1" data-name>[Autohausname]</h1>
-      <p class="sub rv d2">Neuwagen, Gebrauchtwagen und Meisterwerkstatt.</p>
+      <span class="eyebrow rv"><i></i>Bosch Car Service · <span data-ort>Egelsbach</span></span>
+      <h1 class="rv d1" data-name>Autohaus Sollath GmbH</h1>
+      <p class="sub rv d2">Meisterwerkstatt für alle Marken.</p>
       <div class="hero-ctas rv d3">
-        <a href="#fahrzeuge" class="btn btn-dark">Fahrzeuge <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
-        <a href="#termin" class="btn btn-light">Werkstatttermin <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span></a>
+        <a href="#termin" class="btn btn-dark">Termin buchen <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span></a>
+        <a href="#leistungen" class="btn btn-light">Leistungen <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
       </div>
     </div>
     <div class="hero-car">
@@ -431,109 +436,100 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
     <div class="hero-meta">
       <div class="scrub" aria-hidden="true"><span class="mono">Seite</span><div class="scrub-track"><div class="scrub-bar" id="scrubBar"></div></div><span class="mono">Front</span></div>
       <div class="facts">
-        <div class="fact"><b>Seit [Jahr]</b><span>Familienbetrieb</span></div>
-        <div class="fact"><b>[000]+ Fahrzeuge</b><span>sofort verfügbar</span></div>
-        <div class="fact"><b>Meisterwerkstatt</b><span>alle Marken</span></div>
+        <div class="fact"><b>Bosch Car Service</b><span>Partnerwerkstatt</span></div>
+        <div class="fact"><b>4,6 ★ bei Google</b><span>142 Bewertungen</span></div>
+        <div class="fact"><b>Auch samstags</b><span>09:00 – 12:00 Uhr</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= Fahrzeuge ================= -->
-<section class="sec" id="fahrzeuge">
+<!-- ================= Leistungen ================= -->
+<section class="sec" id="leistungen">
   <div class="wrap">
     <div class="sec-head">
       <div class="stack">
-        <span class="eyebrow rv"><i></i>Verkauf</span>
-        <h2 class="h2 rv d1">Fahrzeuge.</h2>
+        <span class="eyebrow rv"><i></i>Werkstatt</span>
+        <h2 class="h2 rv d1">Leistungen.</h2>
       </div>
-      <p class="lead rv d2">Neu, gebraucht, geleast oder finanziert.</p>
+      <p class="lead rv d2">Für alle Marken. Nach Herstellervorgaben.</p>
     </div>
 
     <div class="bento">
-      <a href="#termin" data-anliegen="probefahrt" class="tile b-neu shell rv">
+      <a href="#termin" data-anliegen="inspektion" class="tile b-neu shell rv">
         <div class="core">
-          <img src="assets/img/showroom.webp" srcset="assets/img/showroom-s.webp 900w, assets/img/showroom.webp 1800w" sizes="(max-width:860px) 100vw, 58vw" alt="Heller Showroom mit Glasfront und dunkler Limousine" loading="lazy">
+          <img src="assets/img/werkstatt.webp" srcset="assets/img/werkstatt-s.webp 900w, assets/img/werkstatt.webp 1800w" sizes="(max-width:860px) 100vw, 58vw" alt="Mechaniker arbeitet an einem Fahrzeug auf der Hebebühne" loading="lazy">
           <div class="scrim"></div>
-          <div class="cap"><div><h3>Neuwagen</h3><p>Aktuelle Modelle, Vorführwagen und Tageszulassungen.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+          <div class="cap"><div><h3>Inspektion &amp; Wartung</h3><p>Nach Herstellervorgaben. Die Herstellergarantie bleibt erhalten.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
         </div>
       </a>
-      <a href="#termin" data-anliegen="probefahrt" class="tile b-gebr shell rv d1">
+      <a href="#termin" data-anliegen="diagnose" class="tile b-gebr shell rv d1">
         <div class="core">
-          <img src="assets/img/gebraucht.webp" srcset="assets/img/gebraucht-s.webp 900w, assets/img/gebraucht.webp 1800w" sizes="(max-width:860px) 100vw, 42vw" alt="Fahrzeug im Ausstellungsraum, Rad im Vordergrund" loading="lazy">
+          <img src="assets/img/ankauf.webp" srcset="assets/img/ankauf-s.webp 900w, assets/img/ankauf.webp 1800w" sizes="(max-width:860px) 100vw, 42vw" alt="Mechaniker prüft den Motorraum" loading="lazy">
           <div class="scrim"></div>
-          <div class="cap"><div><h3>Gebrauchtwagen</h3><p>Geprüft, mit Garantie und Historie.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+          <div class="cap"><div><h3>Diagnose &amp; Reparatur</h3><p>Fehlerspeicher, Motor, Elektrik und Elektronik.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
         </div>
       </a>
-      <a href="#termin" data-anliegen="beratung" class="tile tile-text b-leas shell rv d2">
+      <a href="#termin" data-anliegen="hu" class="tile tile-text b-leas shell rv d2">
         <div class="core">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
-            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10.5h18M7 15h3"/></svg></span>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.2 2.4 2.4 4.6-4.9"/></svg></span>
             <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
           </div>
-          <div><h3>Leasing &amp; Finanzierung</h3><p>Privat und gewerblich. Feste Rate, flexible Laufzeit.</p></div>
+          <div><h3>HU / AU</h3><p>Hauptuntersuchung und Abgasuntersuchung direkt bei uns.</p></div>
         </div>
       </a>
-      <a href="#termin" data-anliegen="ankauf" class="tile b-ankauf shell rv">
+      <a href="#termin" data-anliegen="reifen" class="tile b-ankauf shell rv">
         <div class="core">
-          <img src="assets/img/ankauf-s.webp" alt="Mechaniker prüft den Motorraum eines Fahrzeugs" loading="lazy">
+          <img src="assets/img/reifen-s.webp" alt="Gestapelte Reifen mit Leichtmetallfelge" loading="lazy" style="object-position:50% 70%">
           <div class="scrim"></div>
-          <div class="cap"><div><h3>Ankauf &amp; Inzahlungnahme</h3><p>Bewertung vor Ort, Auszahlung am selben Tag.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+          <div class="cap"><div><h3>Reifen &amp; Räder</h3><p>Wechsel, Einlagerung und Achsvermessung.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
         </div>
       </a>
-      <a href="#kontakt" class="tile tile-text tile-dark b-gew shell rv d1">
+      <a href="#termin" data-anliegen="flotte" class="tile tile-text tile-dark b-gew shell rv d1">
         <div class="core">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
-            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3 12.5h18"/></svg></span>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 16V7.5A1.5 1.5 0 0 1 4 6h10v10M14 9h4l3.5 4v3H14"/><circle cx="7" cy="17" r="2"/><circle cx="17.5" cy="17" r="2"/></svg></span>
             <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
           </div>
-          <div><h3>Gewerbekunden</h3><p>Flottenlösungen, Sonderkonditionen und ein fester Ansprechpartner.</p></div>
+          <div><h3>Transporter &amp; Flotten</h3><p>Planbare Wartung für Firmenfahrzeuge.</p></div>
         </div>
       </a>
-      <a href="#service" class="tile tile-text b-gar shell rv d2">
+      <a href="#termin" data-anliegen="unfall" class="tile tile-text b-gar shell rv d2">
         <div class="core">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
-            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 5 6v5.5c0 4.2 2.9 7.6 7 9 4.1-1.4 7-4.8 7-9V6l-7-2.5Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg></span>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15.5 5.6 10a2 2 0 0 1 1.9-1.5h9a2 2 0 0 1 1.9 1.5l1.6 5.5"/><rect x="3" y="15" width="18" height="4" rx="1.5"/><path d="M9 4l1 2.5M15 4l-1 2.5M12 3v3"/></svg></span>
             <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
           </div>
-          <div><h3>Garantie &amp; Versicherung</h3><p>Anschlussgarantie und Kfz-Versicherung aus einer Hand.</p></div>
+          <div><h3>Unfall &amp; Karosserie</h3><p>Instandsetzung und Abwicklung mit der Versicherung.</p></div>
         </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ================= Service / Werkstatt ================= -->
+<!-- ================= Weitere Leistungen + Betrieb ================= -->
 <section class="sec" id="service" style="padding-top:0">
   <div class="wrap">
     <div class="split">
       <div class="split-media">
         <div class="stack" style="display:grid;gap:20px;margin-bottom:32px">
-          <span class="eyebrow rv"><i></i>Werkstatt</span>
-          <h2 class="h2 rv d1">Service.</h2>
+          <span class="eyebrow rv"><i></i>Kurt-Schumacher-Ring 8</span>
+          <h2 class="h2 rv d1">Werkstatt.</h2>
         </div>
-        <div class="shell rv d2"><div class="core"><img src="assets/img/werkstatt.webp" srcset="assets/img/werkstatt-s.webp 900w, assets/img/werkstatt.webp 1800w" sizes="(max-width:860px) 100vw, 40vw" alt="Mechaniker arbeitet an einem Fahrzeug auf der Hebebühne in heller Werkstatt" loading="lazy"></div></div>
+        <div class="shell rv d2"><div class="core"><img src="assets/img/sollath-schild.webp" srcset="assets/img/sollath-schild-s.webp 900w, assets/img/sollath-schild.webp 1447w" sizes="(max-width:860px) 100vw, 40vw" alt="Einfahrt der Autohaus Sollath GmbH mit Bosch-Car-Service-Schild und Hausnummer 8" loading="lazy" style="object-position:72% 50%"></div></div>
       </div>
       <div>
         <div class="svc">
-          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5a4 4 0 0 0-2-2Z"/><path d="M14.5 6.5 17 4"/></svg></span><div><h3>Inspektion &amp; Wartung</h3><p>Nach Herstellervorgaben. Die Garantie bleibt erhalten.</p></div><span class="tag">Alle Marken</span></div>
-          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.2 2.4 2.4 4.6-4.9"/></svg></span><div><h3>HU / AU</h3><p>Hauptuntersuchung direkt im Haus.</p></div><span class="tag">Täglich</span></div>
-          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3.5v5M12 15.5v5M3.5 12h5M15.5 12h5"/></svg></span><div><h3>Reifen &amp; Räder</h3><p>Wechsel, Einlagerung und Achsvermessung.</p></div><span class="tag">Saison</span></div>
-          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15.5 5.6 10a2 2 0 0 1 1.9-1.5h9a2 2 0 0 1 1.9 1.5l1.6 5.5"/><rect x="3" y="15" width="18" height="4" rx="1.5"/><path d="M6.5 19v1.5M17.5 19v1.5M9 4l1 2.5M15 4l-1 2.5M12 3v3"/></svg></span><div><h3>Karosserie &amp; Lack</h3><p>Unfallinstandsetzung und Smart Repair.</p></div><span class="tag">Eigene Lackiererei</span></div>
-          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 6.5 6h11L20 18H4Z"/><path d="m11 10 2 2-1.5 1.5L13 15"/></svg></span><div><h3>Glasservice</h3><p>Steinschlag-Reparatur und Scheibentausch.</p></div><span class="tag">Mit Versicherung</span></div>
+          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 3.5v6M5 16.5l5-3M19 16.5l-5-3"/></svg></span><div><h3>Bremsen &amp; Fahrwerk</h3><p>Beläge, Scheiben, Stoßdämpfer und Achsvermessung.</p></div><span class="tag">Alle Marken</span></div>
           <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/><path d="m10 4.5 2 1.5 2-1.5M10 19.5l2-1.5 2 1.5"/></svg></span><div><h3>Klimaservice</h3><p>Wartung, Desinfektion und Kältemittel.</p></div><span class="tag">Ganzjährig</span></div>
-          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c3 4 5 6.6 5 9.3a5 5 0 0 1-10 0c0-2.7 2-5.3 5-9.3Z"/></svg></span><div><h3>Fahrzeugaufbereitung</h3><p>Innenreinigung, Politur und Versiegelung.</p></div><span class="tag">Auf Termin</span></div>
-          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4.5"/><path d="m11.2 11.8 8.3-8.3M16.5 6.5l2 2M14.5 8.5l1.5 1.5"/></svg></span><div><h3>Ersatzwagen &amp; Hol-/Bringservice</h3><p>Mobil bleiben, während wir arbeiten.</p></div><span class="tag">Auf Anfrage</span></div>
-          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h3l1.5 4-2 1.3a10 10 0 0 0 6.7 6.7l1.3-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 3.5 6.1 1.5 1.5 0 0 1 5 4.5Z"/></svg></span><div><h3>Unfallhilfe &amp; Abschleppdienst</h3><p>Rund um die Uhr erreichbar.</p></div><span class="tag">24 h</span></div>
+          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M7 7V5M17 7V5M8 13h3M15 11.5v3M13.5 13h3"/></svg></span><div><h3>Batterie &amp; Elektrik</h3><p>Batterietest, Licht, Starter und Lichtmaschine.</p></div><span class="tag">Diagnose</span></div>
+          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c3 4 5 6.6 5 9.3a5 5 0 0 1-10 0c0-2.7 2-5.3 5-9.3Z"/></svg></span><div><h3>Ölwechsel</h3><p>Mit Freigabe des Herstellers, inklusive Filter.</p></div><span class="tag">Herstellerfreigabe</span></div>
+          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 6.5 6h11L20 18H4Z"/><path d="m11 10 2 2-1.5 1.5L13 15"/></svg></span><div><h3>Glasservice</h3><p>Steinschlag-Reparatur und Scheibentausch.</p></div><span class="tag">Mit Versicherung</span></div>
+          <div class="svc-row rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l2-5 4 10 2-5h7"/></svg></span><div><h3>Motor &amp; Abgasanlage</h3><p>Zahnriemen, Kupplung, Auspuff und Partikelfilter.</p></div><span class="tag">Alle Marken</span></div>
         </div>
         <div style="margin-top:32px" class="rv"><a href="#termin" class="btn btn-dark">Werkstatttermin buchen <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></div>
       </div>
-    </div>
-
-    <div class="strip">
-      <figure class="rv"><div class="shell"><div class="core"><img src="assets/img/reifen-s.webp" alt="Gestapelte Reifen mit Leichtmetallfelge vor heller Wand" loading="lazy" style="object-position:50% 70%"></div></div><figcaption>Reifenhotel <span>Einlagerung inklusive Wäsche</span></figcaption></figure>
-      <figure class="rv d1"><div class="shell"><div class="core"><img src="assets/img/pflege-s.webp" alt="Fahrzeugpflege: Lack wird von Hand versiegelt" loading="lazy"></div></div><figcaption>Aufbereitung <span>Innen und außen</span></figcaption></figure>
-      <figure class="rv d2"><div class="shell"><div class="core"><img src="assets/img/felge-s.webp" alt="Nahaufnahme einer polierten Leichtmetallfelge" loading="lazy"></div></div><figcaption>Räder <span>Wuchten und Vermessen</span></figcaption></figure>
     </div>
   </div>
 </section>
@@ -573,17 +569,17 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
             <form class="form" id="bookForm" novalidate>
               <div class="field"><label for="f-name">Name</label><input id="f-name" autocomplete="name" placeholder="Vor- und Nachname"></div>
               <div class="field"><label for="f-tel">Telefon oder E-Mail</label><input id="f-tel" autocomplete="tel" placeholder="Für die Bestätigung"></div>
-              <div class="field"><label for="f-kz">Kennzeichen <span style="opacity:.7">(optional)</span></label><input id="f-kz" placeholder="z. B. F-AB 123"></div>
+              <div class="field"><label for="f-kz">Fahrzeug oder Kennzeichen <span style="opacity:.7">(optional)</span></label><input id="f-kz" placeholder="z. B. Ford Focus, OF-AB 123"></div>
               <div class="summary" id="summary"><b>Noch kein Termin gewählt</b><span>Bitte Anliegen, Datum und Uhrzeit wählen.</span></div>
               <button type="submit" class="btn btn-dark" id="bookBtn" disabled>Termin anfragen <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
-              <p class="note">Vorschau: Der Kalender ist ein Platzhalter und wird an das Terminsystem des Autohauses angebunden.</p>
+              <p class="note">Vorschau: Der Kalender ist ein Platzhalter und wird an das Terminsystem der Werkstatt angebunden.</p>
             </form>
           </div>
         </div>
         <div class="done" id="done" aria-live="polite">
           <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
           <h3>Anfrage vorgemerkt.</h3>
-          <p id="doneText">In der fertigen Seite geht die Anfrage direkt an das Autohaus.</p>
+          <p id="doneText">In der fertigen Seite geht die Anfrage direkt an die Werkstatt.</p>
           <button class="btn btn-light" id="again">Neuen Termin wählen <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"/></svg></span></button>
         </div>
       </div>
@@ -591,15 +587,15 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
   </div>
 </section>
 
-<!-- ================= Probefahrt ================= -->
+<!-- ================= Betrieb ================= -->
 <section class="sec" style="padding-bottom:0">
   <div class="wrap">
     <div class="band rv">
-      <img src="assets/img/interieur.webp" srcset="assets/img/interieur-s.webp 900w, assets/img/interieur.webp 1800w" sizes="100vw" alt="Innenraum mit Ledersitzen und Mittelkonsole" loading="lazy">
+      <img src="assets/img/sollath-werkstatt.webp" srcset="assets/img/sollath-werkstatt-s.webp 900w, assets/img/sollath-werkstatt.webp 1448w" sizes="100vw" alt="Werkstattgebäude der Autohaus Sollath GmbH mit Bosch-Car-Service-Schild und Hof mit Transportern" loading="lazy" style="object-position:50% 40%">
       <div class="scrim"></div>
       <div class="in">
-        <div><h2 class="h2">Probefahrt.</h2><p>Jedes Modell aus dem Bestand. Mit Termin steht das Fahrzeug bereit.</p></div>
-        <a href="#termin" data-anliegen="probefahrt" class="btn btn-white">Probefahrt buchen <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+        <div><h2 class="h2">Direkt am Kurt-Schumacher-Ring.</h2><p>Kundenparkplätze direkt auf dem Hof.</p></div>
+        <a href="#kontakt" class="btn btn-white">Anfahrt <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
       </div>
     </div>
   </div>
@@ -613,7 +609,7 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
         <span class="eyebrow rv"><i></i>Google-Bewertungen</span>
         <h2 class="h2 rv d1">Rezensionen.</h2>
       </div>
-      <div class="rating rv d2"><span class="score">4,9</span><div><div class="stars" data-stars></div><span class="mono">127 Bewertungen</span></div></div>
+      <div class="rating rv d2"><span class="score">4,6</span><div><div class="stars" data-stars></div><span class="mono">142 Bewertungen</span></div></div>
     </div>
   </div>
   <div class="marquee rv"><div class="track" id="rev1"></div></div>
@@ -625,17 +621,17 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
   <div class="wrap">
     <div class="sec-head">
       <div class="stack">
-        <span class="eyebrow rv"><i></i>Showroom</span>
+        <span class="eyebrow rv"><i></i>Vor Ort</span>
         <h2 class="h2 rv d1">Impressionen.</h2>
       </div>
     </div>
     <div class="gallery">
-      <div class="shell g1 rv"><div class="core"><img src="assets/img/showroom2.webp" srcset="assets/img/showroom2-s.webp 900w, assets/img/showroom2.webp 1800w" sizes="(max-width:860px) 100vw, 58vw" alt="Showroom mit Sportwagen im Vordergrund" loading="lazy"></div></div>
-      <div class="shell g2 rv d1"><div class="core"><img src="assets/img/silhouette-s.webp" alt="Silhouette einer schwarzen Limousine im Studiolicht" loading="lazy"></div></div>
-      <div class="shell g3 rv d2"><div class="core"><img src="assets/img/beratung-s.webp" alt="Handschlag im Beratungsgespräch" loading="lazy"></div></div>
-      <div class="shell g4 rv"><div class="core"><img src="assets/img/leder-s.webp" alt="Ledersitze im Innenraum" loading="lazy"></div></div>
+      <div class="shell g1 rv"><div class="core"><img src="assets/img/sollath-werkstatt.webp" srcset="assets/img/sollath-werkstatt-s.webp 900w, assets/img/sollath-werkstatt.webp 1448w" sizes="(max-width:860px) 100vw, 58vw" alt="Werkstattgebäude mit Fahrzeugannahme" loading="lazy" style="object-position:30% 50%"></div></div>
+      <div class="shell g2 rv d1"><div class="core"><img src="assets/img/felge-s.webp" alt="Nahaufnahme einer Leichtmetallfelge" loading="lazy"></div></div>
+      <div class="shell g3 rv d2"><div class="core"><img src="assets/img/pflege-s.webp" alt="Fahrzeugpflege: Lack wird von Hand versiegelt" loading="lazy"></div></div>
+      <div class="shell g4 rv"><div class="core"><img src="assets/img/sollath-schild-s.webp" alt="Bosch-Car-Service-Schild an der Einfahrt" loading="lazy" style="object-position:75% 40%"></div></div>
       <div class="shell g5 rv d1"><div class="core"><img src="assets/img/schluessel-s.webp" alt="Übergabe eines Autoschlüssels" loading="lazy" style="object-position:50% 40%"></div></div>
-      <div class="shell g6 rv d2"><div class="core"><img src="assets/img/gebraucht-s.webp" alt="Fahrzeug im Ausstellungsraum" loading="lazy" style="object-position:30% 50%"></div></div>
+      <div class="shell g6 rv d2"><div class="core"><img src="assets/img/werkstatt-s.webp" alt="Fahrzeug auf der Hebebühne" loading="lazy" style="object-position:60% 50%"></div></div>
     </div>
   </div>
 </section>
@@ -652,21 +648,22 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
     <div class="contact">
       <div class="shell rv"><div class="core">
         <span class="open-state" id="openState"><i></i><span>–</span></span>
-        <div class="hours">
-          <div><h3>Verkauf</h3><dl id="hSales"></dl></div>
-          <div><h3>Service</h3><dl id="hService"></dl></div>
+        <div class="hours one">
+          <div><h3>Werkstatt &amp; Annahme</h3><dl id="hService"></dl></div>
+        </div>
+        <div style="margin-top:36px;display:grid;gap:14px">
+          <p style="color:var(--muted);font-size:15px">Termine auch telefonisch.</p>
+          <a href="tel:+496103731200" class="btn btn-light" style="justify-self:start">06103 731200 <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h3l1.5 4-2 1.3a10 10 0 0 0 6.7 6.7l1.3-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 3.5 6.1 1.5 1.5 0 0 1 5 4.5Z"/></svg></span></a>
         </div>
       </div></div>
       <div class="shell contact-dark rv d1"><div class="core">
-        <div style="display:grid;gap:14px"><h2 class="h2" data-name>[Autohausname]</h2><p class="lead">[Straße Nr.], [PLZ] <span data-ort>[Ort]</span></p></div>
+        <div style="display:grid;gap:14px"><h2 class="h2" data-name>Autohaus Sollath GmbH</h2><p class="lead">Kurt-Schumacher-Ring 8, 63329 <span data-ort>Egelsbach</span></p></div>
         <div class="contact-list">
-          <a href="tel:+490000000000"><span>Verkauf</span><b>[Telefonnummer]</b></a>
-          <a href="tel:+490000000000"><span>Service</span><b>[Telefonnummer]</b></a>
-          <a href="mailto:info@beispiel.de"><span>E-Mail</span><b>[E-Mail-Adresse]</b></a>
-          <div><span>Notdienst</span><b>[Notfallnummer]</b></div>
+          <a href="tel:+496103731200"><span>Telefon</span><b>06103 731200</b></a>
+          <a href="mailto:autohaus@sollath.de"><span>E-Mail</span><b>autohaus@sollath.de</b></a>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn btn-white" id="mapLink" href="https://www.google.com/maps/search/?api=1&query=Autohaus" target="_blank" rel="noopener">Route planen <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+          <a class="btn btn-white" href="https://www.google.com/maps/search/?api=1&query=Autohaus%20Sollath%20GmbH%2C%20Kurt-Schumacher-Ring%208%2C%2063329%20Egelsbach" target="_blank" rel="noopener">Route planen <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
           <a class="btn btn-dark" style="background:rgba(255,255,255,.1)" href="#termin">Termin buchen <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span></a>
         </div>
       </div></div>
@@ -678,19 +675,19 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
 <footer>
   <div class="wrap">
     <div class="foot">
-      <a href="#top" class="brand"><span class="brand-mark" data-initial>A</span><span class="brand-name" data-name>[Autohausname]</span></a>
+      <a href="#top" class="brand"><span class="brand-mark" data-initial>S</span><span class="brand-name" data-name>Autohaus Sollath GmbH</span></a>
       <nav class="foot-links" aria-label="Rechtliches">
-        <a href="#fahrzeuge">Fahrzeuge</a><a href="#service">Service</a><a href="#termin">Termin</a><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">Karriere</a>
+        <a href="#leistungen">Leistungen</a><a href="#termin">Termin</a><a href="#kontakt">Kontakt</a><a href="#">Impressum</a><a href="#">Datenschutz</a>
       </nav>
     </div>
-    <p class="credits">© <span id="year"></span> <span data-name>[Autohausname]</span>. Fotos: Unsplash (Unsplash-Lizenz) von Ildar Garifullin, Lorenzo Hamers, Dextar Studio, Kate Ibragimova, Erik Mclean, David Glessner, Rob Wingate, Vitaly Gariev, yahdi yasya, igor constantino, Samuele Errico Piccarini, Kenjiro Yagi und Pheng Moua. Das Fahrzeug im Kopfbereich ist KI-generiert.</p>
+    <p class="credits">© <span id="year"></span> <span data-name>Autohaus Sollath GmbH</span>. Bosch Car Service ist eine Marke der Robert Bosch GmbH. Fotos: Autohaus Sollath sowie Unsplash (Unsplash-Lizenz) von Dextar Studio, Kate Ibragimova, Erik Mclean, David Glessner, Rob Wingate und yahdi yasya. Das Fahrzeug im Kopfbereich ist KI-generiert.</p>
   </div>
 </footer>
 
 <script>
 /* ================= Name & Ort ================= */
-const NAME = "[Autohausname]";   // hier den Namen eintragen
-const ORT  = "[Ort]";
+const NAME = "Autohaus Sollath GmbH";
+const ORT  = "Egelsbach";
 (() => {
   const q = new URLSearchParams(location.search);
   const name = (q.get("name") || NAME).trim();
@@ -699,8 +696,6 @@ const ORT  = "[Ort]";
   document.querySelectorAll("[data-ort]").forEach(el => el.textContent = ort);
   const letter = (name.replace(/^(autohaus|auto|autozentrum|automobile)\s+/i, "").match(/[A-Za-zÄÖÜäöü0-9]/) || ["A"])[0].toUpperCase();
   document.querySelectorAll("[data-initial]").forEach(el => el.textContent = letter);
-  document.title = `${name} – Neuwagen, Gebrauchtwagen & Service`;
-  document.getElementById("mapLink").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name + " " + ort);
   document.getElementById("year").textContent = new Date().getFullYear();
   // Lange Namen: Schrift so weit verkleinern, dass kein Wort über den Rand ragt
   const h1 = document.querySelector(".hero h1");
@@ -802,14 +797,14 @@ const ORT  = "[Ort]";
 /* ================= Terminbuchung (Platzhalter) ================= */
 (() => {
   const ANLIEGEN = [
-    { id: "inspektion", t: "Inspektion & Wartung", s: "ca. 2–4 Std.", typ: "service", ic: '<path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5a4 4 0 0 0-2-2Z"/>' },
-    { id: "reifen", t: "Reifenwechsel", s: "ca. 30 Min.", typ: "service", ic: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/>' },
-    { id: "hu", t: "HU / AU", s: "ca. 1 Std.", typ: "service", ic: '<circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.2 2.4 2.4 4.6-4.9"/>' },
-    { id: "probefahrt", t: "Probefahrt", s: "ca. 45 Min.", typ: "verkauf", ic: '<path d="M4 15.5 5.6 10a2 2 0 0 1 1.9-1.5h9a2 2 0 0 1 1.9 1.5l1.6 5.5"/><rect x="3" y="15" width="18" height="4" rx="1.5"/>' },
-    { id: "beratung", t: "Beratung & Leasing", s: "ca. 1 Std.", typ: "verkauf", ic: '<rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10.5h18"/>' },
-    { id: "ankauf", t: "Fahrzeugbewertung", s: "ca. 30 Min.", typ: "verkauf", ic: '<path d="M4 18V6M4 18h16M8 14l3-3 3 2 5-5"/>' },
+    { id: "inspektion", t: "Inspektion & Wartung", s: "ca. 2–4 Std.", ic: '<path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5a4 4 0 0 0-2-2Z"/>' },
+    { id: "hu", t: "HU / AU", s: "ca. 1 Std.", ic: '<circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.2 2.4 2.4 4.6-4.9"/>' },
+    { id: "reifen", t: "Reifenwechsel", s: "ca. 30 Min.", ic: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/>' },
+    { id: "diagnose", t: "Diagnose & Reparatur", s: "nach Befund", ic: '<path d="M3 12h3l2-5 4 10 2-5h7"/>' },
+    { id: "unfall", t: "Unfall & Karosserie", s: "Besichtigung ca. 30 Min.", ic: '<path d="M4 15.5 5.6 10a2 2 0 0 1 1.9-1.5h9a2 2 0 0 1 1.9 1.5l1.6 5.5"/><rect x="3" y="15" width="18" height="4" rx="1.5"/>' },
+    { id: "flotte", t: "Transporter & Flotte", s: "Rückruf zur Planung", ic: '<path d="M2.5 16V7.5A1.5 1.5 0 0 1 4 6h10v10M14 9h4l3.5 4v3H14"/><circle cx="7" cy="17" r="2"/><circle cx="17.5" cy="17" r="2"/>' },
   ];
-  const SLOTS = { service: ["07:30","08:00","08:30","09:00","10:00","11:00","13:00","14:00","15:00","16:00"], verkauf: ["09:00","10:00","11:00","12:00","14:00","15:00","16:00","17:00"] };
+  const SLOTS = ["07:30","08:00","08:30","09:00","10:00","11:00","13:00","14:00","15:00","16:00","17:00"];
   const optsEl = document.getElementById("opts"), calEl = document.getElementById("cal"), monthEl = document.getElementById("calMonth");
   const slotsEl = document.getElementById("slots"), sumEl = document.getElementById("summary"), btn = document.getElementById("bookBtn");
   const shell = document.getElementById("bookShell");
@@ -819,12 +814,12 @@ const ORT  = "[Ort]";
   const fmtD = new Intl.DateTimeFormat("de-DE", { weekday: "long", day: "numeric", month: "long" });
   const hash = (s) => { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return (h >>> 0) / 4294967295; };
   const key = d => `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
-  const openOn = (d) => { const w = d.getDay(); return w !== 0 && !(w === 6 && state.a.typ === "service"); };
+  const openOn = (d) => d.getDay() !== 0;
   const status = (d) => {
     if (d <= today) return "off";
     if (!openOn(d)) return "off";
     if ((d - today) / 864e5 > 75) return "off";
-    return hash(key(d) + state.a.typ) < 0.22 ? "full" : "free";
+    return hash(key(d) + state.a.id) < 0.22 ? "full" : "free";
   };
 
   ANLIEGEN.forEach(a => {
@@ -865,8 +860,10 @@ const ORT  = "[Ort]";
   }
   function renderSlots() {
     if (!state.date) { slotsEl.innerHTML = `<div class="slots-empty">Bitte zuerst einen Tag wählen.</div>`; return; }
-    let list = SLOTS[state.a.typ];
-    if (state.date.getDay() === 6) list = list.filter(t => t < "14:00");
+    const wd = state.date.getDay();
+    let list = SLOTS;
+    if (wd === 6) list = ["09:00","09:30","10:00","10:30","11:00","11:30"];
+    else if (wd === 5) list = SLOTS.filter(t => t < "16:30");
     slotsEl.innerHTML = `<div class="slots">${list.map(t => {
       const taken = hash(key(state.date) + t + state.a.id) < 0.3;
       return `<button type="button" class="slot" data-t="${t}" ${taken ? "disabled" : ""} aria-pressed="${state.slot === t}">${t}</button>`;
@@ -886,37 +883,21 @@ const ORT  = "[Ort]";
   }
   document.getElementById("bookForm").addEventListener("submit", e => {
     e.preventDefault(); if (btn.disabled) return;
-    document.getElementById("doneText").textContent = `${state.a.t} am ${fmtD.format(state.date)} um ${state.slot} Uhr. In der fertigen Seite geht die Anfrage direkt an das Autohaus.`;
+    document.getElementById("doneText").textContent = `${state.a.t} am ${fmtD.format(state.date)} um ${state.slot} Uhr. In der fertigen Seite geht die Anfrage direkt an die Werkstatt.`;
     shell.classList.add("is-done");
   });
   document.getElementById("again").addEventListener("click", () => { shell.classList.remove("is-done"); state.date = null; state.slot = null; render(); });
   render();
 })();
 
-/* ================= Rezensionen (Beispieltexte – vor dem Livegang durch echte Bewertungen ersetzen) ================= */
+/* ================= Rezensionen (Platzhalter – echte Google-Bewertungen wählt der Betrieb selbst aus) ================= */
 (() => {
   const star = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.7 6.6 19.7l1.2-6L3.3 9.5l6.1-.7L12 3.2z"/></svg>';
-  document.querySelectorAll("[data-stars]").forEach(el => el.innerHTML = star.repeat(5));
-  const REVIEWS = [
-    ["Markus T.", "vor 1 Woche", "Inspektion morgens abgegeben, mittags war alles fertig. Rechnung genau wie angekündigt, keine Überraschungen."],
-    ["Sabine K.", "vor 2 Wochen", "Sehr ruhige, ehrliche Beratung beim Leasing. Ich hatte nie das Gefühl, zu etwas gedrängt zu werden."],
-    ["Daniel W.", "vor 3 Wochen", "Gebrauchtwagen gekauft, Übergabe war top vorbereitet: vollgetankt, gereinigt, alles erklärt."],
-    ["Elif Y.", "vor 1 Monat", "Reifenwechsel online gebucht, pünktlich drangekommen und nach 30 Minuten wieder unterwegs."],
-    ["Thomas R.", "vor 1 Monat", "Unfallschaden komplett über die Werkstatt abgewickelt, inklusive Ersatzwagen. Absolut stressfrei."],
-    ["Julia M.", "vor 2 Monaten", "Probefahrt ganz spontan möglich, das Auto stand schon bereit. Freundliches Team, schöner Showroom."],
-    ["Stefan H.", "vor 2 Monaten", "Mein altes Auto wurde fair bewertet und direkt in Zahlung genommen. Alles an einem Vormittag erledigt."],
-    ["Anna L.", "vor 3 Monaten", "HU und Inspektion in einem Termin. Kompetente Erklärung, was gemacht wurde und was noch Zeit hat."],
-    ["Michael B.", "vor 3 Monaten", "Als Gewerbekunde mit vier Fahrzeugen bestens betreut. Ein fester Ansprechpartner, schnelle Antworten."],
-    ["Laura S.", "vor 4 Monaten", "Die Aufbereitung hat mein Auto wieder wie neu aussehen lassen. Preis-Leistung stimmt."],
-    ["Kevin P.", "vor 4 Monaten", "Finanzierung war transparent und schnell. Nach drei Tagen konnte ich den Wagen abholen."],
-    ["Petra G.", "vor 5 Monaten", "Seit Jahren Kundin hier. Man kennt mich und mein Auto, genau so stelle ich mir Service vor."],
-    ["Jonas F.", "vor 5 Monaten", "Klimaservice gebucht, Termin eingehalten, Wartezeit mit Kaffee in der Lounge. Gerne wieder."],
-    ["Nicole D.", "vor 6 Monaten", "Neuwagen konfiguriert und bestellt, bei der Auslieferung wurde mir alles in Ruhe gezeigt."],
-  ];
-  const card = ([n, t, txt]) => `<article class="rev-card"><div class="stars">${star.repeat(5)}</div><p>${txt}</p><div class="who"><span class="av">${n[0]}</span><div>${n}<small>${t}</small></div></div></article>`;
-  ["rev1", "rev2"].forEach((id, r) => {
+  document.querySelectorAll("[data-stars]").forEach(el => el.innerHTML = star.repeat(4) + '<span style="opacity:.3;display:flex">' + star + '</span>');
+  const card = () => `<article class="rev-card"><div class="stars">${star.repeat(5)}</div><p>Platzhalter – hier steht eine echte Google-Bewertung, die die Werkstatt selbst auswählt.</p><div class="who"><span class="av">P</span><div>Platzhalter<small>Google-Rezension</small></div></div></article>`;
+  ["rev1", "rev2"].forEach(id => {
     const el = document.getElementById(id);
-    const html = REVIEWS.slice(r * 7, r * 7 + 7).map(card).join("");
+    const html = Array.from({ length: 7 }, card).join("");
     el.innerHTML = html + html;
     el.querySelectorAll(".rev-card").forEach((c, i) => { if (i >= 7) c.setAttribute("aria-hidden", "true"); });
   });
@@ -925,16 +906,15 @@ const ORT  = "[Ort]";
 /* ================= Öffnungszeiten ================= */
 (() => {
   const H = {
-    sales:   [["Mo – Fr", "09:00 – 18:30", [1,2,3,4,5], 9, 18.5], ["Samstag", "09:00 – 14:00", [6], 9, 14], ["Sonntag", "geschlossen", [0], 0, 0]],
-    service: [["Mo – Fr", "07:30 – 17:00", [1,2,3,4,5], 7.5, 17], ["Samstag", "geschlossen", [6], 0, 0], ["Sonntag", "geschlossen", [0], 0, 0]],
+    service: [["Mo – Do", "07:30 – 18:00", [1,2,3,4], 7.5, 18], ["Freitag", "07:30 – 17:00", [5], 7.5, 17], ["Samstag", "09:00 – 12:00", [6], 9, 12], ["Sonntag", "geschlossen", [0], 0, 0]],
   };
   const now = new Date(), wd = now.getDay(), h = now.getHours() + now.getMinutes() / 60;
   const fill = (id, rows) => document.getElementById(id).innerHTML = rows.map(r => `<div class="${r[2].includes(wd) ? "today" : ""}" style="display:contents"><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("");
-  fill("hSales", H.sales); fill("hService", H.service);
+  fill("hService", H.service);
   const isOpen = (rows) => rows.some(r => r[2].includes(wd) && h >= r[3] && h < r[4]);
-  const s = isOpen(H.sales), v = isOpen(H.service), el = document.getElementById("openState");
-  el.classList.toggle("closed", !(s || v));
-  el.querySelector("span").textContent = s && v ? "Verkauf und Service geöffnet" : s ? "Verkauf geöffnet" : v ? "Service geöffnet" : "Gerade geschlossen";
+  const v = isOpen(H.service), el = document.getElementById("openState");
+  el.classList.toggle("closed", !v);
+  el.querySelector("span").textContent = v ? "Jetzt geöffnet" : "Gerade geschlossen";
 })();
 </script>
 </body>
