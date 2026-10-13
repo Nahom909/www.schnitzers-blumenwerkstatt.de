@@ -324,8 +324,74 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
 .rv.in{opacity:1;transform:none}
 .rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
 
+.bento-even{grid-auto-rows:auto}
+.bento-even > .tile{grid-column:span 4;grid-row:auto}
+.bento-even .core{min-height:250px}
+
+/* ---------- KI-Assistent ---------- */
+.chat-fab{position:fixed;right:20px;bottom:20px;z-index:45;display:inline-flex;align-items:center;gap:12px;padding:8px 20px 8px 8px;border-radius:999px;
+  background:var(--brand);color:#fff;font-size:15px;font-weight:500;box-shadow:0 14px 40px -12px rgba(16,60,62,.55);
+  transition:transform .5s var(--ease),opacity .4s var(--ease),background-color .4s var(--ease)}
+.chat-fab:hover{background:var(--brand-2)}
+.chat-fab:active{transform:scale(.97)}
+.chat-fab .ic{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center}
+.chat-fab svg{width:20px;height:20px}
+.chat-fab small{display:block;font-size:11.5px;opacity:.7;font-weight:400;line-height:1.2}
+.chat-fab b{display:block;font-weight:550;line-height:1.25}
+.chat-open .chat-fab{opacity:0;pointer-events:none;transform:translateY(12px) scale(.96)}
+.chat{position:fixed;right:20px;bottom:20px;z-index:46;width:min(400px,calc(100vw - 40px));height:min(640px,calc(100dvh - 40px));
+  display:flex;flex-direction:column;background:#fff;border-radius:26px;overflow:hidden;
+  box-shadow:0 0 0 1px var(--line),0 30px 80px -24px rgba(11,11,12,.35);
+  opacity:0;visibility:hidden;transform:translateY(16px) scale(.98);transform-origin:bottom right;
+  transition:opacity .45s var(--ease),transform .55s var(--ease),visibility 0s linear .55s}
+.chat-open .chat{opacity:1;visibility:visible;transform:none;transition:opacity .45s var(--ease),transform .55s var(--ease)}
+.chat-head{display:flex;align-items:center;gap:12px;padding:16px 16px 14px 18px;border-bottom:1px solid var(--line)}
+.chat-avatar{width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;flex:none}
+.chat-avatar svg{width:20px;height:20px}
+.chat-head b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em}
+.chat-head small{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.chat-head small i{width:6px;height:6px;border-radius:50%;background:#1f9d55}
+.chat-close{margin-left:auto;width:38px;height:38px;border-radius:50%;background:var(--soft);display:grid;place-items:center;transition:background-color .3s var(--ease)}
+.chat-close:hover{background:#ececea}
+.chat-close svg{width:16px;height:16px}
+.chat-log{flex:1;overflow-y:auto;padding:18px 16px 8px;display:flex;flex-direction:column;gap:10px;overscroll-behavior:contain}
+.msg{max-width:86%;padding:11px 14px;border-radius:18px;font-size:14.5px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.bot{align-self:flex-start;background:var(--soft);color:var(--ink);border-bottom-left-radius:6px}
+.msg.me{align-self:flex-end;background:var(--brand);color:#fff;border-bottom-right-radius:6px}
+.msg.typing{display:flex;gap:4px;align-items:center;padding:14px 16px}
+.msg.typing i{width:6px;height:6px;border-radius:50%;background:#a5a5aa;animation:blink 1.2s infinite var(--ease)}
+.msg.typing i:nth-child(2){animation-delay:.15s}.msg.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-2px)}}
+.msg-cta{align-self:flex-start;display:flex;gap:8px;flex-wrap:wrap}
+.msg-cta a{font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px var(--line-2);transition:background-color .3s var(--ease)}
+.msg-cta a:hover{background:var(--soft)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;padding:4px 16px 10px}
+.chips[hidden]{display:none}
+.chip{font-size:13px;padding:8px 12px;border-radius:999px;background:var(--soft);color:var(--ink-2);transition:background-color .3s var(--ease),color .3s var(--ease)}
+.chip:hover{background:#ececea;color:var(--ink)}
+.chat-form{display:flex;align-items:flex-end;gap:8px;padding:10px 12px 8px;border-top:1px solid var(--line)}
+.chat-form textarea{flex:1;resize:none;font:inherit;font-size:15px;line-height:1.4;max-height:120px;padding:11px 14px;border:0;border-radius:18px;background:var(--soft);color:var(--ink);outline:none;
+  box-shadow:inset 0 0 0 1px transparent;transition:box-shadow .3s var(--ease),background-color .3s var(--ease)}
+.chat-form textarea:focus{background:#fff;box-shadow:inset 0 0 0 1.5px var(--brand)}
+.chat-send{width:44px;height:44px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;flex:none;transition:background-color .3s var(--ease),transform .3s var(--ease),opacity .3s var(--ease)}
+.chat-send:hover{background:var(--brand-2)}
+.chat-send:active{transform:scale(.95)}
+.chat-send:disabled{opacity:.35;cursor:default}
+.chat-send svg{width:18px;height:18px}
+.chat-note{font-size:11px;color:var(--muted);text-align:center;padding:0 16px 12px}
+@media (max-width:640px){
+  .chat-fab{right:14px;bottom:14px;padding:6px 16px 6px 6px;font-size:14px}
+  .chat-fab .ic{width:38px;height:38px}
+  .chat-fab small{display:none}
+  .chat{right:0;left:0;bottom:0;width:100%;height:calc(100dvh - 56px);border-radius:24px 24px 0 0;transform-origin:bottom center}
+  .chat-form{padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+  .chat-form textarea{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){.msg.typing i{animation:none}}
+
 /* ---------- Responsive ---------- */
 @media (max-width:1080px){
+  .bento-even > .tile{grid-column:span 6}
   .nav-links{display:none}
   .booker{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .booker > .col:nth-child(2){border-right:0}
@@ -357,6 +423,7 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
   .bento,.gallery{grid-template-columns:1fr;grid-auto-rows:auto}
   .bento > *,.gallery > *{grid-column:auto !important;grid-row:auto !important}
   .tile .core{min-height:260px}
+  .bento-even .core{min-height:180px}
   .b-neu .core{min-height:380px}
   .gallery .shell{aspect-ratio:4/3}
   .split{grid-template-columns:1fr}
@@ -395,7 +462,6 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
   <nav class="nav-links" aria-label="Hauptmenü">
     <a href="#leistungen">Leistungen</a>
     <a href="#termin">Termin</a>
-    <a href="#bewertungen">Bewertungen</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
   <a href="#termin" class="btn btn-dark">Termin buchen <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
@@ -405,7 +471,6 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
   <a class="big" href="#leistungen">Leistungen</a>
   <a class="big" href="#service">Werkstatt</a>
   <a class="big" href="#termin">Termin buchen</a>
-  <a class="big" href="#bewertungen">Bewertungen</a>
   <a class="big" href="#kontakt">Kontakt</a>
   <div class="meta"><span>Kurt-Schumacher-Ring 8, 63329 <span data-ort>Egelsbach</span></span><a href="tel:+496103731200">06103 731200</a></div>
 </div>
@@ -437,7 +502,7 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
       <div class="scrub" aria-hidden="true"><span class="mono">Seite</span><div class="scrub-track"><div class="scrub-bar" id="scrubBar"></div></div><span class="mono">Front</span></div>
       <div class="facts">
         <div class="fact"><b>Bosch Car Service</b><span>Partnerwerkstatt</span></div>
-        <div class="fact"><b>4,6 ★ bei Google</b><span>142 Bewertungen</span></div>
+        <div class="fact"><b>Kurt-Schumacher-Ring 8</b><span>63329 Egelsbach</span></div>
         <div class="fact"><b>Auch samstags</b><span>09:00 – 12:00 Uhr</span></div>
       </div>
     </div>
@@ -455,22 +520,26 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
       <p class="lead rv d2">Für alle Marken. Nach Herstellervorgaben.</p>
     </div>
 
-    <div class="bento">
-      <a href="#termin" data-anliegen="inspektion" class="tile b-neu shell rv">
+    <div class="bento bento-even">
+      <a href="#termin" data-anliegen="inspektion" class="tile tile-text tile-dark shell rv">
         <div class="core">
-          <img src="assets/img/werkstatt.webp" srcset="assets/img/werkstatt-s.webp 900w, assets/img/werkstatt.webp 1800w" sizes="(max-width:860px) 100vw, 58vw" alt="Mechaniker arbeitet an einem Fahrzeug auf der Hebebühne" loading="lazy">
-          <div class="scrim"></div>
-          <div class="cap"><div><h3>Inspektion &amp; Wartung</h3><p>Nach Herstellervorgaben. Die Herstellergarantie bleibt erhalten.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5a4 4 0 0 0-2-2Z"/><path d="M14.5 6.5 17 4"/></svg></span>
+            <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </div>
+          <div><h3>Inspektion &amp; Wartung</h3><p>Nach Herstellervorgaben. Die Herstellergarantie bleibt erhalten.</p></div>
         </div>
       </a>
-      <a href="#termin" data-anliegen="diagnose" class="tile b-gebr shell rv d1">
+      <a href="#termin" data-anliegen="diagnose" class="tile tile-text  shell rv d1">
         <div class="core">
-          <img src="assets/img/ankauf.webp" srcset="assets/img/ankauf-s.webp 900w, assets/img/ankauf.webp 1800w" sizes="(max-width:860px) 100vw, 42vw" alt="Mechaniker prüft den Motorraum" loading="lazy">
-          <div class="scrim"></div>
-          <div class="cap"><div><h3>Diagnose &amp; Reparatur</h3><p>Fehlerspeicher, Motor, Elektrik und Elektronik.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l2-5 4 10 2-5h7"/></svg></span>
+            <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </div>
+          <div><h3>Diagnose &amp; Reparatur</h3><p>Fehlerspeicher, Motor, Elektrik und Elektronik.</p></div>
         </div>
       </a>
-      <a href="#termin" data-anliegen="hu" class="tile tile-text b-leas shell rv d2">
+      <a href="#termin" data-anliegen="hu" class="tile tile-text  shell rv d2">
         <div class="core">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.2 2.4 2.4 4.6-4.9"/></svg></span>
@@ -479,14 +548,16 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
           <div><h3>HU / AU</h3><p>Hauptuntersuchung und Abgasuntersuchung direkt bei uns.</p></div>
         </div>
       </a>
-      <a href="#termin" data-anliegen="reifen" class="tile b-ankauf shell rv">
+      <a href="#termin" data-anliegen="reifen" class="tile tile-text  shell rv">
         <div class="core">
-          <img src="assets/img/reifen-s.webp" alt="Gestapelte Reifen mit Leichtmetallfelge" loading="lazy" style="object-position:50% 70%">
-          <div class="scrim"></div>
-          <div class="cap"><div><h3>Reifen &amp; Räder</h3><p>Wechsel, Einlagerung und Achsvermessung.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3.5v5M12 15.5v5M3.5 12h5M15.5 12h5"/></svg></span>
+            <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </div>
+          <div><h3>Reifen &amp; Räder</h3><p>Wechsel, Einlagerung und Achsvermessung.</p></div>
         </div>
       </a>
-      <a href="#termin" data-anliegen="flotte" class="tile tile-text tile-dark b-gew shell rv d1">
+      <a href="#termin" data-anliegen="flotte" class="tile tile-text  shell rv d1">
         <div class="core">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 16V7.5A1.5 1.5 0 0 1 4 6h10v10M14 9h4l3.5 4v3H14"/><circle cx="7" cy="17" r="2"/><circle cx="17.5" cy="17" r="2"/></svg></span>
@@ -495,7 +566,7 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
           <div><h3>Transporter &amp; Flotten</h3><p>Planbare Wartung für Firmenfahrzeuge.</p></div>
         </div>
       </a>
-      <a href="#termin" data-anliegen="unfall" class="tile tile-text b-gar shell rv d2">
+      <a href="#termin" data-anliegen="unfall" class="tile tile-text  shell rv d2">
         <div class="core">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15.5 5.6 10a2 2 0 0 1 1.9-1.5h9a2 2 0 0 1 1.9 1.5l1.6 5.5"/><rect x="3" y="15" width="18" height="4" rx="1.5"/><path d="M9 4l1 2.5M15 4l-1 2.5M12 3v3"/></svg></span>
@@ -601,41 +672,6 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
   </div>
 </section>
 
-<!-- ================= Rezensionen ================= -->
-<section class="sec" id="bewertungen">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="stack">
-        <span class="eyebrow rv"><i></i>Google-Bewertungen</span>
-        <h2 class="h2 rv d1">Rezensionen.</h2>
-      </div>
-      <div class="rating rv d2"><span class="score">4,6</span><div><div class="stars" data-stars></div><span class="mono">142 Bewertungen</span></div></div>
-    </div>
-  </div>
-  <div class="marquee rv"><div class="track" id="rev1"></div></div>
-  <div class="marquee rev rv d1"><div class="track" id="rev2"></div></div>
-</section>
-
-<!-- ================= Impressionen ================= -->
-<section class="sec" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="stack">
-        <span class="eyebrow rv"><i></i>Vor Ort</span>
-        <h2 class="h2 rv d1">Impressionen.</h2>
-      </div>
-    </div>
-    <div class="gallery">
-      <div class="shell g1 rv"><div class="core"><img src="assets/img/sollath-werkstatt.webp" srcset="assets/img/sollath-werkstatt-s.webp 900w, assets/img/sollath-werkstatt.webp 1448w" sizes="(max-width:860px) 100vw, 58vw" alt="Werkstattgebäude mit Fahrzeugannahme" loading="lazy" style="object-position:30% 50%"></div></div>
-      <div class="shell g2 rv d1"><div class="core"><img src="assets/img/felge-s.webp" alt="Nahaufnahme einer Leichtmetallfelge" loading="lazy"></div></div>
-      <div class="shell g3 rv d2"><div class="core"><img src="assets/img/pflege-s.webp" alt="Fahrzeugpflege: Lack wird von Hand versiegelt" loading="lazy"></div></div>
-      <div class="shell g4 rv"><div class="core"><img src="assets/img/sollath-schild-s.webp" alt="Bosch-Car-Service-Schild an der Einfahrt" loading="lazy" style="object-position:75% 40%"></div></div>
-      <div class="shell g5 rv d1"><div class="core"><img src="assets/img/schluessel-s.webp" alt="Übergabe eines Autoschlüssels" loading="lazy" style="object-position:50% 40%"></div></div>
-      <div class="shell g6 rv d2"><div class="core"><img src="assets/img/werkstatt-s.webp" alt="Fahrzeug auf der Hebebühne" loading="lazy" style="object-position:60% 50%"></div></div>
-    </div>
-  </div>
-</section>
-
 <!-- ================= Kontakt ================= -->
 <section class="sec" id="kontakt" style="padding-top:0">
   <div class="wrap">
@@ -680,9 +716,35 @@ footer{padding:56px 0 40px;border-top:1px solid var(--line);margin-top:clamp(88p
         <a href="#leistungen">Leistungen</a><a href="#termin">Termin</a><a href="#kontakt">Kontakt</a><a href="#">Impressum</a><a href="#">Datenschutz</a>
       </nav>
     </div>
-    <p class="credits">© <span id="year"></span> <span data-name>Autohaus Sollath GmbH</span>. Bosch Car Service ist eine Marke der Robert Bosch GmbH. Fotos: Autohaus Sollath sowie Unsplash (Unsplash-Lizenz) von Dextar Studio, Kate Ibragimova, Erik Mclean, David Glessner, Rob Wingate und yahdi yasya. Das Fahrzeug im Kopfbereich ist KI-generiert.</p>
+    <p class="credits">© <span id="year"></span> <span data-name>Autohaus Sollath GmbH</span>. Bosch Car Service ist eine Marke der Robert Bosch GmbH. Fotos: Autohaus Sollath. Das Fahrzeug im Kopfbereich ist KI-generiert.</p>
   </div>
 </footer>
+
+<!-- ================= KI-Assistent ================= -->
+<button class="chat-fab" id="chatFab" aria-controls="chat" aria-expanded="false">
+  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 1 3.3 6.5L4 19.5l1-3.3A8 8 0 0 1 4 12Z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg></span>
+  <span><b>Fragen?</b><small>KI-Assistent, rund um die Uhr</small></span>
+</button>
+<section class="chat" id="chat" role="dialog" aria-modal="false" aria-label="KI-Assistent der Werkstatt">
+  <header class="chat-head">
+    <span class="chat-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5a4 4 0 0 0-2-2Z"/></svg></span>
+    <div><b>Sollath Assistent</b><small><i></i>KI · antwortet sofort</small></div>
+    <button class="chat-close" id="chatClose" aria-label="Chat schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </header>
+  <div class="chat-log" id="chatLog" aria-live="polite"></div>
+  <div class="chips" id="chatChips">
+    <button class="chip" type="button">Wann haben Sie geöffnet?</button>
+    <button class="chip" type="button">Machen Sie auch HU/AU?</button>
+    <button class="chip" type="button">Bleibt meine Garantie bei der Inspektion erhalten?</button>
+    <button class="chip" type="button">Wie buche ich einen Termin?</button>
+  </div>
+  <form class="chat-form" id="chatForm">
+    <label class="sr" for="chatInput">Ihre Frage</label>
+    <textarea id="chatInput" rows="1" maxlength="1000" placeholder="Ihre Frage …"></textarea>
+    <button class="chat-send" id="chatSend" type="submit" aria-label="Senden" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+  </form>
+  <p class="chat-note">Automatische Antworten ohne Gewähr. Bitte keine sensiblen Daten eingeben.</p>
+</section>
 
 <script>
 /* ================= Name & Ort ================= */
@@ -890,19 +952,6 @@ const ORT  = "Egelsbach";
   render();
 })();
 
-/* ================= Rezensionen (Platzhalter – echte Google-Bewertungen wählt der Betrieb selbst aus) ================= */
-(() => {
-  const star = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.7 6.6 19.7l1.2-6L3.3 9.5l6.1-.7L12 3.2z"/></svg>';
-  document.querySelectorAll("[data-stars]").forEach(el => el.innerHTML = star.repeat(4) + '<span style="opacity:.3;display:flex">' + star + '</span>');
-  const card = () => `<article class="rev-card"><div class="stars">${star.repeat(5)}</div><p>Platzhalter – hier steht eine echte Google-Bewertung, die die Werkstatt selbst auswählt.</p><div class="who"><span class="av">P</span><div>Platzhalter<small>Google-Rezension</small></div></div></article>`;
-  ["rev1", "rev2"].forEach(id => {
-    const el = document.getElementById(id);
-    const html = Array.from({ length: 7 }, card).join("");
-    el.innerHTML = html + html;
-    el.querySelectorAll(".rev-card").forEach((c, i) => { if (i >= 7) c.setAttribute("aria-hidden", "true"); });
-  });
-})();
-
 /* ================= Öffnungszeiten ================= */
 (() => {
   const H = {
@@ -915,6 +964,91 @@ const ORT  = "Egelsbach";
   const v = isOpen(H.service), el = document.getElementById("openState");
   el.classList.toggle("closed", !v);
   el.querySelector("span").textContent = v ? "Jetzt geöffnet" : "Gerade geschlossen";
+})();
+
+/* ================= KI-Assistent ================= */
+(() => {
+  const fab = document.getElementById("chatFab"), panel = document.getElementById("chat"), log = document.getElementById("chatLog");
+  const form = document.getElementById("chatForm"), input = document.getElementById("chatInput"), send = document.getElementById("chatSend");
+  const chips = document.getElementById("chatChips");
+  const history = [];
+  let busy = false, greeted = false;
+
+  // Antworten, falls der KI-Dienst nicht erreichbar ist (z. B. lokale Vorschau ohne Schlüssel)
+  const FAQ = [
+    [/öffnungs|geöffnet|offen|uhrzeit|wann.*(auf|da)|samstag/i, "Wir sind Montag bis Donnerstag von 07:30 bis 18:00 Uhr, freitags von 07:30 bis 17:00 Uhr und samstags von 09:00 bis 12:00 Uhr für Sie da. Sonntags ist geschlossen."],
+    [/termin|buchen|vereinbar/i, "Einen Termin können Sie direkt hier auf der Seite unter „Termin buchen“ anfragen oder telefonisch unter 06103 731200 vereinbaren."],
+    [/\bhu\b|\bau\b|tüv|dekra|hauptuntersuchung|plakette/i, "Ja, HU und AU machen wir direkt bei uns. Rechnen Sie mit etwa einer Stunde. Einen Termin bekommen Sie über „Termin buchen“ oder unter 06103 731200."],
+    [/garantie|hersteller|scheckheft|inspektion|wartung/i, "Wir warten nach Herstellervorgaben, Ihre Herstellergarantie bleibt also erhalten. Eine Inspektion dauert je nach Umfang etwa zwei bis vier Stunden."],
+    [/reifen|räder|felge|einlager|winter|sommer/i, "Wir wechseln Reifen und Räder, lagern sie ein und vermessen die Achse. Ein Reifenwechsel dauert etwa 30 Minuten."],
+    [/preis|kost|teuer|angebot|€|euro/i, "Preise hängen vom Fahrzeug und Umfang ab. Am besten fragen Sie kurz telefonisch unter 06103 731200 nach, dann bekommen Sie eine verlässliche Auskunft."],
+    [/adresse|wo |anfahrt|parken|parkplatz|finde/i, "Sie finden uns am Kurt-Schumacher-Ring 8 in 63329 Egelsbach. Kundenparkplätze gibt es direkt auf dem Hof."],
+    [/telefon|anruf|nummer|erreich|mail/i, "Sie erreichen uns unter 06103 731200 oder per E-Mail an autohaus@sollath.de."],
+    [/marke|ford|vw|opel|bmw|audi|mercedes|toyota|skoda|fiat|hyundai|kia/i, "Als Bosch Car Service sind wir eine Meisterwerkstatt für alle Marken."],
+    [/unfall|karosserie|delle|kratzer|versicherung|lack/i, "Nach einem Unfall setzen wir Ihr Fahrzeug instand und kümmern uns auch um die Abwicklung mit der Versicherung. Am besten rufen Sie kurz an: 06103 731200."],
+    [/klima/i, "Den Klimaservice machen wir ganzjährig, inklusive Wartung, Desinfektion und Kältemittel."],
+    [/brems|warnleucht|rauch|lenkung|quietsch/i, "Bei Problemen mit Bremsen, Lenkung oder einer roten Warnleuchte fahren Sie bitte nicht weiter und rufen Sie uns an: 06103 731200."],
+  ];
+  const offline = (q) => (FAQ.find(([re]) => re.test(q)) || [, "Das klärt unser Team am besten persönlich. Rufen Sie uns gern an unter 06103 731200 oder schreiben Sie an autohaus@sollath.de."])[1];
+
+  function bubble(cls, text = "") {
+    const el = document.createElement("div");
+    el.className = "msg " + cls; el.textContent = text;
+    log.appendChild(el); log.scrollTop = log.scrollHeight;
+    return el;
+  }
+  function cta() {
+    const box = document.createElement("div"); box.className = "msg-cta";
+    box.innerHTML = '<a href="#termin">Termin buchen</a><a href="tel:+496103731200">06103 731200 anrufen</a>';
+    box.querySelector('a[href="#termin"]').addEventListener("click", () => toggle(false));
+    log.appendChild(box); log.scrollTop = log.scrollHeight;
+  }
+  function toggle(open) {
+    document.body.classList.toggle("chat-open", open);
+    fab.setAttribute("aria-expanded", open);
+    if (open && !greeted) { greeted = true; bubble("bot", "Guten Tag! Ich beantworte Fragen zu unserer Werkstatt, zu Leistungen, Öffnungszeiten und Terminen. Was kann ich für Sie tun?"); }
+    if (open && matchMedia("(hover:hover)").matches) setTimeout(() => input.focus(), 250);
+    if (!open) fab.focus({ preventScroll: true });
+  }
+  async function ask(q) {
+    q = q.trim(); if (!q || busy) return;
+    busy = true; send.disabled = true; chips.hidden = true;
+    bubble("me", q); history.push({ role: "user", content: q });
+    input.value = ""; input.style.height = "";
+    const typing = bubble("bot typing"); typing.innerHTML = "<i></i><i></i><i></i>";
+    let answer = "", el = null;
+    try {
+      const res = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history.slice(-16) }) });
+      if (!res.ok || !res.body) throw new Error("offline");
+      const reader = res.body.getReader(), dec = new TextDecoder();
+      for (;;) {
+        const { value, done } = await reader.read(); if (done) break;
+        answer += dec.decode(value, { stream: true });
+        if (answer.includes("\u0000FEHLER")) throw new Error("offline");
+        if (!el && answer.trim()) { typing.remove(); el = bubble("bot"); }
+        if (el) { el.textContent = answer.trim(); log.scrollTop = log.scrollHeight; }
+      }
+      if (!answer.trim()) throw new Error("offline");
+    } catch {
+      answer = offline(q);
+      typing.remove(); (el || (el = bubble("bot"))).textContent = answer;
+    }
+    answer = answer.replace("\u0000FEHLER", "").trim();
+    history.push({ role: "assistant", content: answer });
+    if (/termin|buchen|vereinbar|anruf|06103/i.test(q + " " + answer)) cta();
+    busy = false; send.disabled = !input.value.trim();
+  }
+
+  fab.addEventListener("click", () => toggle(true));
+  document.getElementById("chatClose").addEventListener("click", () => toggle(false));
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && document.body.classList.contains("chat-open")) toggle(false); });
+  chips.querySelectorAll(".chip").forEach((c) => c.addEventListener("click", () => ask(c.textContent)));
+  input.addEventListener("input", () => {
+    send.disabled = busy || !input.value.trim();
+    input.style.height = ""; input.style.height = Math.min(input.scrollHeight, 120) + "px";
+  });
+  input.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); ask(input.value); } });
+  form.addEventListener("submit", (e) => { e.preventDefault(); ask(input.value); });
 })();
 </script>
 </body>
