@@ -348,7 +348,7 @@ ${rows.map((r) => `          <dt data-d="${rowIdx(r)}">${esc(rowLabel(r))}</dt><
     <nav aria-label="Rechtliches">
       <a href="#leistungen">${esc(c.leistungen?.titel)}</a><a href="#termin">Termin</a><a href="#kontakt">${esc(c.kontakt?.titel)}</a><a href="#">Impressum</a><a href="#">Datenschutz</a>
     </nav>
-    <p class="credits">© <span id="year">${new Date().getFullYear()}</span> ${esc(f.name)}. ${esc(c.fusszeile?.text)}</p>
+    <p class="credits">© <span id="year">${new Date().getFullYear()}</span> ${esc(f.name)}. ${esc(c.fusszeile?.text)}${c.vermietung?.bild_quelle ? ` Transporter-Foto: ${c.vermietung.bild_quelle_url ? `<a href="${esc(c.vermietung.bild_quelle_url)}" target="_blank" rel="noopener">${esc(c.vermietung.bild_quelle)}</a>` : esc(c.vermietung.bild_quelle)}${c.vermietung.bild_lizenz ? `, ${c.vermietung.bild_lizenz_url ? `<a href="${esc(c.vermietung.bild_lizenz_url)}" target="_blank" rel="noopener">${esc(c.vermietung.bild_lizenz)}</a>` : esc(c.vermietung.bild_lizenz)}` : ""}, via Wikimedia Commons, freigestellt und bearbeitet.` : ""}</p>
   </div>
 </footer>
 

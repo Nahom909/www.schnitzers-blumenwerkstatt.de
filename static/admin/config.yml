@@ -149,6 +149,10 @@ collections:
               - { label: "Überschrift (nur für Chatbot und Vorlesen, wird nicht angezeigt)", name: titel, widget: string }
               - { label: "Bild des Transporters (Seitenansicht)", name: bild, widget: image, required: false, hint: "Am besten freigestellt auf Weiß, Querformat." }
               - { label: "Bildbeschreibung", name: bild_beschreibung, widget: string, required: false }
+              - { label: "Bildnachweis: Fotograf", name: bild_quelle, widget: string, required: false, hint: "Nur nötig bei fremden Fotos (z. B. Wikimedia). Leer = kein Nachweis." }
+              - { label: "Bildnachweis: Link zum Foto", name: bild_quelle_url, widget: string, required: false }
+              - { label: "Bildnachweis: Lizenz", name: bild_lizenz, widget: string, required: false }
+              - { label: "Bildnachweis: Link zur Lizenz", name: bild_lizenz_url, widget: string, required: false }
               - { label: "Fahrzeug (steht unter dem Bild)", name: fahrzeug, widget: string, required: false }
               - label: "Tarife"
                 name: tarife
