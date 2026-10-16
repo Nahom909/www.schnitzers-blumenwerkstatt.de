@@ -1,0 +1,94 @@
+{
+  "seo": {
+    "titel": "Autohaus Sollath GmbH – Bosch Car Service in Egelsbach",
+    "beschreibung": "Bosch Car Service in Egelsbach: Meisterwerkstatt für alle Marken. Inspektion, HU/AU, Reifen, Diagnose und Reparatur. Termin online buchen oder anrufen: 06103 731200."
+  },
+  "firma": {
+    "name": "Autohaus Sollath GmbH",
+    "kurzname": "Sollath.",
+    "zusatz": "Bosch Car Service · Egelsbach",
+    "strasse": "Kurt-Schumacher-Ring 8",
+    "plz_ort": "63329 Egelsbach",
+    "telefon": "06103 731200",
+    "email": "autohaus@sollath.de"
+  },
+  "oeffnungszeiten": {
+    "mo": "07:30-18:00",
+    "di": "07:30-18:00",
+    "mi": "07:30-18:00",
+    "do": "07:30-18:00",
+    "fr": "07:30-17:00",
+    "sa": "09:00-12:00",
+    "so": ""
+  },
+  "hero": {
+    "kicker": "Bosch Car Service · Egelsbach",
+    "titel": "Autohaus Sollath GmbH",
+    "text": "Meisterwerkstatt für alle Marken.",
+    "bild": "/assets/img/sollath-werkstatt.webp",
+    "bild_beschreibung": "Werkstattgebäude der Autohaus Sollath GmbH mit Bosch-Car-Service-Schild, davor der Hof mit Transportern",
+    "knopf_termin": "Termin buchen",
+    "knopf_leistungen": "Leistungen"
+  },
+  "leistungen": {
+    "titel": "Leistungen",
+    "text": "Für alle Marken. Nach Herstellervorgaben.",
+    "liste": [
+      { "titel": "Inspektion & Wartung", "text": "Nach Herstellervorgaben. Die Herstellergarantie bleibt erhalten.", "dauer": "ca. 2–4 Std.", "symbol": "inspektion" },
+      { "titel": "Diagnose & Reparatur", "text": "Fehlerspeicher, Motor, Elektrik und Elektronik.", "dauer": "nach Befund", "symbol": "diagnose" },
+      { "titel": "HU / AU", "text": "Hauptuntersuchung und Abgasuntersuchung direkt bei uns.", "dauer": "ca. 1 Std.", "symbol": "hu" },
+      { "titel": "Reifen & Räder", "text": "Wechsel, Einlagerung und Achsvermessung.", "dauer": "ca. 30 Min.", "symbol": "reifen" },
+      { "titel": "Transporter & Flotten", "text": "Planbare Wartung für Firmenfahrzeuge.", "dauer": "Rückruf zur Planung", "symbol": "flotte" },
+      { "titel": "Unfall & Karosserie", "text": "Instandsetzung und Abwicklung mit der Versicherung.", "dauer": "Besichtigung ca. 30 Min.", "symbol": "unfall" }
+    ]
+  },
+  "werkstatt": {
+    "kicker": "Kurt-Schumacher-Ring 8",
+    "titel": "Werkstatt",
+    "bild": "/assets/img/sollath-schild.webp",
+    "bild_beschreibung": "Einfahrt der Autohaus Sollath GmbH mit Bosch-Car-Service-Schild und Hausnummer 8",
+    "liste": [
+      { "titel": "Bremsen & Fahrwerk", "text": "Beläge, Scheiben, Stoßdämpfer und Achsvermessung." },
+      { "titel": "Klimaservice", "text": "Wartung, Desinfektion und Kältemittel." },
+      { "titel": "Batterie & Elektrik", "text": "Batterietest, Licht, Starter und Lichtmaschine." },
+      { "titel": "Ölwechsel", "text": "Mit Freigabe des Herstellers, inklusive Filter." },
+      { "titel": "Glasservice", "text": "Steinschlag-Reparatur und Scheibentausch." },
+      { "titel": "Motor & Abgasanlage", "text": "Zahnriemen, Kupplung, Auspuff und Partikelfilter." }
+    ],
+    "knopf": "Werkstatttermin buchen"
+  },
+  "termin": {
+    "titel": "Termin buchen",
+    "text": "Anliegen wählen, Tag und Uhrzeit festlegen. Wir bestätigen den Termin per Telefon oder E-Mail.",
+    "vorlauf_tage": 90,
+    "danke_titel": "Danke, Ihr Terminwunsch ist bei uns.",
+    "danke_text": "Wir bestätigen den Termin per Telefon oder E-Mail."
+  },
+  "band": {
+    "titel": "Direkt am Kurt-Schumacher-Ring.",
+    "text": "Kundenparkplätze direkt auf dem Hof.",
+    "knopf": "Anfahrt"
+  },
+  "kontakt": {
+    "kicker": "Öffnungszeiten & Anfahrt",
+    "titel": "Kontakt",
+    "zeiten_titel": "Werkstatt & Annahme",
+    "hinweis": "Termine auch telefonisch."
+  },
+  "chatbot": {
+    "knopf": "KI-Chatbot",
+    "titel": "KI-Chatbot für offene Fragen",
+    "untertitel": "Antwortet sofort zu Werkstatt, Leistungen, Zeiten und rund ums Auto",
+    "begruessung": "Guten Tag! Ich bin der KI-Chatbot der Autohaus Sollath GmbH. Fragen Sie mich alles zu unserer Werkstatt, zu Leistungen, Zeiten und Terminen oder allgemein rund ums Auto.",
+    "beispielfragen": [
+      "Haben Sie heute offen?",
+      "Was kostet eine Inspektion?",
+      "Wie lange dauert die HU?",
+      "Wie buche ich einen Termin?"
+    ],
+    "zusatzwissen": "Kundenparkplätze gibt es direkt auf dem Hof."
+  },
+  "fusszeile": {
+    "text": "Bosch Car Service ist eine Marke der Robert Bosch GmbH. Fotos: Autohaus Sollath."
+  }
+}

@@ -1,0 +1,179 @@
+# Decap CMS: Inhalte der Website Autohaus Sollath
+# Jede Änderung wird ins Git-Repository gespeichert, Netlify baut die Seite danach neu (ca. 1 Minute).
+
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    update: "Geändert: {{collection}} „{{slug}}“"
+    uploadMedia: "Bild hochgeladen: {{path}}"
+    deleteMedia: "Bild gelöscht: {{path}}"
+
+# Lokal testen: im Projektordner „npx decap-server“ starten und /admin/ über den lokalen Server öffnen
+local_backend: true
+
+locale: de
+
+media_folder: static/assets/img/uploads
+public_folder: /assets/img/uploads
+
+collections:
+  - name: inhalte
+    label: Inhalte
+    description: "Alle Texte, Bilder und Zeiten der Website. Nach dem Speichern ist die Seite in etwa einer Minute aktualisiert."
+    format: json
+    editor:
+      preview: false
+    files:
+      - name: seite
+        label: Website
+        file: content/seite.json
+        fields:
+
+          - label: "Google"
+            name: seo
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Seitentitel (Google)", name: titel, widget: string }
+              - { label: "Beschreibung (Google)", name: beschreibung, widget: text }
+
+          - label: "Firma & Kontakt"
+            name: firma
+            widget: object
+            collapsed: true
+            hint: "Diese Angaben stehen an mehreren Stellen der Seite und werden auch vom Chatbot benutzt."
+            fields:
+              - { label: "Firmenname", name: name, widget: string }
+              - { label: "Kurzname oben links", name: kurzname, widget: string }
+              - { label: "Zusatz neben dem Kurznamen", name: zusatz, widget: string, required: false }
+              - { label: "Straße und Hausnummer", name: strasse, widget: string }
+              - { label: "PLZ und Ort", name: plz_ort, widget: string }
+              - { label: "Telefon", name: telefon, widget: string, hint: "So schreiben, wie es angezeigt werden soll, z. B. 06103 731200." }
+              - { label: "E-Mail", name: email, widget: string }
+
+          - label: "Öffnungszeiten"
+            name: oeffnungszeiten
+            widget: object
+            collapsed: true
+            hint: "Format 07:30-18:00. Leer lassen = geschlossen. Der Kalender bietet nur Tage und Uhrzeiten innerhalb dieser Zeiten an."
+            fields:
+              - { label: "Montag", name: mo, widget: string, required: false }
+              - { label: "Dienstag", name: di, widget: string, required: false }
+              - { label: "Mittwoch", name: mi, widget: string, required: false }
+              - { label: "Donnerstag", name: do, widget: string, required: false }
+              - { label: "Freitag", name: fr, widget: string, required: false }
+              - { label: "Samstag", name: sa, widget: string, required: false }
+              - { label: "Sonntag", name: so, widget: string, required: false }
+
+          - label: "Erster Bildschirm"
+            name: hero
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Kleine Zeile über der Überschrift", name: kicker, widget: string, required: false }
+              - { label: "Überschrift", name: titel, widget: string }
+              - { label: "Text darunter", name: text, widget: string, required: false }
+              - { label: "Hintergrundbild", name: bild, widget: image, hint: "Querformat, mindestens 1600 Pixel breit." }
+              - { label: "Bildbeschreibung (für Blinde und Google)", name: bild_beschreibung, widget: string }
+              - { label: "Knopf zur Terminbuchung", name: knopf_termin, widget: string }
+              - { label: "Knopf zu den Leistungen", name: knopf_leistungen, widget: string }
+
+          - label: "Leistungen"
+            name: leistungen
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Überschrift", name: titel, widget: string }
+              - { label: "Text unter der Überschrift", name: text, widget: string, required: false }
+              - label: "Leistungen"
+                name: liste
+                widget: list
+                summary: "{{fields.titel}}"
+                hint: "Jede Leistung erscheint als Kachel und als Anliegen im Kalender."
+                fields:
+                  - { label: "Titel", name: titel, widget: string }
+                  - { label: "Text", name: text, widget: text }
+                  - { label: "Dauer (steht im Kalender)", name: dauer, widget: string, required: false, hint: "z. B. ca. 1 Std." }
+                  - label: "Symbol"
+                    name: symbol
+                    widget: select
+                    default: allgemein
+                    options:
+                      - { label: "Werkzeug (Inspektion)", value: inspektion }
+                      - { label: "Messkurve (Diagnose)", value: diagnose }
+                      - { label: "Haken (HU/AU)", value: hu }
+                      - { label: "Rad (Reifen)", value: reifen }
+                      - { label: "Transporter (Flotte)", value: flotte }
+                      - { label: "Auto (Unfall)", value: unfall }
+                      - { label: "Bremsscheibe", value: bremse }
+                      - { label: "Schneeflocke (Klima)", value: klima }
+                      - { label: "Batterie", value: batterie }
+                      - { label: "Allgemein", value: allgemein }
+
+          - label: "Werkstatt"
+            name: werkstatt
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Kleine Zeile über der Überschrift", name: kicker, widget: string, required: false }
+              - { label: "Überschrift", name: titel, widget: string }
+              - { label: "Bild", name: bild, widget: image, required: false, hint: "Hochformat oder Querformat." }
+              - { label: "Bildbeschreibung", name: bild_beschreibung, widget: string, required: false }
+              - label: "Weitere Arbeiten"
+                name: liste
+                widget: list
+                summary: "{{fields.titel}}"
+                fields:
+                  - { label: "Titel", name: titel, widget: string }
+                  - { label: "Text", name: text, widget: string }
+              - { label: "Knopf", name: knopf, widget: string }
+
+          - label: "Terminbuchung"
+            name: termin
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Überschrift", name: titel, widget: string }
+              - { label: "Text", name: text, widget: text, required: false }
+              - { label: "Wie viele Tage im Voraus buchbar", name: vorlauf_tage, widget: number, value_type: int, min: 7, max: 365, default: 90 }
+              - { label: "Danke-Überschrift", name: danke_titel, widget: string }
+              - { label: "Danke-Text", name: danke_text, widget: string }
+
+          - label: "Anfahrt-Band"
+            name: band
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Überschrift", name: titel, widget: string }
+              - { label: "Text", name: text, widget: string, required: false }
+              - { label: "Knopf", name: knopf, widget: string }
+
+          - label: "Kontakt"
+            name: kontakt
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Kleine Zeile über der Überschrift", name: kicker, widget: string, required: false }
+              - { label: "Überschrift", name: titel, widget: string }
+              - { label: "Überschrift über den Zeiten", name: zeiten_titel, widget: string }
+              - { label: "Hinweis", name: hinweis, widget: string, required: false }
+
+          - label: "KI-Chatbot"
+            name: chatbot
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Knopf unten rechts", name: knopf, widget: string }
+              - { label: "Titel im Fenster", name: titel, widget: string }
+              - { label: "Untertitel", name: untertitel, widget: string, required: false }
+              - { label: "Begrüßung", name: begruessung, widget: text }
+              - { label: "Beispielfragen", name: beispielfragen, widget: list, field: { label: "Frage", name: frage, widget: string } }
+              - { label: "Zusatzwissen für den Chatbot", name: zusatzwissen, widget: text, required: false, hint: "Alles, was der Chatbot zusätzlich wissen soll, z. B. Parkplätze, Ersatzwagen, Zahlungsarten." }
+
+          - label: "Fußzeile"
+            name: fusszeile
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Text", name: text, widget: string }

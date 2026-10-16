@@ -1,5 +1,5 @@
 // Lokale Vorschau inklusive Chatbot: node dev-server.mjs  →  http://localhost:8788
-// Liefert public/ aus und leitet POST /api/chat an die Netlify-Funktion weiter.
+// Liefert dist/ aus (vorher: node build.mjs) und leitet POST /api/chat an die Netlify-Funktion weiter.
 import http from "node:http";
 import { readFile } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
@@ -7,7 +7,7 @@ import { Readable } from "node:stream";
 import { fileURLToPath } from "node:url";
 import chat from "./netlify/functions/chat.mjs";
 
-const ROOT = fileURLToPath(new URL("./public/", import.meta.url));
+const ROOT = fileURLToPath(new URL("./dist/", import.meta.url));
 const PORT = Number(process.env.PORT) || 8788;
 const TYPES = { ".html": "text/html; charset=utf-8", ".webp": "image/webp", ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg" };
 
