@@ -1,11 +1,13 @@
 {
   "seo": {
-    "titel": "Autohaus Sollath GmbH – Bosch Car Service in Egelsbach",
-    "beschreibung": "Bosch Car Service in Egelsbach: Meisterwerkstatt für alle Marken. Inspektion, HU/AU, Reifen, Diagnose und Reparatur. Termin online buchen oder anrufen: 06103 731200."
+    "titel": "Autohaus Sollath GmbH – Werkstatt, Transporter-Vermietung und Gebrauchtwagen in Egelsbach",
+    "beschreibung": "Autohaus Sollath in Egelsbach: Bosch-Car-Service-Meisterwerkstatt für alle Marken, Transporter-Vermietung und geprüfte Gebrauchtwagen. Termin online buchen oder anrufen: 06103 731200."
   },
   "firma": {
     "name": "Autohaus Sollath GmbH",
     "kurzname": "Sollath.",
+    "logo": "/assets/img/logo-bosch-service.webp",
+    "logo_beschreibung": "Bosch Service",
     "zusatz": "Bosch Car Service · Egelsbach",
     "strasse": "Kurt-Schumacher-Ring 8",
     "plz_ort": "63329 Egelsbach",
@@ -22,9 +24,9 @@
     "so": ""
   },
   "hero": {
-    "kicker": "Bosch Car Service · Egelsbach",
+    "kicker": "Autohaus · Bosch Car Service · Egelsbach",
     "titel": "Autohaus Sollath GmbH",
-    "text": "Meisterwerkstatt für alle Marken.",
+    "text": "Meisterwerkstatt für alle Marken, Transporter-Vermietung und geprüfte Gebrauchtwagen.",
     "bild": "/assets/img/sollath-werkstatt.webp",
     "bild_beschreibung": "Werkstattgebäude der Autohaus Sollath GmbH mit Bosch-Car-Service-Schild, davor der Hof mit Transportern",
     "knopf_termin": "Termin buchen",
@@ -32,37 +34,169 @@
   },
   "leistungen": {
     "titel": "Leistungen",
-    "text": "Für alle Marken. Nach Herstellervorgaben.",
+    "text": "Werkstatt, Transporter-Vermietung und Fahrzeugverkauf an einem Ort.",
     "liste": [
-      { "titel": "Inspektion & Wartung", "text": "Nach Herstellervorgaben. Die Herstellergarantie bleibt erhalten.", "dauer": "ca. 2–4 Std.", "symbol": "inspektion" },
-      { "titel": "Diagnose & Reparatur", "text": "Fehlerspeicher, Motor, Elektrik und Elektronik.", "dauer": "nach Befund", "symbol": "diagnose" },
-      { "titel": "HU / AU", "text": "Hauptuntersuchung und Abgasuntersuchung direkt bei uns.", "dauer": "ca. 1 Std.", "symbol": "hu" },
-      { "titel": "Reifen & Räder", "text": "Wechsel, Einlagerung und Achsvermessung.", "dauer": "ca. 30 Min.", "symbol": "reifen" },
-      { "titel": "Transporter & Flotten", "text": "Planbare Wartung für Firmenfahrzeuge.", "dauer": "Rückruf zur Planung", "symbol": "flotte" },
-      { "titel": "Unfall & Karosserie", "text": "Instandsetzung und Abwicklung mit der Versicherung.", "dauer": "Besichtigung ca. 30 Min.", "symbol": "unfall" }
+      {
+        "titel": "Inspektion & Wartung",
+        "text": "Nach Herstellervorgaben. Die Herstellergarantie bleibt erhalten.",
+        "dauer": "ca. 2–4 Std.",
+        "symbol": "inspektion"
+      },
+      {
+        "titel": "Diagnose & Reparatur",
+        "text": "Fehlerspeicher, Motor, Elektrik und Elektronik.",
+        "dauer": "nach Befund",
+        "symbol": "diagnose"
+      },
+      {
+        "titel": "HU / AU",
+        "text": "Hauptuntersuchung und Abgasuntersuchung direkt bei uns.",
+        "dauer": "ca. 1 Std.",
+        "symbol": "hu"
+      },
+      {
+        "titel": "Reifen & Räder",
+        "text": "Wechsel, Einlagerung und Achsvermessung.",
+        "dauer": "ca. 30 Min.",
+        "symbol": "reifen"
+      },
+      {
+        "titel": "Flottenwartung",
+        "text": "Planbare Wartung für Transporter und Firmenfahrzeuge.",
+        "dauer": "Rückruf zur Planung",
+        "symbol": "flotte"
+      },
+      {
+        "titel": "Unfall & Karosserie",
+        "text": "Instandsetzung und Abwicklung mit der Versicherung.",
+        "dauer": "Besichtigung ca. 30 Min.",
+        "symbol": "unfall"
+      },
+      {
+        "titel": "Transporter-Vermietung",
+        "text": "Transporter für Umzug, Einkauf oder Baustelle, ab 4 Stunden.",
+        "dauer": "",
+        "symbol": "flotte",
+        "link": "#vermietung"
+      },
+      {
+        "titel": "Fahrzeugverkauf",
+        "text": "Geprüfte Gebrauchtwagen, Inzahlungnahme und Finanzierung.",
+        "dauer": "",
+        "symbol": "unfall",
+        "link": "#verkauf"
+      }
     ]
   },
   "werkstatt": {
     "kicker": "Kurt-Schumacher-Ring 8",
-    "titel": "Werkstatt",
+    "titel": "Außerdem in der Werkstatt",
     "bild": "/assets/img/sollath-schild.webp",
     "bild_beschreibung": "Einfahrt der Autohaus Sollath GmbH mit Bosch-Car-Service-Schild und Hausnummer 8",
     "liste": [
-      { "titel": "Bremsen & Fahrwerk", "text": "Beläge, Scheiben, Stoßdämpfer und Achsvermessung." },
-      { "titel": "Klimaservice", "text": "Wartung, Desinfektion und Kältemittel." },
-      { "titel": "Batterie & Elektrik", "text": "Batterietest, Licht, Starter und Lichtmaschine." },
-      { "titel": "Ölwechsel", "text": "Mit Freigabe des Herstellers, inklusive Filter." },
-      { "titel": "Glasservice", "text": "Steinschlag-Reparatur und Scheibentausch." },
-      { "titel": "Motor & Abgasanlage", "text": "Zahnriemen, Kupplung, Auspuff und Partikelfilter." }
+      {
+        "titel": "Bremsen & Fahrwerk",
+        "text": "Beläge, Scheiben, Stoßdämpfer und Achsvermessung."
+      },
+      {
+        "titel": "Klimaservice",
+        "text": "Wartung, Desinfektion und Kältemittel."
+      },
+      {
+        "titel": "Batterie & Elektrik",
+        "text": "Batterietest, Licht, Starter und Lichtmaschine."
+      },
+      {
+        "titel": "Ölwechsel",
+        "text": "Mit Freigabe des Herstellers, inklusive Filter."
+      },
+      {
+        "titel": "Glasservice",
+        "text": "Steinschlag-Reparatur und Scheibentausch."
+      },
+      {
+        "titel": "Motor & Abgasanlage",
+        "text": "Zahnriemen, Kupplung, Auspuff und Partikelfilter."
+      }
     ],
     "knopf": "Werkstatttermin buchen"
+  },
+  "vermietung": {
+    "titel": "Transporter mieten",
+    "text": "Transporter für Umzug, Einkauf oder Baustelle. Abholung direkt bei uns am Kurt-Schumacher-Ring.",
+    "bild": "/assets/img/transporter-seite.svg",
+    "bild_beschreibung": "Transporter zum Mieten in Seitenansicht",
+    "fahrzeug": "Ford Transit Custom, 3 Sitze, Ladefläche ca. 2,5 m",
+    "tarife": [
+      {
+        "name": "4 Stunden",
+        "preis": "49 €",
+        "text": "100 km frei"
+      },
+      {
+        "name": "1 Tag",
+        "preis": "79 €",
+        "text": "200 km frei"
+      },
+      {
+        "name": "Wochenende",
+        "preis": "149 €",
+        "text": "Fr–Mo, 400 km frei"
+      }
+    ],
+    "bedingungen": [
+      "Führerschein Klasse B, seit mindestens 2 Jahren",
+      "Mindestalter 21 Jahre",
+      "Kaution 300 €, per EC-Karte",
+      "Jeder weitere Kilometer 0,25 €",
+      "Vollkasko mit 1.000 € Selbstbeteiligung inklusive"
+    ],
+    "hinweis": "Beispielpreise inklusive MwSt.",
+    "knopf": "Transporter reservieren"
+  },
+  "verkauf": {
+    "titel": "Fahrzeugverkauf",
+    "text": "Geprüfte Gebrauchtwagen aus der eigenen Werkstatt, dazu Inzahlungnahme und Finanzierung aus einer Hand.",
+    "punkte": [
+      {
+        "titel": "Gebrauchtwagen",
+        "text": "Von unserer Meisterwerkstatt durchgesehen, mit neuer HU und 12 Monaten Gebrauchtwagengarantie.",
+        "symbol": "hu"
+      },
+      {
+        "titel": "Inzahlungnahme",
+        "text": "Wir bewerten Ihr bisheriges Fahrzeug vor Ort und rechnen es beim Kauf an.",
+        "symbol": "diagnose"
+      },
+      {
+        "titel": "Finanzierung & Leasing",
+        "text": "Monatliche Raten über unsere Partnerbank. Ein Angebot erstellen wir Ihnen gern persönlich.",
+        "symbol": "allgemein"
+      },
+      {
+        "titel": "Transporter für Gewerbe",
+        "text": "Gebrauchte Transporter für Handwerk und Lieferdienste, auf Wunsch mit Wartungsvertrag.",
+        "symbol": "flotte"
+      }
+    ],
+    "knopf": "Beratung vereinbaren"
   },
   "termin": {
     "titel": "Termin buchen",
     "text": "Anliegen wählen, Tag und Uhrzeit festlegen. Wir bestätigen den Termin per Telefon oder E-Mail.",
     "vorlauf_tage": 90,
     "danke_titel": "Danke, Ihr Terminwunsch ist bei uns.",
-    "danke_text": "Wir bestätigen den Termin per Telefon oder E-Mail."
+    "danke_text": "Wir bestätigen den Termin per Telefon oder E-Mail.",
+    "zusatz_anliegen": [
+      {
+        "titel": "Transporter mieten",
+        "dauer": "Abholung vor Ort"
+      },
+      {
+        "titel": "Kaufberatung & Probefahrt",
+        "dauer": "ca. 45 Min."
+      }
+    ]
   },
   "band": {
     "titel": "Direkt am Kurt-Schumacher-Ring.",
@@ -78,12 +212,12 @@
   "chatbot": {
     "knopf": "KI-Chatbot",
     "titel": "KI-Chatbot für offene Fragen",
-    "untertitel": "Antwortet sofort zu Werkstatt, Leistungen, Zeiten und rund ums Auto",
-    "begruessung": "Guten Tag! Ich bin der KI-Chatbot der Autohaus Sollath GmbH. Fragen Sie mich alles zu unserer Werkstatt, zu Leistungen, Zeiten und Terminen oder allgemein rund ums Auto.",
+    "untertitel": "Kurze Antworten zu Werkstatt, Vermietung und Verkauf",
+    "begruessung": "Guten Tag! Ich beantworte kurz Ihre Fragen zu Werkstatt, Vermietung und Verkauf.",
     "beispielfragen": [
       "Haben Sie heute offen?",
-      "Was kostet eine Inspektion?",
-      "Wie lange dauert die HU?",
+      "Was kostet ein Transporter?",
+      "Verkaufen Sie Gebrauchtwagen?",
       "Wie buche ich einen Termin?"
     ],
     "zusatzwissen": "Kundenparkplätze gibt es direkt auf dem Hof."

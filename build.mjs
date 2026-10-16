@@ -59,10 +59,37 @@ const mapsUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURICo
 const client = {
   name: f.name, telefon: f.telefon, telLink: tel, email: f.email, strasse: f.strasse, plzOrt: f.plz_ort,
   hours, zeilen: rows.map((r) => [rowLabel(r), r.t === "geschlossen" ? "geschlossen" : r.t + " Uhr"]),
-  anliegen: leist.map((l) => [l.titel, l.dauer || ""]),
+  anliegen: [...leist.filter((l) => !l.link), ...list(c.termin?.zusatz_anliegen)].map((l) => [l.titel, l.dauer || ""]),
+  preise: list(c.preise?.liste).map((p) => [p.leistung, p.preis]),
+  miete: { tarife: list(c.vermietung?.tarife).map((t) => [t.name, t.preis, t.text || ""]), bedingungen: list(c.vermietung?.bedingungen), fahrzeug: c.vermietung?.fahrzeug || "" },
+  verkauf: list(c.verkauf?.punkte).map((p) => [p.titel, p.text]),
   vorlauf: c.termin?.vorlauf_tage || 90, danke: c.termin?.danke_text || "",
   begruessung: c.chatbot?.begruessung || "", wissen: c.chatbot?.zusatzwissen || "",
 };
+// Wissensliste für den Chatbot: jede Info der Seite als kurzer Eintrag [Typ, Titel, Antwort]
+const W = [];
+const add = (typ, titel, ...teile) => { const a = teile.filter(Boolean).join(" · "); if (titel || a) W.push([typ, titel || "", a]); };
+add("firma", f.name, f.zusatz, c.hero?.text);
+add("adresse", "Adresse", `${f.strasse}, ${f.plz_ort}`, c.band?.text);
+add("kontakt", "Kontakt", `Telefon ${f.telefon}`, `E-Mail ${f.email}`, c.kontakt?.hinweis);
+for (const l of leist) add("leistung", l.titel, l.text, l.dauer && `Dauer ${l.dauer}`, l.preis && `Preis ${l.preis}`);
+for (const l of list(c.werkstatt?.liste)) add("leistung", l.titel, l.text);
+for (const p of list(c.preise?.liste)) add("preis", p.leistung, `Preis ${p.preis}`);
+if (c.preise?.hinweis) add("preis", "Hinweis zu Preisen", c.preise.hinweis);
+if (c.vermietung) {
+  add("miete", c.vermietung.titel, c.vermietung.text, c.vermietung.fahrzeug);
+  for (const t of list(c.vermietung.tarife)) add("miete", `Transporter mieten, ${t.name}`, `Preis ${t.preis}`, t.text);
+  for (const b of list(c.vermietung.bedingungen)) add("miete", "Bedingung Vermietung", b);
+}
+if (c.verkauf) {
+  add("verkauf", c.verkauf.titel, c.verkauf.text);
+  for (const p of list(c.verkauf.punkte)) add("verkauf", p.titel, p.text);
+}
+add("termin", c.termin?.titel, c.termin?.text, `Bis ${c.termin?.vorlauf_tage || 90} Tage im Voraus`);
+for (const z of list(c.termin?.zusatz_anliegen)) add("termin", z.titel, z.dauer, "über „Termin buchen“");
+if (c.chatbot?.zusatzwissen) add("info", "", c.chatbot.zusatzwissen);
+client.wissen_liste = W;
+
 const clientJson = JSON.stringify(client).replace(/</g, "\\u003c");
 
 /* ---------- Seite ---------- */
@@ -73,8 +100,8 @@ const html = `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(c.seo?.titel)}</title>
 <meta name="description" content="${esc(c.seo?.beschreibung)}">
-<meta name="theme-color" content="#103c3e">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23103c3e'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='20' font-weight='700' fill='%23fff' text-anchor='middle'%3E${esc((f.kurzname || f.name || "S").trim()[0])}%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#0f2d44">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231f78c8'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='20' font-weight='700' fill='%23fff' text-anchor='middle'%3E${esc((f.kurzname || f.name || "S").trim()[0])}%3C/text%3E%3C/svg%3E">
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/barlow-latin-400-normal.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/barlow-semi-condensed-latin-600-normal.woff2" crossorigin>
 <link rel="preload" as="image" href="${esc(c.hero?.bild)}">
@@ -86,11 +113,12 @@ ${css.replace(/url\(assets\//g, "url(/assets/")}</style>
 <!-- ================= Kopfzeile ================= -->
 <header class="top">
   <div class="wrap">
-    <a href="#top" class="logo" aria-label="${esc(f.name)}, zum Seitenanfang"><b>${esc(f.kurzname)}</b><span>${esc(f.zusatz)}</span></a>
+    <a href="#top" class="logo" aria-label="${esc(f.name)}, zum Seitenanfang">${f.logo ? `<img src="${esc(f.logo)}" alt="${esc(f.logo_beschreibung || "")}" height="48">` : `<b>${esc(f.kurzname)}</b>`}<span><strong>${esc(f.name)}</strong>${esc(f.zusatz)}</span></a>
     <nav aria-label="Hauptmenü">
       <a href="#top">Start</a>
-      <a href="#leistungen">${esc(c.leistungen?.titel)}</a>
-      <a href="#service">${esc(c.werkstatt?.titel)}</a>
+      <a href="#leistungen">Leistungen</a>
+      ${c.vermietung ? `<a href="#vermietung">Vermietung</a>` : ""}
+      ${c.verkauf ? `<a href="#verkauf">Verkauf</a>` : ""}
       <a href="#termin">Termin</a>
       <a href="#kontakt">${esc(c.kontakt?.titel)}</a>
       <a href="tel:${tel}" class="btn btn-primary">${PHONE}${esc(f.telefon)}</a>
@@ -101,8 +129,9 @@ ${css.replace(/url\(assets\//g, "url(/assets/")}</style>
       <details class="menu">
         <summary>Menü</summary>
         <ul>
-          <li><a href="#leistungen">${esc(c.leistungen?.titel)}</a></li>
-          <li><a href="#service">${esc(c.werkstatt?.titel)}</a></li>
+          <li><a href="#leistungen">Leistungen</a></li>
+          ${c.vermietung ? `<li><a href="#vermietung">Vermietung</a></li>` : ""}
+          ${c.verkauf ? `<li><a href="#verkauf">Verkauf</a></li>` : ""}
           <li><a href="#termin">${esc(c.termin?.titel)}</a></li>
           <li><a href="#kontakt">${esc(c.kontakt?.kicker)}</a></li>
         </ul>
@@ -142,9 +171,9 @@ ${css.replace(/url\(assets\//g, "url(/assets/")}</style>
       ${c.leistungen?.text ? `<p class="intro">${esc(c.leistungen.text)}</p>` : ""}
     </div>
     <div class="services">
-${leist.map((l, i) => `      <a href="#termin" class="card${i === 0 ? " card-dark" : ""}" data-anliegen="${esc(l.titel)}">
+${leist.map((l, i) => `      <a href="${esc(l.link || "#termin")}" class="card${i === 0 ? " card-dark" : ""}"${l.link ? "" : ` data-anliegen="${esc(l.titel)}"`}>
         <span class="ico">${icon(l.symbol)}</span>
-        <h3>${esc(l.titel)}</h3><p>${esc(l.text)}</p><span class="go">${esc(c.hero?.knopf_termin || "Termin buchen")} →</span>
+        <h3>${esc(l.titel)}</h3><p>${esc(l.text)}</p><span class="go">${l.link ? "Mehr dazu" : esc(c.hero?.knopf_termin || "Termin buchen")} →</span>
       </a>`).join("\n")}
     </div>
   </div>
@@ -152,10 +181,14 @@ ${leist.map((l, i) => `      <a href="#termin" class="card${i === 0 ? " card-dar
 
 <!-- ================= Werkstatt ================= -->
 <section class="sec" id="service" aria-labelledby="h-werkstatt">
-  <div class="wrap split">
-    <div>
+  <div class="wrap">
+    <div class="sec-head">
       ${c.werkstatt?.kicker ? `<p class="kicker">${esc(c.werkstatt.kicker)}</p>` : ""}
       <h2 id="h-werkstatt">${esc(c.werkstatt?.titel)}</h2>
+    </div>
+  </div>
+  <div class="wrap split">
+    <div>
       ${c.werkstatt?.bild ? `<img src="${esc(c.werkstatt.bild)}" alt="${esc(c.werkstatt.bild_beschreibung)}" loading="lazy">` : ""}
     </div>
     <div>
@@ -166,6 +199,43 @@ ${list(c.werkstatt?.liste).map((l) => `        <li><b>${esc(l.titel)}</b><span>$
     </div>
   </div>
 </section>
+${c.vermietung ? `
+<!-- ================= Vermietung: Transporter + Mietpreise, ohne Überschrift ================= -->
+<section class="sec rent-sec" id="vermietung" aria-label="${esc(c.vermietung.titel || "Transporter mieten")}">
+  <div class="wrap">
+    ${c.vermietung.bild ? `<figure class="rent-pic"><img src="${esc(c.vermietung.bild)}" alt="${esc(c.vermietung.bild_beschreibung)}" loading="lazy" width="1000" height="420">${c.vermietung.fahrzeug ? `<figcaption>${esc(c.vermietung.fahrzeug)}</figcaption>` : ""}</figure>` : ""}
+    <div class="rent">
+      <div class="rates">
+${list(c.vermietung.tarife).map((t, i) => `        <div class="rate${i === 1 ? " rate-dark" : ""}"><span class="rate-name">${esc(t.name)}</span><b>${esc(t.preis)}</b><span>${esc(t.text)}</span></div>`).join("\n")}
+      </div>
+      <div class="rent-info">
+        <ul class="checks">
+${list(c.vermietung.bedingungen).map((b) => `          <li>${esc(b)}</li>`).join("\n")}
+        </ul>
+        <a href="#termin" class="btn btn-primary" data-anliegen="Transporter mieten">${esc(c.vermietung.knopf)}</a>
+        ${c.vermietung.hinweis ? `<p class="fine">${esc(c.vermietung.hinweis)}</p>` : ""}
+      </div>
+    </div>
+  </div>
+</section>` : ""}
+${c.verkauf ? `
+<!-- ================= Verkauf ================= -->
+<section class="sec" id="verkauf" aria-labelledby="h-verkauf">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">Verkauf</p>
+      <h2 id="h-verkauf">${esc(c.verkauf.titel)}</h2>
+      ${c.verkauf.text ? `<p class="intro">${esc(c.verkauf.text)}</p>` : ""}
+    </div>
+    <div class="services services-4">
+${list(c.verkauf.punkte).map((p) => `      <div class="card card-static">
+        <span class="ico">${icon(p.symbol)}</span>
+        <h3>${esc(p.titel)}</h3><p>${esc(p.text)}</p>
+      </div>`).join("\n")}
+    </div>
+    <div class="row-cta"><a href="#termin" class="btn btn-primary" data-anliegen="Kaufberatung & Probefahrt">${esc(c.verkauf.knopf)}</a><a href="tel:${tel}" class="btn btn-secondary">${PHONE}${esc(f.telefon)}</a></div>
+  </div>
+</section>` : ""}
 
 <!-- ================= Terminbuchung ================= -->
 <section class="sec booking" id="termin" aria-labelledby="h-termin">
@@ -274,7 +344,7 @@ ${rows.map((r) => `          <dt data-d="${rowIdx(r)}">${esc(rowLabel(r))}</dt><
 
 <footer>
   <div class="wrap">
-    <a href="#top" class="logo"><b>${esc(f.kurzname)}</b></a>
+    <a href="#top" class="logo">${f.logo ? `<img src="${esc(f.logo)}" alt="${esc(f.logo_beschreibung || "")}" height="46" loading="lazy">` : `<b>${esc(f.kurzname)}</b>`}<span><strong>${esc(f.name)}</strong>${esc(f.strasse)}, ${esc(f.plz_ort)}</span></a>
     <nav aria-label="Rechtliches">
       <a href="#leistungen">${esc(c.leistungen?.titel)}</a><a href="#termin">Termin</a><a href="#kontakt">${esc(c.kontakt?.titel)}</a><a href="#">Impressum</a><a href="#">Datenschutz</a>
     </nav>

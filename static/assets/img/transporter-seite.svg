@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" role="img" aria-labelledby="t">
+  <title id="t">Weißer Transporter in Seitenansicht</title>
+  <defs>
+    <clipPath id="body">
+      <path d="M72 330 Q60 326 60 306 L62 252 Q64 230 92 223 L172 199 Q186 195 196 182 L258 100 Q272 80 300 78 L898 76 Q930 76 933 104 L940 318 Q940 338 918 338 L838 338 A78 78 0 0 0 682 338 L294 338 A78 78 0 0 0 138 338 L96 338 Q78 338 72 330 Z"/>
+    </clipPath>
+    <clipPath id="ueberboden">
+      <rect x="0" y="0" width="1000" height="344"/>
+    </clipPath>
+  </defs>
+
+  <!-- Schatten am Boden -->
+  <ellipse cx="500" cy="394" rx="450" ry="11" fill="#e6ebf0"/>
+
+  <!-- Karosserie -->
+  <path d="M72 330 Q60 326 60 306 L62 252 Q64 230 92 223 L172 199 Q186 195 196 182 L258 100 Q272 80 300 78 L898 76 Q930 76 933 104 L940 318 Q940 338 918 338 L838 338 A78 78 0 0 0 682 338 L294 338 A78 78 0 0 0 138 338 L96 338 Q78 338 72 330 Z" fill="#f7f8fa"/>
+  <g clip-path="url(#body)">
+    <!-- Dach-Lichtkante -->
+    <rect x="0" y="70" width="1000" height="16" fill="#ffffff"/>
+    <!-- Schattenfläche unten an der Flanke -->
+    <path d="M60 252 L940 246 L940 300 L60 304 Z" fill="#e9edf1"/>
+    <!-- dunkle Schutzleiste unten -->
+    <rect x="0" y="300" width="1000" height="60" fill="#3a4047"/>
+    <rect x="0" y="300" width="1000" height="4" fill="#4b525a"/>
+  </g>
+
+  <!-- Frontscheibe (schmaler sichtbarer Streifen) -->
+  <path d="M180 196 L252 104 Q262 92 276 90 L284 90 L210 188 Q200 196 180 196 Z" fill="#2b3440"/>
+  <!-- Seitenfenster Fahrerhaus -->
+  <path d="M214 190 L282 102 Q290 94 302 94 L402 94 Q410 94 410 102 L410 184 Q410 190 404 190 Z" fill="#2b3440"/>
+  <path d="M232 186 L290 110 L330 110 L268 186 Z" fill="#3c4756"/>
+  <!-- Außenspiegel -->
+  <path d="M206 168 L236 162 Q244 161 244 169 L244 180 Q244 186 237 186 L212 186 Q205 186 205 179 Z" fill="#2b3440"/>
+
+  <!-- Türfugen -->
+  <path d="M424 92 L424 300" stroke="#c9d0d8" stroke-width="2.5" fill="none"/>
+  <path d="M206 300 L206 196" stroke="#c9d0d8" stroke-width="2.5" fill="none"/>
+  <!-- Schiebetür -->
+  <path d="M446 92 L446 300 M700 92 L700 300" stroke="#c9d0d8" stroke-width="2.5" fill="none"/>
+  <!-- Schiebetür-Schiene -->
+  <path d="M700 214 L928 212" stroke="#c9d0d8" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <!-- Griffe -->
+  <rect x="380" y="206" width="30" height="8" rx="4" fill="#3a4047"/>
+  <rect x="460" y="206" width="30" height="8" rx="4" fill="#3a4047"/>
+  <!-- Hecktür-Fuge und Rückleuchte -->
+  <path d="M930 98 L934 300" stroke="#c9d0d8" stroke-width="2" fill="none"/>
+  <rect x="926" y="118" width="12" height="96" rx="4" fill="#d6413a"/>
+  <!-- Scheinwerfer und Blinker -->
+  <path d="M66 248 Q70 234 92 229 L150 213 Q160 211 158 220 L150 236 Q146 242 136 243 L74 252 Z" fill="#2b3440"/>
+  <path d="M92 236 L140 224 L136 234 L90 242 Z" fill="#dfe6ee"/>
+  <!-- Kühlergrill vorne (Kante) -->
+  <path d="M60 262 L72 262 L72 296 L60 296 Z" fill="#3a4047"/>
+
+  <!-- Radkästen -->
+  <g clip-path="url(#ueberboden)" fill="#2a3036">
+    <circle cx="216" cy="338" r="74"/>
+    <circle cx="760" cy="338" r="74"/>
+  </g>
+
+  <!-- Räder -->
+  <g>
+    <circle cx="216" cy="338" r="60" fill="#1d2126"/>
+    <circle cx="216" cy="338" r="40" fill="#cdd3da"/>
+    <circle cx="216" cy="338" r="31" fill="#b9c1ca"/>
+    <g stroke="#8e98a3" stroke-width="7" stroke-linecap="round">
+      <path d="M216 312 L216 324"/><path d="M241 330 L229 334"/><path d="M231 359 L224 349"/><path d="M201 359 L208 349"/><path d="M191 330 L203 334"/>
+    </g>
+    <circle cx="216" cy="338" r="11" fill="#6b7480"/>
+  </g>
+  <g>
+    <circle cx="760" cy="338" r="60" fill="#1d2126"/>
+    <circle cx="760" cy="338" r="40" fill="#cdd3da"/>
+    <circle cx="760" cy="338" r="31" fill="#b9c1ca"/>
+    <g stroke="#8e98a3" stroke-width="7" stroke-linecap="round">
+      <path d="M760 312 L760 324"/><path d="M785 330 L773 334"/><path d="M775 359 L768 349"/><path d="M745 359 L752 349"/><path d="M735 330 L747 334"/>
+    </g>
+    <circle cx="760" cy="338" r="11" fill="#6b7480"/>
+  </g>
+</svg>

@@ -45,7 +45,9 @@ collections:
             hint: "Diese Angaben stehen an mehreren Stellen der Seite und werden auch vom Chatbot benutzt."
             fields:
               - { label: "Firmenname", name: name, widget: string }
-              - { label: "Kurzname oben links", name: kurzname, widget: string }
+              - { label: "Kurzname (wenn kein Logo)", name: kurzname, widget: string }
+              - { label: "Logo oben links", name: logo, widget: image, required: false, hint: "Am besten die offizielle Datei (PNG oder SVG). Leer lassen = Kurzname als Schrift." }
+              - { label: "Logo-Beschreibung", name: logo_beschreibung, widget: string, required: false }
               - { label: "Zusatz neben dem Kurznamen", name: zusatz, widget: string, required: false }
               - { label: "Straße und Hausnummer", name: strasse, widget: string }
               - { label: "PLZ und Ort", name: plz_ort, widget: string }
@@ -95,6 +97,15 @@ collections:
                   - { label: "Titel", name: titel, widget: string }
                   - { label: "Text", name: text, widget: text }
                   - { label: "Dauer (steht im Kalender)", name: dauer, widget: string, required: false, hint: "z. B. ca. 1 Std." }
+                  - label: "Kachel führt zu"
+                    name: link
+                    widget: select
+                    required: false
+                    hint: "Leer = Terminbuchung (und die Leistung erscheint als Anliegen im Kalender)."
+                    options:
+                      - { label: "Vermietung", value: "#vermietung" }
+                      - { label: "Verkauf", value: "#verkauf" }
+                      - { label: "Werkstatt", value: "#service" }
                   - label: "Symbol"
                     name: symbol
                     widget: select
@@ -129,6 +140,55 @@ collections:
                   - { label: "Text", name: text, widget: string }
               - { label: "Knopf", name: knopf, widget: string }
 
+          - label: "Vermietung"
+            name: vermietung
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Text", name: text, widget: text, required: false }
+              - { label: "Überschrift (nur für Chatbot und Vorlesen, wird nicht angezeigt)", name: titel, widget: string }
+              - { label: "Bild des Transporters (Seitenansicht)", name: bild, widget: image, required: false, hint: "Am besten freigestellt auf Weiß, Querformat." }
+              - { label: "Bildbeschreibung", name: bild_beschreibung, widget: string, required: false }
+              - { label: "Fahrzeug (steht unter dem Bild)", name: fahrzeug, widget: string, required: false }
+              - label: "Tarife"
+                name: tarife
+                widget: list
+                summary: "{{fields.name}} – {{fields.preis}}"
+                hint: "Der zweite Tarif wird dunkel hervorgehoben."
+                fields:
+                  - { label: "Name (z. B. 1 Tag)", name: name, widget: string }
+                  - { label: "Preis", name: preis, widget: string }
+                  - { label: "Zusatz (z. B. 200 km frei)", name: text, widget: string, required: false }
+              - { label: "Bedingungen", name: bedingungen, widget: list, field: { label: "Bedingung", name: bedingung, widget: string } }
+              - { label: "Hinweis", name: hinweis, widget: string, required: false }
+              - { label: "Knopf", name: knopf, widget: string }
+
+          - label: "Verkauf"
+            name: verkauf
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Überschrift", name: titel, widget: string }
+              - { label: "Text", name: text, widget: text, required: false }
+              - label: "Kacheln"
+                name: punkte
+                widget: list
+                summary: "{{fields.titel}}"
+                fields:
+                  - { label: "Titel", name: titel, widget: string }
+                  - { label: "Text", name: text, widget: text }
+                  - label: "Symbol"
+                    name: symbol
+                    widget: select
+                    default: allgemein
+                    options:
+                      - { label: "Haken", value: hu }
+                      - { label: "Messkurve", value: diagnose }
+                      - { label: "Transporter", value: flotte }
+                      - { label: "Auto", value: unfall }
+                      - { label: "Werkzeug", value: allgemein }
+              - { label: "Knopf", name: knopf, widget: string }
+
           - label: "Terminbuchung"
             name: termin
             widget: object
@@ -137,6 +197,14 @@ collections:
               - { label: "Überschrift", name: titel, widget: string }
               - { label: "Text", name: text, widget: text, required: false }
               - { label: "Wie viele Tage im Voraus buchbar", name: vorlauf_tage, widget: number, value_type: int, min: 7, max: 365, default: 90 }
+              - label: "Weitere Anliegen im Kalender"
+                name: zusatz_anliegen
+                widget: list
+                summary: "{{fields.titel}}"
+                hint: "Zusätzlich zu den Werkstatt-Leistungen, z. B. Transporter mieten."
+                fields:
+                  - { label: "Titel", name: titel, widget: string }
+                  - { label: "Dauer/Hinweis", name: dauer, widget: string, required: false }
               - { label: "Danke-Überschrift", name: danke_titel, widget: string }
               - { label: "Danke-Text", name: danke_text, widget: string }
 

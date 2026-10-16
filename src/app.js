@@ -24,20 +24,6 @@ function openText() {
   hero.querySelector("em").textContent = s.text; hero.classList.toggle("closed", !s.open);
 })();
 
-/* ================= Hero verblasst beim Scrollen ================= */
-(() => {
-  const hero = document.querySelector(".hero"), inner = document.querySelector(".hero-inner");
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  let raf = 0;
-  const update = () => {
-    raf = 0;
-    const p = Math.min(1, Math.max(0, scrollY / (hero.offsetHeight * 0.9)));
-    inner.style.opacity = (1 - p).toFixed(3);
-  };
-  addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
-  update();
-})();
-
 /* ================= Terminbuchung (Kalender) ================= */
 (() => {
   const ANLIEGEN = C.anliegen; // [[Titel, Dauer], …]
@@ -157,39 +143,92 @@ function openText() {
   // Eingebaute Antworten mit den Infos der Seite. Greifen, wenn der KI-Dienst
   // nicht erreichbar ist (z. B. lokale Vorschau ohne API-Schlüssel).
   const TEL = C.telefon, MAIL = C.email, ADR = `${C.strasse} in ${C.plzOrt}`;
-  const hoursText = () => C.zeilen.map(([tage, zeit]) => `${tage} ${zeit}`).join(", ") + ".";
-  const dauerText = () => C.anliegen.map(([t, d]) => `${t}: ${d}`).join(", ") + ".";
+  const hoursList = () => C.zeilen.map(([tage, zeit]) => `- ${tage}: ${zeit}`).join("\n");
+  const dauerList = () => C.anliegen.filter(([, d]) => d).map(([t, d]) => `- ${t}: ${d}`).join("\n");
+  const BUCHEN = "- Termin: oben „Termin buchen“ oder " + TEL;
+  // Kurz und in Stichpunkten, die erste passende Antwort gewinnt (Reihenfolge zählt)
+  // Die ersten INTENTS Einträge sind feste Absichten (vor der Suche), der Rest greift nur, wenn die Suche nichts findet
+  const INTENTS = 11;
   const FAQ = [
-    [/hallo|guten (tag|morgen|abend)|^hi\b|servus|moin/i, () => "Guten Tag! Fragen Sie mich gern zu unserer Werkstatt, zu Leistungen, Öffnungszeiten, Terminen oder allgemein rund ums Auto."],
-    [/danke|vielen dank|super|perfekt/i, () => "Gern geschehen. Wenn noch etwas offen ist, fragen Sie einfach."],
-    [/wer bist|bist du|ki\b|künstlich|mensch|bot/i, () => `Ich bin der KI-Chatbot der ${C.name} und beantworte Fragen rund um die Werkstatt. Verbindliche Zusagen macht unser Team persönlich.`],
-    [/heute|jetzt|gerade|offen|geöffnet|öffnungs|uhrzeit|wann.*(auf|da|zu)|samstag|sonntag|feierabend|schließ/i, () => `${openText().text}. Unsere Zeiten: ${hoursText()}`],
-    [/termin|buchen|vereinbar|anmeld|kalender|vorbeikommen|wann kann ich/i, () => `Unter „Termin buchen“ wählen Sie Ihr Anliegen, einen Tag im Kalender und eine Uhrzeit, dazu Name und Telefon oder E-Mail. Wir bestätigen den Termin dann per Telefon oder E-Mail. Schneller geht es telefonisch: ${TEL}.`],
-    [/preis|kost|teuer|günstig|angebot|€|euro|kostenvoranschlag/i, () => `Feste Preise nennen wir hier nicht, weil sie vom Fahrzeug und vom Umfang abhängen. Für eine Inspektion zählen zum Beispiel Modell, Laufleistung und das Wartungsintervall laut Serviceheft. Ein kurzer Anruf unter ${TEL} bringt Ihnen eine verlässliche Auskunft.`],
-    [/dauer|wie lange|lang dauert|zeit brauch|warten/i, () => `Grobe Richtwerte: ${dauerText()}`],
-    [/\bhu\b|\bau\b|tüv|dekra|hauptuntersuchung|abgasuntersuchung|plakette/i, () => "Ja, HU und AU machen wir direkt bei uns im Haus. Rechnen Sie mit etwa einer Stunde."],
-    [/garantie|gewährleistung|scheckheft|serviceheft|inspektion|wartung|durchsicht|service fällig/i, () => "Wir warten nach Herstellervorgaben, Ihre Herstellergarantie bleibt also erhalten. Eine Inspektion dauert je nach Umfang etwa zwei bis vier Stunden."],
-    [/reifen|räder|\brad\b|radwechsel|felge|einlager|winter|sommer|achsvermess|spur/i, () => "Wir wechseln Reifen und Räder, lagern sie ein und vermessen die Achse. Ein Reifenwechsel dauert etwa 30 Minuten. Als Faustregel gilt: Winterreifen von O bis O, also etwa Oktober bis Ostern."],
-    [/brems|fahrwerk|stoßdämpfer|quietsch|schleif/i, () => `Bremsen und Fahrwerk machen wir komplett: Beläge, Scheiben, Stoßdämpfer und Achsvermessung. Wenn die Bremse auffällig ist, fahren Sie bitte nicht weiter und rufen Sie uns an: ${TEL}.`],
-    [/warnleucht|kontrollleucht|leuchte|rauch|lenkung|öl ?verlust|tropft/i, () => `Bei einer roten Warnleuchte, Rauch, Problemen mit Bremsen oder Lenkung oder Ölverlust fahren Sie bitte nicht weiter und rufen Sie uns an: ${TEL}. Gelbe Leuchten lesen wir per Diagnose aus dem Fehlerspeicher aus.`],
-    [/diagnos|fehlerspeicher|fehler|elektronik|geräusch|ruckelt|springt nicht/i, () => "Wir lesen den Fehlerspeicher aus und prüfen Motor, Elektrik und Elektronik. Wie lange die Reparatur dauert, hängt vom Befund ab."],
-    [/unfall|karosserie|delle|kratzer|beule|versicherung|lack|gutacht/i, () => "Nach einem Unfall setzen wir Ihr Fahrzeug instand und übernehmen die Abwicklung mit der Versicherung. Eine Besichtigung dauert etwa 30 Minuten."],
-    [/glas|steinschlag|scheibe|frontscheibe|riss/i, () => "Steinschläge reparieren wir, und Scheiben tauschen wir auch. Ein Steinschlag sollte früh gemacht werden, bevor ein Riss entsteht."],
-    [/klima/i, () => "Den Klimaservice machen wir das ganze Jahr: Wartung, Desinfektion und Kältemittel."],
-    [/batterie|elektrik|\blicht|lampe|starter|anlasser|lichtmaschine/i, () => "Wir testen die Batterie und prüfen Licht, Starter und Lichtmaschine."],
-    [/öl|ölwechsel|filter/i, () => "Den Ölwechsel machen wir mit Öl, das der Hersteller freigegeben hat, inklusive Filter."],
-    [/motor|zahnriem|kupplung|auspuff|partikelfilter|dpf|abgas/i, () => "Auch Arbeiten an Motor und Abgasanlage gehören dazu: Zahnriemen, Kupplung, Auspuff und Partikelfilter."],
-    [/transporter|flotte|firm|gewerb|lieferwagen/i, () => "Für Transporter und Firmenflotten planen wir die Wartung so, dass möglichst wenig Ausfallzeit entsteht. Wählen Sie bei „Termin buchen“ das passende Anliegen, dann rufen wir Sie zur Planung an."],
-    [/marke|ford|vw|volkswagen|opel|bmw|audi|mercedes|toyota|skoda|seat|fiat|hyundai|kia|renault|peugeot|bosch/i, () => "Als Bosch Car Service sind wir eine Meisterwerkstatt für alle Marken."],
-    [/adresse|wo (seid|sind|ist|finde)|anfahrt|\bweg\b|route|egelsbach/i, () => `Sie finden uns am ${ADR}. ${C.wissen || ""}`.trim()],
-    [/park/i, () => C.wissen || `Sie finden uns am ${ADR}.`],
-    [/telefon|anruf|nummer|erreich|mail|kontakt/i, () => `Sie erreichen uns unter ${TEL} oder per E-Mail an ${MAIL}.`],
-    [/ersatzwagen|leihwagen|mietwagen|vermiet|verleih|miete|holservice|bringservice|abhol|hol- und|e-auto|elektroauto|hybrid|bezahl|kartenzahlung|ec-karte|\bbar\b|paypal/i, () => `Dazu steht auf unserer Seite nichts, deshalb möchte ich Ihnen nichts Falsches sagen. Fragen Sie am besten kurz telefonisch nach: ${TEL}.`],
+    [/was (macht|bietet|könnt|koennt|habt) ihr|was (machen|bieten|haben) sie|was gibt es (bei|hier)|überblick|ueberblick|euer angebot|ihr angebot/i, () =>
+      `- Meisterwerkstatt für alle Marken (Bosch Car Service)\n- Transporter-Vermietung ab ${(C.miete.tarife[0] || [, , ""])[1]}\n- Gebrauchtwagen, Inzahlungnahme, Finanzierung`],
+    [/^(vermietet|verleiht|vermieten|verleihen) (ihr|sie)|kann (man|ich) (bei euch|bei ihnen|hier)? ?(was|etwas|ein auto|autos|einen transporter)? ?(mieten|leihen)\??$/i, () =>
+      `Ja, Transporter${C.miete.fahrzeug ? ` (${C.miete.fahrzeug})` : ""}:\n${C.miete.tarife.map(([n, p, t]) => `- ${n}: ${p}${t ? `, ${t}` : ""}`).join("\n")}\n- Reservieren: „Termin buchen“ → „Transporter mieten“`],
+    [/^(verkauft|verkaufen) (ihr|sie)/i, () =>
+      `Ja:\n${C.verkauf.map(([t]) => `- ${t}`).join("\n")}\n- Beratung: „Termin buchen“ → „Kaufberatung & Probefahrt“`],
+    [/hallo|guten (tag|morgen|abend)|^hi\b|servus|moin/i, () => "Guten Tag! Wobei kann ich helfen?"],
+    [/danke|vielen dank|super|perfekt/i, () => "Gern geschehen."],
+    [/wer bist|bist du|ki\b|künstlich|mensch|\bbot\b|chatbot/i, () => `KI-Chatbot der ${C.name}. Verbindliche Zusagen macht unser Team.`],
+    [/warnleucht|kontrollleucht|leuchte|\brauch\b|qualm|lenkung|öl ?verlust|tropft/i, () => `- Rot, Rauch, Lenkung oder Ölverlust: nicht weiterfahren, anrufen: ${TEL}\n- Gelbe Leuchte: Fehlerspeicher auslesen lassen`],
+    [/heute|jetzt|gerade|offen|geöffnet|öffnungs|uhrzeit|wann.*(auf|da|zu)|samstag|sonntag|feierabend|schließ/i, () => `${openText().text}.\n${hoursList()}`],
+    [/termin|buchen|vereinbar|anmeld|kalender|vorbeikommen|wann kann ich/i, () => `- „Termin buchen“: Anliegen, Tag, Uhrzeit wählen\n- Bis ${C.vorlauf} Tage im Voraus\n- Wir bestätigen per Telefon oder E-Mail\n- Schneller: ${TEL}`],
+    [/telefon|anruf|nummer|erreich|mail|kontakt/i, () => `- Telefon: ${TEL}\n- E-Mail: ${MAIL}`],
+    [/ersatzwagen|holservice|bringservice|abhol|hol- und|e-auto|elektroauto|hybrid|bezahl|kartenzahlung|ec-karte|\bbar\b|paypal/i, () => `Weiß ich leider nicht sicher.\n- Bitte kurz anrufen: ${TEL}`],
+    [/miet|verleih|vermiet|ausleih|umzug|sprinter|\bbus\b|kaution|kilometer|\bkm\b|kost.*transporter|transporter.*kost/i, () =>
+      `Transporter mieten${C.miete.fahrzeug ? ` (${C.miete.fahrzeug})` : ""}:\n${C.miete.tarife.map(([n, p, t]) => `- ${n}: ${p}${t ? `, ${t}` : ""}`).join("\n")}\n- ${C.miete.bedingungen.slice(0, 3).join(", ")}\n- Reservieren: „Termin buchen“ → „Transporter mieten“`],
+    [/kaufen|verkauf|gebrauchtwagen|gebrauchte|neuwagen|inzahlung|in zahlung|finanzier|leasing|probefahrt|ankauf/i, () =>
+      `Ja, wir verkaufen auch:\n${C.verkauf.map(([t]) => `- ${t}`).join("\n")}\n- Beratung: „Termin buchen“ → „Kaufberatung & Probefahrt“`],
+    [/preis|kost|teuer|günstig|angebot|€|euro|kostenvoranschlag/i, () =>
+      `- Werkstatt: Preis je nach Fahrzeug, kurz anfragen: ${TEL}\n- Transporter mieten ab ${(C.miete.tarife[0] || [, , "auf Anfrage"])[1]}`],
+    [/dauer|wie lange|lang dauert|zeit brauch|warten/i, () => `Richtwerte:\n${dauerList()}`],
+    [/\bhu\b|\bau\b|tüv|dekra|hauptuntersuchung|abgasuntersuchung|plakette/i, () => `- HU/AU direkt bei uns\n- Dauer ca. 1 Std.\n${BUCHEN}`],
+    [/garantie|gewährleistung|scheckheft|serviceheft|inspektion|wartung|durchsicht|service fällig/i, () => `- Nach Herstellervorgaben\n- Herstellergarantie bleibt erhalten\n- Dauer ca. 2–4 Std.`],
+    [/reifen|räder|\brad\b|radwechsel|felge|einlager|winter|sommer|achsvermess|spur/i, () => `- Wechsel, Einlagerung, Achsvermessung\n- Radwechsel ca. 30 Min.\n- Faustregel: Winterreifen von O bis O (Oktober bis Ostern)`],
+    [/brems|fahrwerk|stoßdämpfer|quietsch|schleif/i, () => `- Beläge, Scheiben, Stoßdämpfer, Achsvermessung\n- Bremse auffällig? Nicht weiterfahren, anrufen: ${TEL}`],
+    [/diagnos|fehlerspeicher|fehler|elektronik|geräusch|ruckelt|springt nicht/i, () => `- Fehlerspeicher auslesen\n- Motor, Elektrik, Elektronik\n- Dauer nach Befund`],
+    [/unfall|karosserie|delle|kratzer|beule|versicherung|lack|gutacht/i, () => `- Instandsetzung nach Unfall\n- Abwicklung mit der Versicherung\n- Besichtigung ca. 30 Min.`],
+    [/glas|steinschlag|scheibe|frontscheibe|riss/i, () => `- Steinschlag-Reparatur und Scheibentausch\n- Steinschlag früh machen, bevor ein Riss entsteht`],
+    [/klima/i, () => `- Klimaservice ganzjährig\n- Wartung, Desinfektion, Kältemittel`],
+    [/batterie|elektrik|\blicht|lampe|starter|anlasser|lichtmaschine/i, () => `- Batterietest\n- Licht, Starter, Lichtmaschine`],
+    [/öl|ölwechsel|filter/i, () => `- Öl mit Herstellerfreigabe\n- Inklusive Filter`],
+    [/motor|zahnriem|kupplung|auspuff|partikelfilter|dpf|abgas/i, () => `- Zahnriemen, Kupplung\n- Auspuff, Partikelfilter`],
+    [/transporter|flotte|firm|gewerb|lieferwagen/i, () => `- Planbare Wartung für Firmenfahrzeuge\n- Anliegen „Transporter & Flotten“ wählen, wir rufen zurück`],
+    [/marke|ford|vw|volkswagen|opel|bmw|audi|mercedes|toyota|skoda|seat|fiat|hyundai|kia|renault|peugeot|bosch/i, () => `- Bosch Car Service\n- Meisterwerkstatt für alle Marken`],
+    [/adresse|wo (seid|sind|ist|finde)|anfahrt|\bweg\b|route|egelsbach|park/i, () => `- ${ADR}${C.wissen ? `\n- ${C.wissen}` : ""}`],
   ];
+  // Suche über alle Inhalte der Seite (Wissensliste aus content/seite.json)
+  const norm = (t) => t.toLowerCase().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss");
+  const STOP = new Set("ich du er sie es wir ihr der die das den dem des ein eine einen einem einer und oder aber was wie wo wann warum wer welche welcher welches kann koennt koennen kannst habt haben hat hast gibt gibts geht bei euch ihnen mir mich mein meine meinen fuer mit von zu zum zur im in am an auf aus ist sind seid bin sein auch noch man muss muessen soll sollte viel viele macht machen mach tut tun bitte gerne gern denn mal so schon nur nicht kein keine keinen ja nein dass wenn ob ueber um bis ab uns unser euer eure da hier dort bei mal etwa ca wie lange alles wechselt repariert bietet anbieten angebot leistet".split(" "));
+  const PRICE = /preis|kost|teuer|guenstig|euro|€|bezahl|angebot/;
+  const TYPE_KEYS = {
+    miete: "vermietung vermieten vermietet mieten miete leihen verleih verleiht ausleihen transporter auto autos fahrzeug wagen kilometer",
+    verkauf: "verkauf verkaufen verkauft kaufen kauf gebrauchtwagen gebraucht auto autos fahrzeug wagen",
+    preis: "preis preise kosten kostet euro",
+    termin: "termin termine buchen kalender anmelden vereinbaren reservieren",
+    adresse: "wo adresse anfahrt parken parkplatz parkplaetze hof finden",
+    kontakt: "telefon nummer email mail anrufen erreichen kontakt",
+    firma: "bosch marken marke autohaus werkstatt meister meisterwerkstatt",
+    leistung: "werkstatt reparatur reparieren machen",
+  };
+  const IDX = (C.wissen_liste || []).map(([typ, titel, a]) => ({ typ, titel, a, title: norm(titel), text: norm(`${titel} ${a} ${TYPE_KEYS[typ] || ""}`) }));
+  const stem = (w) => (w.length > 6 ? w.slice(0, 5) : w.length > 4 ? w.slice(0, w.length - 1) : w);
+  function suche(q) {
+    const nq = norm(q), priceIntent = PRICE.test(nq);
+    const toks = [...new Set(nq.split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !STOP.has(w) && !PRICE.test(w)).map(stem))];
+    if (!toks.length && !priceIntent) return null;
+    const df = Object.fromEntries(toks.map((t) => [t, IDX.filter((e) => e.text.includes(t)).length || 1]));
+    const scored = IDX.map((e) => {
+      let s = 0;
+      for (const t of toks) if (e.text.includes(t)) s += (1 + Math.log(IDX.length / df[t])) * (e.title.includes(t) ? 1.5 : 1);
+      if (priceIntent && /€/.test(e.a) && s > 0) s += 1.5;
+      if (priceIntent && !toks.length && e.typ === "preis") s += 1;
+      if (e.typ === "firma") s *= 0.6; // allgemeiner Eintrag nur, wenn nichts Genaueres passt
+      return { e, s };
+    }).filter((x) => x.s > 0).sort((a, b) => b.s - a.s);
+    if (!scored.length) return null;
+    const best = scored[0].s, top = scored.filter((x) => x.s >= best * 0.85).slice(0, priceIntent && !toks.length ? 10 : 3);
+    return top.map(({ e }) => `- ${e.titel ? `${e.titel}: ` : ""}${e.a.replace(/\.? · /g, ", ")}`).join("\n");
+  }
   function offline(q) {
-    const hits = FAQ.filter(([re]) => re.test(q)).slice(0, 2).map(([, fn]) => fn());
-    if (hits.length) return [...new Set(hits)].join("\n");
-    return `Das kann ich Ihnen leider nicht sicher beantworten. Ich helfe gern bei Leistungen, Öffnungszeiten, Terminen, Dauer von Arbeiten oder Anfahrt. Alles andere klärt unser Team persönlich unter ${TEL}.`;
+    const intent = FAQ.slice(0, INTENTS).find(([re]) => re.test(q));
+    if (intent) return intent[1](q);
+    const found = suche(q);
+    if (found) return PRICE.test(norm(q)) && !found.includes("€") ? `${found}
+- Preis: je nach Fahrzeug, kurz anfragen: ${TEL}` : found;
+    const hit = FAQ.slice(INTENTS).find(([re]) => re.test(q));
+    if (hit) return hit[1](q);
+    return `Dazu weiß ich nichts Sicheres.
+- Bitte kurz anrufen: ${TEL}`;
   }
 
   // Text sicher darstellen: Zeilen mit "- " werden zur Liste, Sternchen fallen weg
@@ -215,7 +254,7 @@ function openText() {
     return el;
   }
   // Passendes Anliegen für den Knopf „Termin buchen“ unter einer Antwort
-  const KEYS = [[/hu|au|tüv|hauptunters/i, /hu|au/i], [/reifen|räder|\brad\b|winter|sommer/i, /reifen/i], [/unfall|karosser|delle|kratzer|versicherung/i, /unfall/i], [/transporter|flotte|firm/i, /flotte|transporter/i], [/inspektion|wartung|service|öl/i, /inspektion|wartung/i], [/diagnos|reparat|geräusch|warnleucht|motor|kupplung|zahnriem|batterie|auspuff|brems/i, /diagnose|reparatur/i]];
+  const KEYS = [[/miet|verleih|leih|umzug/i, /transporter mieten/i], [/kauf|gebraucht|probefahrt|finanz|leasing/i, /kaufberatung/i], [/hu|au|tüv|hauptunters/i, /hu|au/i], [/reifen|räder|\brad\b|winter|sommer/i, /reifen/i], [/unfall|karosser|delle|kratzer|versicherung/i, /unfall/i], [/transporter|flotte|firm/i, /flotte|transporter/i], [/inspektion|wartung|service|öl/i, /inspektion|wartung/i], [/diagnos|reparat|geräusch|warnleucht|motor|kupplung|zahnriem|batterie|auspuff|brems/i, /diagnose|reparatur/i]];
   function cta(context) {
     const hit = KEYS.find(([re]) => re.test(context));
     const target = hit && C.anliegen.find(([t]) => hit[1].test(t));
