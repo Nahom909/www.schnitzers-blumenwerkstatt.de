@@ -1,0 +1,56 @@
+/* ===== Variante „klassisch“: eckige Knöpfe, Liste statt Kacheln, geteilter Start, Faktenleiste ===== */
+
+/* Eckige Knöpfe und Flächen */
+.btn,.menu summary,.ask-btn,.chat-send,.msg-cta a,.chip{border-radius:3px}
+.menu summary{border-radius:3px}
+.card,.box,.pricebox,.rate,.rent-info,.booker,.thanks,.chat,.split img,.rent-pic img{border-radius:6px}
+.card .ico,.rent-info .ico{border-radius:6px}
+.msg,.opt,.slot,.summary{border-radius:6px}
+.day,.cal-nav button,.step .n{border-radius:50%}
+.logo img{border-radius:2px}
+
+/* Hero geteilt: Text links auf Weiß, Foto rechts */
+.hero-split{padding:clamp(28px,5vw,64px) 0 clamp(40px,6vw,72px)}
+.hero-split .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,5vw,64px);align-items:center}
+.hero-split .kicker{margin-bottom:14px}
+.hero-split h1{font-size:clamp(2.4rem,5vw,3.9rem);line-height:1.02;max-width:12ch}
+.hero-split .sub{font-size:clamp(1.08rem,1.5vw,1.25rem);color:var(--ink-2);margin-top:16px;max-width:34ch}
+.hero-split .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero-split img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.hs-open{display:flex;align-items:center;gap:8px;margin-top:24px;font-size:16px;color:var(--ink-2)}
+.hs-open i{width:9px;height:9px;border-radius:50%;background:#2c8a4b;flex:none}
+.hs-open:has(.closed) i{background:#a7afb1}
+
+/* Faktenleiste unter dem Start */
+.facts{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.facts ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.facts li{padding:20px 20px 20px 0;font-size:16px;color:var(--ink-2)}
+.facts li + li{padding-left:20px;border-left:1px solid var(--line)}
+.facts b{display:block;color:var(--ink);font-weight:600;font-size:17px}
+
+/* Leistungen als Liste mit Linie statt Kacheln */
+.services{grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(24px,4vw,48px)}
+.card,.card:hover,.card-dark,.card-dark:hover{background:none;color:var(--ink);border-radius:0;border-top:2px solid var(--ink);padding:18px 0 28px;min-height:0;gap:8px}
+.card:hover h3{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+.card .ico,.card-dark .ico{display:none}
+.card h3{margin-top:0}
+.card p,.card-dark p{color:var(--ink-2)}
+.card .go,.card-dark .go{color:var(--accent)}
+
+/* Kontakt: ruhige Flächen */
+.box-dark{border-radius:6px}
+
+@media (max-width:980px){
+  .hero-split .wrap{grid-template-columns:1fr}
+  .facts ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .facts li:nth-child(3){padding-left:0;border-left:0}
+  .facts li:nth-child(n+3){border-top:1px solid var(--line)}
+  .services{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .hero-split .ctas .btn{flex:1 1 100%}
+  .services{grid-template-columns:1fr}
+  .facts li{padding:16px 12px 16px 0;font-size:15px}
+  .facts li + li{padding-left:12px}
+  .facts li:nth-child(3){padding-left:0}
+}

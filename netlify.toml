@@ -1,7 +1,7 @@
 # Netlify baut die Seite bei jeder Änderung (auch aus dem Admin-Bereich /admin) neu.
 [build]
-  command = "node build.mjs"
-  publish = "dist"
+  command = "node build.mjs premium"
+  publish = "dist-premium"
   functions = "netlify/functions"
 
 [functions]

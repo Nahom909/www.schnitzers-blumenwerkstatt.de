@@ -4,9 +4,12 @@
 import { readFile, writeFile, mkdir, cp, rm } from "node:fs/promises";
 
 const ROOT = new URL("./", import.meta.url);
-const OUT = new URL("dist/", ROOT);
+// Variante: node build.mjs klassisch  →  dist-klassisch/ (eckige Knöpfe, geteilter Start, Faktenleiste)
+const VARIANT = process.argv[2] || "";
+const OUT = new URL(VARIANT ? `dist-${VARIANT}/` : "dist/", ROOT);
 const c = JSON.parse(await readFile(new URL("content/seite.json", ROOT), "utf8"));
-const css = await readFile(new URL("src/style.css", ROOT), "utf8");
+let css = await readFile(new URL("src/style.css", ROOT), "utf8");
+if (VARIANT && VARIANT !== "premium") css += "\n" + await readFile(new URL(`src/variant-${VARIANT}.css`, ROOT), "utf8");
 const js = await readFile(new URL("src/app.js", ROOT), "utf8");
 
 /* ---------- Hilfen ---------- */
@@ -143,7 +146,31 @@ ${css.replace(/url\(assets\//g, "url(/assets/")}</style>
 <main>
 
 <!-- ================= Hero ================= -->
-<section class="hero" aria-labelledby="titel">
+${VARIANT ? `<section class="hero-split" aria-labelledby="titel">
+  <div class="wrap">
+    <div class="hs-text">
+      <p class="kicker">${esc(c.hero?.kicker)}</p>
+      <h1 id="titel">${esc(c.hero?.titel)}</h1>
+      <p class="sub">${esc(c.hero?.text)}</p>
+      <div class="ctas">
+        <a href="#termin" class="btn btn-primary">${esc(c.hero?.knopf_termin)}</a>
+        <a href="#leistungen" class="btn btn-secondary">${esc(c.hero?.knopf_leistungen)}</a>
+      </div>
+      <p class="hs-open"><i></i><span id="heroOpen"><em style="font-style:normal">${esc(rows[0] ? `${rowLabel(rows[0])} ${rows[0].t}` : "")}</em></span></p>
+    </div>
+    <img src="${esc(c.hero?.bild)}" alt="${esc(c.hero?.bild_beschreibung)}" fetchpriority="high">
+  </div>
+</section>
+<div class="facts">
+  <div class="wrap">
+    <ul>
+      <li><b>Bosch Car Service</b>Partnerwerkstatt</li>
+      <li><b>Alle Marken</b>nach Herstellervorgaben</li>
+      <li><b>${esc(c.vermietung?.titel || "Vermietung")}</b>ab ${esc((list(c.vermietung?.tarife)[0] || {}).preis || "")}</li>
+      <li><b>Auch samstags</b>${esc(zeitText("sa"))} Uhr</li>
+    </ul>
+  </div>
+</div>` : `<section class="hero" aria-labelledby="titel">
   <div class="hero-inner">
     <img src="${esc(c.hero?.bild)}" alt="${esc(c.hero?.bild_beschreibung)}" fetchpriority="high">
     <div class="scrim"></div>
@@ -161,7 +188,7 @@ ${css.replace(/url\(assets\//g, "url(/assets/")}</style>
       </div>
     </div>
   </div>
-</section>
+</section>`}
 
 <!-- ================= Leistungen ================= -->
 <section class="sec" id="leistungen" aria-labelledby="h-leistungen">
@@ -381,5 +408,8 @@ ${js}</script>
 await rm(OUT, { recursive: true, force: true });
 await mkdir(OUT, { recursive: true });
 await cp(new URL("static/", ROOT), OUT, { recursive: true });
-await writeFile(new URL("index.html", OUT), html);
-console.log(`Fertig: dist/index.html (${(html.length / 1024).toFixed(0)} KB), ${leist.length} Leistungen, ${rows.length} Zeilen Öffnungszeiten`);
+const page = VARIANT === "premium"
+  ? (await import("./src/premium.mjs")).render({ c, f, tel, leist, rows, rowLabel, rowIdx, list, esc, mapsUrl, clientJson, js, motion: await readFile(new URL("src/premium-motion.js", ROOT), "utf8"), css: await readFile(new URL("src/premium.css", ROOT), "utf8") })
+  : html;
+await writeFile(new URL("index.html", OUT), page);
+console.log(`Fertig: ${VARIANT ? `dist-${VARIANT}` : "dist"}/index.html (${(page.length / 1024).toFixed(0)} KB), ${leist.length} Leistungen, ${rows.length} Zeilen Öffnungszeiten`);
