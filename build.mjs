@@ -409,7 +409,7 @@ await rm(OUT, { recursive: true, force: true });
 await mkdir(OUT, { recursive: true });
 await cp(new URL("static/", ROOT), OUT, { recursive: true });
 const page = VARIANT === "premium"
-  ? (await import("./src/premium.mjs")).render({ c, f, tel, leist, rows, rowLabel, rowIdx, list, esc, mapsUrl, clientJson, js, motion: await readFile(new URL("src/premium-motion.js", ROOT), "utf8"), css: await readFile(new URL("src/premium.css", ROOT), "utf8") })
+  ? (await import("./src/premium.mjs")).render({ c, f, tel, leist, rows, rowLabel, rowIdx, list, esc, mapsUrl, clientJson, js, motion: (await readFile(new URL("src/premium-motion.js", ROOT), "utf8")), css: (await readFile(new URL("src/premium-icons.css", ROOT), "utf8")) + (await readFile(new URL("src/premium.css", ROOT), "utf8")) })
   : html;
 await writeFile(new URL("index.html", OUT), page);
 console.log(`Fertig: ${VARIANT ? `dist-${VARIANT}` : "dist"}/index.html (${(page.length / 1024).toFixed(0)} KB), ${leist.length} Leistungen, ${rows.length} Zeilen Öffnungszeiten`);

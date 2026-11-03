@@ -1,55 +1,47 @@
-/* Bewegung der Premium-Fassung (GSAP + ScrollTrigger + Lenis, lokal). Bei „Bewegung reduzieren“ bleibt alles statisch. */
+/* Bewegung der Premium-Fassung: Hoffoto wächst beim Scrollen auf volle Breite, Einblendungen,
+   fallende Mietpreise. Ohne Bibliotheken; bei „Bewegung reduzieren“ bleibt alles statisch. */
 (() => {
-  const nav = document.getElementById("nav");
-  const onScroll = () => nav.classList.toggle("scrolled", scrollY > 40);
-  addEventListener("scroll", onScroll, { passive: true }); onScroll();
-  if (!document.documentElement.classList.contains("motion") || !window.gsap || !window.ScrollTrigger) return;
-  gsap.registerPlugin(ScrollTrigger);
+  const motion = document.documentElement.classList.contains("motion");
 
-  const lenis = window.Lenis ? new Lenis({ lerp: 0.1 }) : null;
-  if (lenis) {
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add((t) => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-    document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener("click", (e) => {
-      const id = a.getAttribute("href"); if (id.length < 2) { e.preventDefault(); lenis.scrollTo(0); return; }
-      const el = document.querySelector(id); if (el) { e.preventDefault(); lenis.scrollTo(el, { offset: -90 }); }
-    }));
+  // Hoffoto im ersten Bildschirm: von leicht eingerückt auf volle Breite (nur transform)
+  const photo = document.getElementById("heroPhoto");
+  if (motion && photo) {
+    let ticking = false;
+    const grow = () => {
+      ticking = false;
+      const r = photo.getBoundingClientRect(), p = Math.min(1, Math.max(0, (innerHeight - r.top) / (innerHeight * 0.9)));
+      photo.style.setProperty("--s", (0.95 + 0.05 * p).toFixed(4));
+    };
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(grow); } }, { passive: true });
+    addEventListener("resize", grow);
+    grow();
   }
 
-  // Hero: Zeilen steigen auf, Foto zoomt beim Laden heraus, beim Scrollen langsamer
-  gsap.from(".hero h1 .line > span", { yPercent: 105, duration: 1.1, ease: "expo.out", stagger: 0.08, delay: 0.1 });
-  gsap.from([".hero .lead", ".hero-ctas", ".hero-card"], { opacity: 0, y: 18, duration: 1, ease: "expo.out", stagger: 0.07, delay: 0.4, clearProps: "transform" });
-  gsap.from("#heroMedia", { scale: 1.08, duration: 2.4, ease: "expo.out" });
-  gsap.to("#heroMedia", { yPercent: 12, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  // Menü schließen, sobald ein Eintrag gewählt wurde
+  document.querySelectorAll(".menu a").forEach((a) => a.addEventListener("click", () => a.closest("details").removeAttribute("open")));
 
-  // Aussage: Wort für Wort aufhellen
-  const say = document.getElementById("say");
-  if (say) {
-    say.innerHTML = say.textContent.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(" ");
-    gsap.fromTo(say.querySelectorAll(".w"), { opacity: 0.16 }, { opacity: 1, stagger: 0.05, ease: "none", scrollTrigger: { trigger: say, start: "top 82%", end: "bottom 45%", scrub: 0.6 } });
+  // Einblenden beim Hereinscrollen
+  const rv = [...document.querySelectorAll(".rv")];
+  if (!motion || !("IntersectionObserver" in window)) rv.forEach((el) => el.classList.add("in"));
+  else {
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+    rv.forEach((el) => io.observe(el));
   }
 
-  // Leistungszeilen: blenden beim Durchscrollen auf
-  document.querySelectorAll(".svc-row a").forEach((li) => gsap.fromTo(li, { opacity: 0.25 }, { opacity: 1, ease: "none", scrollTrigger: { trigger: li, start: "top 92%", end: "top 60%", scrub: 0.5 } }));
-
-  // Werkstatt-Bildband: öffnet sich und zoomt heraus
-  gsap.fromTo("#shopBand", { clipPath: "inset(8% 6% 8% 6% round 22px)" }, { clipPath: "inset(0% 0% 0% 0% round 22px)", ease: "none", scrollTrigger: { trigger: "#shopBand", start: "top 95%", end: "center 55%", scrub: 0.6 } });
-  gsap.fromTo("#shopBand img", { scale: 1.18 }, { scale: 1, ease: "none", scrollTrigger: { trigger: "#shopBand", start: "top bottom", end: "bottom top", scrub: true } });
-
-  // Transporter fährt ins Bild
-  gsap.fromTo("#rentVan", { xPercent: -70, opacity: 0 }, { xPercent: 0, opacity: 1, ease: "power2.out", scrollTrigger: { trigger: "#rentStage", start: "top 85%", end: "center 55%", scrub: 0.8 } });
-
-  // Zahlen zählen hoch
-  document.querySelectorAll(".count").forEach((el) => {
-    const to = +el.dataset.to || 0; if (!to) return;
-    ScrollTrigger.create({ trigger: el, start: "top 88%", once: true, onEnter: () => {
-      const o = { v: 0 }; gsap.to(o, { v: to, duration: 1.4, ease: "expo.out", onUpdate: () => { el.textContent = Math.round(o.v); } });
-    } });
-  });
-
-  // Alles mit .rv: weich von unten einblenden
-  ScrollTrigger.batch(".rv", { start: "top 88%", once: true, onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, duration: 0.9, ease: "expo.out", stagger: 0.06 }) });
-
-  addEventListener("load", () => ScrollTrigger.refresh());
+  // Mietpreise fallen von oben auf den echten Preis
+  const prices = [...document.querySelectorAll(".count-down")];
+  if (motion && prices.length && "IntersectionObserver" in window) {
+    prices.forEach((el) => { const to = +el.dataset.to || 0; el.dataset.from = String(Math.round((to * 2.2) / 10) * 10 - 1); el.textContent = el.dataset.from; });
+    const run = () => prices.forEach((el, i) => {
+      const to = +el.dataset.to, from = +el.dataset.from, dur = 1300, t0 = performance.now() + i * 150;
+      const step = (now) => {
+        const t = Math.min(1, Math.max(0, (now - t0) / dur)), e = 1 - Math.pow(1 - t, 2);
+        el.textContent = String(Math.round(from + (to - from) * e));
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); run(); } }, { threshold: 0.5 });
+    io.observe(document.querySelector(".rates"));
+  }
 })();

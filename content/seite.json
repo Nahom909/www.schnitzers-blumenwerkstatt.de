@@ -26,7 +26,7 @@
   "hero": {
     "kicker": "Autohaus · Bosch Car Service · Egelsbach",
     "titel": "Autohaus Sollath GmbH",
-    "text": "Meisterwerkstatt für alle Marken, Transporter-Vermietung und geprüfte Gebrauchtwagen.",
+    "text": "Werkstatt für alle Marken. Transporter mieten. Gebrauchtwagen kaufen.",
     "bild": "/assets/img/sollath-werkstatt.webp",
     "bild_beschreibung": "Werkstattgebäude der Autohaus Sollath GmbH mit Bosch-Car-Service-Schild, davor der Hof mit Transportern",
     "knopf_termin": "Termin buchen",
@@ -34,7 +34,7 @@
   },
   "leistungen": {
     "titel": "Leistungen",
-    "text": "Werkstatt, Transporter-Vermietung und Fahrzeugverkauf an einem Ort.",
+    "text": "Für alle Marken, nach Herstellervorgabe.",
     "liste": [
       {
         "titel": "Inspektion & Wartung",
@@ -123,7 +123,7 @@
   },
   "vermietung": {
     "titel": "Transporter mieten",
-    "text": "Transporter für Umzug, Einkauf oder Baustelle. Abholung direkt bei uns am Kurt-Schumacher-Ring.",
+    "text": "Für Umzug, Einkauf oder Baustelle. Abholung direkt bei uns.",
     "bild": "/assets/img/transporter-seite.svg",
     "bild_beschreibung": "Transporter zum Mieten in Seitenansicht",
     "fahrzeug": "Ford Transit Custom, 3 Sitze, Ladefläche ca. 2,5 m",
@@ -145,37 +145,37 @@
       }
     ],
     "bedingungen": [
-      "Führerschein Klasse B, seit mindestens 2 Jahren",
-      "Mindestalter 21 Jahre",
-      "Kaution 300 €, per EC-Karte",
-      "Jeder weitere Kilometer 0,25 €",
-      "Vollkasko mit 1.000 € Selbstbeteiligung inklusive"
+      "Führerschein B seit 2 Jahren",
+      "Ab 21 Jahren",
+      "Kaution 300 € per EC-Karte",
+      "Vollkasko inklusive (SB 1.000 €)",
+      "Mehrkilometer 0,25 €"
     ],
     "hinweis": "Beispielpreise inklusive MwSt.",
     "knopf": "Transporter reservieren"
   },
   "verkauf": {
     "titel": "Fahrzeugverkauf",
-    "text": "Geprüfte Gebrauchtwagen aus der eigenen Werkstatt, dazu Inzahlungnahme und Finanzierung aus einer Hand.",
+    "text": "Geprüfte Gebrauchtwagen, Inzahlungnahme und Finanzierung.",
     "punkte": [
       {
         "titel": "Gebrauchtwagen",
-        "text": "Von unserer Meisterwerkstatt durchgesehen, mit neuer HU und 12 Monaten Gebrauchtwagengarantie.",
+        "text": "Durchgesehen, neue HU, 12 Monate Garantie.",
         "symbol": "hu"
       },
       {
         "titel": "Inzahlungnahme",
-        "text": "Wir bewerten Ihr bisheriges Fahrzeug vor Ort und rechnen es beim Kauf an.",
+        "text": "Bewertung vor Ort, Anrechnung beim Kauf.",
         "symbol": "diagnose"
       },
       {
         "titel": "Finanzierung & Leasing",
-        "text": "Monatliche Raten über unsere Partnerbank. Ein Angebot erstellen wir Ihnen gern persönlich.",
+        "text": "Monatliche Raten über unsere Partnerbank.",
         "symbol": "allgemein"
       },
       {
         "titel": "Transporter für Gewerbe",
-        "text": "Gebrauchte Transporter für Handwerk und Lieferdienste, auf Wunsch mit Wartungsvertrag.",
+        "text": "Für Handwerk und Lieferdienste.",
         "symbol": "flotte"
       }
     ],
@@ -183,7 +183,7 @@
   },
   "termin": {
     "titel": "Termin buchen",
-    "text": "Anliegen wählen, Tag und Uhrzeit festlegen. Wir bestätigen den Termin per Telefon oder E-Mail.",
+    "text": "Anliegen, Tag und Uhrzeit wählen. Wir bestätigen kurz per Telefon oder E-Mail.",
     "vorlauf_tage": 90,
     "danke_titel": "Danke, Ihr Terminwunsch ist bei uns.",
     "danke_text": "Wir bestätigen den Termin per Telefon oder E-Mail.",
