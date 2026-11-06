@@ -88,8 +88,8 @@ if (c.verkauf) {
   add("verkauf", c.verkauf.titel, c.verkauf.text);
   for (const p of list(c.verkauf.punkte)) add("verkauf", p.titel, p.text);
 }
-add("termin", c.termin?.titel, c.termin?.text, `Bis ${c.termin?.vorlauf_tage || 90} Tage im Voraus`);
-for (const z of list(c.termin?.zusatz_anliegen)) add("termin", z.titel, z.dauer, "über „Termin buchen“");
+add("termin", c.termin?.titel, c.termin?.text, VARIANT === "premium" ? "Kein Online-Kalender, Wunschtermin im Formular angeben" : `Bis ${c.termin?.vorlauf_tage || 90} Tage im Voraus`);
+for (const z of list(c.termin?.zusatz_anliegen)) add("termin", z.titel, z.dauer, VARIANT === "premium" ? "über „Anfrage senden“" : "über „Termin buchen“");
 if (c.chatbot?.zusatzwissen) add("info", "", c.chatbot.zusatzwissen);
 client.wissen_liste = W;
 

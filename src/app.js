@@ -1,6 +1,6 @@
 /* Inhalte kommen aus content/seite.json (beim Bauen in die Seite geschrieben) */
 const C = JSON.parse(document.getElementById("inhalt").textContent);
-document.getElementById("year").textContent = new Date().getFullYear();
+const yearEl = document.getElementById("year"); if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 /* ================= Öffnungszeiten ================= */
 const HOURS = C.hours; // Index 0 = Sonntag; [von, bis] in Stunden oder null
@@ -19,13 +19,13 @@ function openText() {
   const wd = new Date().getDay(), s = openText();
   document.querySelectorAll("#hours [data-d]").forEach(el => { if (el.dataset.d.split(" ").includes(String(wd))) el.classList.add("is-today"); });
   const box = document.getElementById("openState");
-  box.querySelector("span").textContent = s.text; box.classList.toggle("closed", !s.open);
+  if (box) { box.querySelector("span").textContent = s.text; box.classList.toggle("closed", !s.open); }
   const hero = document.getElementById("heroOpen");
-  hero.querySelector("em").textContent = s.text; hero.classList.toggle("closed", !s.open);
+  if (hero) { hero.querySelector("em").textContent = s.text; hero.classList.toggle("closed", !s.open); }
 })();
 
-/* ================= Terminbuchung (Kalender) ================= */
-(() => {
+/* ================= Terminbuchung (Kalender, nur in Fassungen mit Kalender) ================= */
+if (document.getElementById("cal")) (() => {
   const ANLIEGEN = C.anliegen; // [[Titel, Dauer], …]
   const form = document.getElementById("bookForm"), wrap = document.getElementById("bookWrap");
   const optsEl = document.getElementById("opts"), calEl = document.getElementById("cal"), monthEl = document.getElementById("calMonth");
@@ -132,8 +132,46 @@ function openText() {
   render();
 })();
 
-/* ================= KI-Chatbot ================= */
-(() => {
+/* ================= Anfrage (Kontaktformular, Premium-Fassung) ================= */
+if (document.getElementById("anfrageForm")) (() => {
+  const form = document.getElementById("anfrageForm"), wrap = document.getElementById("bookWrap");
+  const sel = document.getElementById("f-anliegen"), btn = document.getElementById("sendBtn"), errBox = document.getElementById("formError");
+  const name = document.getElementById("f-name"), kontakt = document.getElementById("f-kontakt");
+  const btnHtml = btn.innerHTML;
+  [...C.anliegen.map(([t]) => t), "Sonstiges"].forEach((t) => sel.add(new Option(t, t)));
+  window.pickAnliegen = (t) => { if ([...sel.options].some((o) => o.value === t)) sel.value = t; };
+  document.querySelectorAll("[data-anliegen]").forEach((a) => a.addEventListener("click", () => window.pickAnliegen(a.dataset.anliegen)));
+
+  const mark = (id, bad) => { const f = document.getElementById(id); f.classList.toggle("invalid", bad); f.querySelector("input").setAttribute("aria-invalid", String(bad)); };
+  function check() {
+    const n = !name.value.trim(), k = !kontakt.value.trim();
+    mark("fa-name", n); mark("fa-kontakt", k);
+    return !n && !k;
+  }
+  [name, kontakt].forEach((el) => el.addEventListener("input", () => { if (form.dataset.tried) check(); }));
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    form.dataset.tried = "1"; errBox.classList.remove("show");
+    if (!check()) { form.querySelector(".invalid input")?.focus(); return; }
+    btn.disabled = true; btn.textContent = "Wird gesendet …";
+    try {
+      const res = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(new FormData(form)).toString() });
+      if (!res.ok) throw new Error(res.status);
+      document.getElementById("thanksText").textContent = `${sel.value}. ${C.danke}`;
+      wrap.classList.add("is-sent");
+      document.getElementById("thanks").focus();
+    } catch {
+      errBox.classList.add("show");
+    } finally {
+      btn.disabled = false; btn.innerHTML = btnHtml;
+    }
+  });
+  document.getElementById("again").addEventListener("click", () => { form.reset(); delete form.dataset.tried; wrap.classList.remove("is-sent"); sel.focus(); });
+})();
+
+/* ================= KI-Chatbot (nur in Fassungen mit Chat) ================= */
+if (document.getElementById("chatFab")) (() => {
   const fab = document.getElementById("chatFab"), log = document.getElementById("chatLog");
   const form = document.getElementById("chatForm"), input = document.getElementById("chatInput"), send = document.getElementById("chatSend");
   const chips = document.getElementById("chatChips");
@@ -145,31 +183,33 @@ function openText() {
   const TEL = C.telefon, MAIL = C.email, ADR = `${C.strasse} in ${C.plzOrt}`;
   const hoursList = () => C.zeilen.map(([tage, zeit]) => `- ${tage}: ${zeit}`).join("\n");
   const dauerList = () => C.anliegen.filter(([, d]) => d).map(([t, d]) => `- ${t}: ${d}`).join("\n");
-  const BUCHEN = "- Termin: oben „Termin buchen“ oder " + TEL;
+  // Premium-Fassung hat ein Anfrageformular statt Kalender
+  const FORMULAR = !!document.getElementById("anfrageForm"), KNOPF = FORMULAR ? "Anfrage senden" : "Termin buchen", BUCH = `„${KNOPF}“`;
+  const BUCHEN = `- Termin: ${BUCH} oder ` + TEL;
   // Kurz und in Stichpunkten, die erste passende Antwort gewinnt (Reihenfolge zählt)
   // Die ersten INTENTS Einträge sind feste Absichten (vor der Suche), der Rest greift nur, wenn die Suche nichts findet
   const INTENTS = 11;
   const FAQ = [
     [/was (macht|bietet|könnt|koennt|habt) ihr|was (machen|bieten|haben) sie|was gibt es (bei|hier)|überblick|ueberblick|euer angebot|ihr angebot/i, () =>
-      `- Meisterwerkstatt für alle Marken (Bosch Car Service)\n- Transporter-Vermietung ab ${(C.miete.tarife[0] || [, , ""])[1]}\n- Gebrauchtwagen, Inzahlungnahme, Finanzierung`],
+      `- Werkstatt für alle Marken (Bosch Car Service)\n- Transporter-Vermietung ab ${C.miete.tarife[0]?.[1] ?? "auf Anfrage"} (Beispielpreis)\n- Gebrauchtwagen, Inzahlungnahme, Finanzierung`],
     [/^(vermietet|verleiht|vermieten|verleihen) (ihr|sie)|kann (man|ich) (bei euch|bei ihnen|hier)? ?(was|etwas|ein auto|autos|einen transporter)? ?(mieten|leihen)\??$/i, () =>
-      `Ja, Transporter${C.miete.fahrzeug ? ` (${C.miete.fahrzeug})` : ""}:\n${C.miete.tarife.map(([n, p, t]) => `- ${n}: ${p}${t ? `, ${t}` : ""}`).join("\n")}\n- Reservieren: „Termin buchen“ → „Transporter mieten“`],
+      `Ja, Transporter${C.miete.fahrzeug ? ` (${C.miete.fahrzeug})` : ""}:\n${C.miete.tarife.map(([n, p, t]) => `- ${n}: ${p}${t ? `, ${t}` : ""}`).join("\n")}\n- Reservieren: ${BUCH} → „Transporter mieten“`],
     [/^(verkauft|verkaufen) (ihr|sie)/i, () =>
-      `Ja:\n${C.verkauf.map(([t]) => `- ${t}`).join("\n")}\n- Beratung: „Termin buchen“ → „Kaufberatung & Probefahrt“`],
+      `Ja:\n${C.verkauf.map(([t]) => `- ${t}`).join("\n")}\n- Beratung: ${BUCH} → „Kaufberatung & Probefahrt“`],
     [/hallo|guten (tag|morgen|abend)|^hi\b|servus|moin/i, () => "Guten Tag! Wobei kann ich helfen?"],
     [/danke|vielen dank|super|perfekt/i, () => "Gern geschehen."],
     [/wer bist|bist du|ki\b|künstlich|mensch|\bbot\b|chatbot/i, () => `KI-Chatbot der ${C.name}. Verbindliche Zusagen macht unser Team.`],
     [/warnleucht|kontrollleucht|leuchte|\brauch\b|qualm|lenkung|öl ?verlust|tropft/i, () => `- Rot, Rauch, Lenkung oder Ölverlust: nicht weiterfahren, anrufen: ${TEL}\n- Gelbe Leuchte: Fehlerspeicher auslesen lassen`],
     [/heute|jetzt|gerade|offen|geöffnet|öffnungs|uhrzeit|wann.*(auf|da|zu)|samstag|sonntag|feierabend|schließ/i, () => `${openText().text}.\n${hoursList()}`],
-    [/termin|buchen|vereinbar|anmeld|kalender|vorbeikommen|wann kann ich/i, () => `- „Termin buchen“: Anliegen, Tag, Uhrzeit wählen\n- Bis ${C.vorlauf} Tage im Voraus\n- Wir bestätigen per Telefon oder E-Mail\n- Schneller: ${TEL}`],
+    [/termin|buchen|vereinbar|anmeld|kalender|vorbeikommen|wann kann ich/i, () => FORMULAR ? `- ${BUCH}: Anliegen wählen, Wunschtermin und Nachricht angeben\n- Wir melden uns per Telefon oder E-Mail\n- Schneller: ${TEL}` : `- „Termin buchen“: Anliegen, Tag, Uhrzeit wählen\n- Bis ${C.vorlauf} Tage im Voraus\n- Wir bestätigen per Telefon oder E-Mail\n- Schneller: ${TEL}`],
     [/telefon|anruf|nummer|erreich|mail|kontakt/i, () => `- Telefon: ${TEL}\n- E-Mail: ${MAIL}`],
     [/ersatzwagen|holservice|bringservice|abhol|hol- und|e-auto|elektroauto|hybrid|bezahl|kartenzahlung|ec-karte|\bbar\b|paypal/i, () => `Weiß ich leider nicht sicher.\n- Bitte kurz anrufen: ${TEL}`],
     [/miet|verleih|vermiet|ausleih|umzug|sprinter|\bbus\b|kaution|kilometer|\bkm\b|kost.*transporter|transporter.*kost/i, () =>
-      `Transporter mieten${C.miete.fahrzeug ? ` (${C.miete.fahrzeug})` : ""}:\n${C.miete.tarife.map(([n, p, t]) => `- ${n}: ${p}${t ? `, ${t}` : ""}`).join("\n")}\n- ${C.miete.bedingungen.slice(0, 3).join(", ")}\n- Reservieren: „Termin buchen“ → „Transporter mieten“`],
+      `Transporter mieten${C.miete.fahrzeug ? ` (${C.miete.fahrzeug})` : ""}:\n${C.miete.tarife.map(([n, p, t]) => `- ${n}: ${p}${t ? `, ${t}` : ""}`).join("\n")}\n- ${C.miete.bedingungen.slice(0, 3).join(", ")}\n- Reservieren: ${BUCH} → „Transporter mieten“`],
     [/kaufen|verkauf|gebrauchtwagen|gebrauchte|neuwagen|inzahlung|in zahlung|finanzier|leasing|probefahrt|ankauf/i, () =>
-      `Ja, wir verkaufen auch:\n${C.verkauf.map(([t]) => `- ${t}`).join("\n")}\n- Beratung: „Termin buchen“ → „Kaufberatung & Probefahrt“`],
+      `Ja, wir verkaufen auch:\n${C.verkauf.map(([t]) => `- ${t}`).join("\n")}\n- Beratung: ${BUCH} → „Kaufberatung & Probefahrt“`],
     [/preis|kost|teuer|günstig|angebot|€|euro|kostenvoranschlag/i, () =>
-      `- Werkstatt: Preis je nach Fahrzeug, kurz anfragen: ${TEL}\n- Transporter mieten ab ${(C.miete.tarife[0] || [, , "auf Anfrage"])[1]}`],
+      `- Werkstatt: Preis je nach Fahrzeug, kurz anfragen: ${TEL}\n- Transporter mieten ab ${C.miete.tarife[0]?.[1] ?? "auf Anfrage"} (Beispielpreis)`],
     [/dauer|wie lange|lang dauert|zeit brauch|warten/i, () => `Richtwerte:\n${dauerList()}`],
     [/\bhu\b|\bau\b|tüv|dekra|hauptuntersuchung|abgasuntersuchung|plakette/i, () => `- HU/AU direkt bei uns\n- Dauer ca. 1 Std.\n${BUCHEN}`],
     [/garantie|gewährleistung|scheckheft|serviceheft|inspektion|wartung|durchsicht|service fällig/i, () => `- Nach Herstellervorgaben\n- Herstellergarantie bleibt erhalten\n- Dauer ca. 2–4 Std.`],
@@ -182,8 +222,8 @@ function openText() {
     [/batterie|elektrik|\blicht|lampe|starter|anlasser|lichtmaschine/i, () => `- Batterietest\n- Licht, Starter, Lichtmaschine`],
     [/öl|ölwechsel|filter/i, () => `- Öl mit Herstellerfreigabe\n- Inklusive Filter`],
     [/motor|zahnriem|kupplung|auspuff|partikelfilter|dpf|abgas/i, () => `- Zahnriemen, Kupplung\n- Auspuff, Partikelfilter`],
-    [/transporter|flotte|firm|gewerb|lieferwagen/i, () => `- Planbare Wartung für Firmenfahrzeuge\n- Anliegen „Transporter & Flotten“ wählen, wir rufen zurück`],
-    [/marke|ford|vw|volkswagen|opel|bmw|audi|mercedes|toyota|skoda|seat|fiat|hyundai|kia|renault|peugeot|bosch/i, () => `- Bosch Car Service\n- Meisterwerkstatt für alle Marken`],
+    [/transporter|flotte|firm|gewerb|lieferwagen/i, () => `- Planbare Wartung für Firmenfahrzeuge\n- Anliegen „${(C.anliegen.find(([t]) => /flotte/i.test(t)) || ["Flottenwartung"])[0]}“ wählen, wir rufen zurück`],
+    [/marke|ford|vw|volkswagen|opel|bmw|audi|mercedes|toyota|skoda|seat|fiat|hyundai|kia|renault|peugeot|bosch/i, () => `- Bosch Car Service\n- Werkstatt für alle Marken`],
     [/adresse|wo (seid|sind|ist|finde)|anfahrt|\bweg\b|route|egelsbach|park/i, () => `- ${ADR}${C.wissen ? `\n- ${C.wissen}` : ""}`],
   ];
   // Suche über alle Inhalte der Seite (Wissensliste aus content/seite.json)
@@ -259,7 +299,7 @@ function openText() {
     const hit = KEYS.find(([re]) => re.test(context));
     const target = hit && C.anliegen.find(([t]) => hit[1].test(t));
     const box = document.createElement("div"); box.className = "msg-cta";
-    box.innerHTML = `<a href="#termin">Termin buchen</a><a href="tel:${C.telLink}">Anrufen</a>`;
+    box.innerHTML = `<a href="#termin">${KNOPF}</a><a href="tel:${C.telLink}">Anrufen</a>`;
     box.querySelector('a[href="#termin"]').addEventListener("click", () => { if (target) window.pickAnliegen(target[0]); toggle(false); });
     log.appendChild(box); log.scrollTop = log.scrollHeight;
   }
@@ -269,7 +309,11 @@ function openText() {
     if (open) {
       if (!greeted) { greeted = true; bubble("bot", C.begruessung); }
       if (matchMedia("(hover:hover)").matches) input.focus();
-    } else fab.focus({ preventScroll: true });
+    } else {
+      // auf dem Handy ist der runde Knopf ausgeblendet, dann zurück zur Schnellleiste
+      const back = getComputedStyle(fab).display === "none" || getComputedStyle(fab).opacity === "0" ? document.getElementById("mbarChat") || fab : fab;
+      back.focus({ preventScroll: true });
+    }
   }
   async function ask(q) {
     q = q.trim(); if (!q || busy) return;
@@ -296,7 +340,7 @@ function openText() {
     }
     answer = answer.replace("\u0000FEHLER", "").trim();
     history.push({ role: "assistant", content: answer });
-    if (/termin|buchen|vereinbar|vorbeikommen|vorbei kommen|wann kann ich/i.test(q) || /„Termin buchen“/.test(answer)) cta(history.filter(m => m.role === "user").map(m => m.content).join(" "));
+    if (/termin|buchen|vereinbar|vorbeikommen|vorbei kommen|wann kann ich/i.test(q) || /„(Termin buchen|Anfrage senden)“/.test(answer)) cta(history.filter(m => m.role === "user").map(m => m.content).join(" "));
     busy = false; send.disabled = !input.value.trim();
   }
 

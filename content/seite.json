@@ -1,7 +1,7 @@
 {
   "seo": {
     "titel": "Autohaus Sollath GmbH – Werkstatt, Transporter-Vermietung und Gebrauchtwagen in Egelsbach",
-    "beschreibung": "Autohaus Sollath in Egelsbach: Bosch-Car-Service-Meisterwerkstatt für alle Marken, Transporter-Vermietung und geprüfte Gebrauchtwagen. Termin online buchen oder anrufen: 06103 731200."
+    "beschreibung": "Autohaus Sollath in Egelsbach: Bosch Car Service für alle Marken, Transporter-Vermietung und Gebrauchtwagen. Anfrage per Formular oder Telefon: 06103 731200."
   },
   "firma": {
     "name": "Autohaus Sollath GmbH",
@@ -29,12 +29,12 @@
     "text": "Werkstatt für alle Marken. Transporter mieten. Gebrauchtwagen kaufen.",
     "bild": "/assets/img/sollath-werkstatt.webp",
     "bild_beschreibung": "Werkstattgebäude der Autohaus Sollath GmbH mit Bosch-Car-Service-Schild, davor der Hof mit Transportern",
-    "knopf_termin": "Termin buchen",
-    "knopf_leistungen": "Leistungen"
+    "knopf_termin": "Anfrage senden",
+    "knopf_leistungen": "Transporter mieten"
   },
   "leistungen": {
     "titel": "Leistungen",
-    "text": "Für alle Marken, nach Herstellervorgabe.",
+    "text": "Für alle Marken. Ein Klick auf eine Leistung füllt die Anfrage vor.",
     "liste": [
       {
         "titel": "Inspektion & Wartung",
@@ -81,7 +81,7 @@
       },
       {
         "titel": "Fahrzeugverkauf",
-        "text": "Geprüfte Gebrauchtwagen, Inzahlungnahme und Finanzierung.",
+        "text": "Gebrauchtwagen, Inzahlungnahme und Finanzierung.",
         "dauer": "",
         "symbol": "unfall",
         "link": "#verkauf"
@@ -90,13 +90,13 @@
   },
   "werkstatt": {
     "kicker": "Kurt-Schumacher-Ring 8",
-    "titel": "Außerdem in der Werkstatt",
+    "titel": "Weitere Arbeiten",
     "bild": "/assets/img/sollath-schild.webp",
     "bild_beschreibung": "Einfahrt der Autohaus Sollath GmbH mit Bosch-Car-Service-Schild und Hausnummer 8",
     "liste": [
       {
         "titel": "Bremsen & Fahrwerk",
-        "text": "Beläge, Scheiben, Stoßdämpfer und Achsvermessung."
+        "text": "Beläge, Scheiben und Stoßdämpfer."
       },
       {
         "titel": "Klimaservice",
@@ -119,7 +119,17 @@
         "text": "Zahnriemen, Kupplung, Auspuff und Partikelfilter."
       }
     ],
-    "knopf": "Werkstatttermin buchen"
+    "knopf": "Anfrage senden"
+  },
+  "bosch": {
+    "kicker": "Bosch Car Service",
+    "titel": "Partnerwerkstatt für alle Marken",
+    "text": "Teil des Bosch-Car-Service-Netzes. Für Pkw und Transporter aller Marken.",
+    "punkte": [
+      "Alle Marken",
+      "Wartung nach Herstellervorgaben",
+      "Herstellergarantie bleibt erhalten"
+    ]
   },
   "vermietung": {
     "titel": "Transporter mieten",
@@ -151,16 +161,16 @@
       "Vollkasko inklusive (SB 1.000 €)",
       "Mehrkilometer 0,25 €"
     ],
-    "hinweis": "Beispielpreise inklusive MwSt.",
+    "hinweis": "Beispielpreise und -bedingungen inkl. MwSt.",
     "knopf": "Transporter reservieren"
   },
   "verkauf": {
     "titel": "Fahrzeugverkauf",
-    "text": "Geprüfte Gebrauchtwagen, Inzahlungnahme und Finanzierung.",
+    "text": "Gebrauchtwagen, Inzahlungnahme und Finanzierung. Aktueller Bestand auf Anfrage.",
     "punkte": [
       {
         "titel": "Gebrauchtwagen",
-        "text": "Durchgesehen, neue HU, 12 Monate Garantie.",
+        "text": "Aktueller Bestand auf Anfrage.",
         "symbol": "hu"
       },
       {
@@ -170,7 +180,7 @@
       },
       {
         "titel": "Finanzierung & Leasing",
-        "text": "Monatliche Raten über unsere Partnerbank.",
+        "text": "Angebot auf Anfrage.",
         "symbol": "allgemein"
       },
       {
@@ -181,12 +191,33 @@
     ],
     "knopf": "Beratung vereinbaren"
   },
+  "ablauf": {
+    "titel": "Ablauf",
+    "schritte": [
+      {
+        "titel": "Anfragen",
+        "text": "Per Formular oder Telefon."
+      },
+      {
+        "titel": "Termin abstimmen",
+        "text": "Rückmeldung mit einem Terminvorschlag."
+      },
+      {
+        "titel": "Fahrzeug bringen",
+        "text": "Annahme direkt bei uns am Hof."
+      },
+      {
+        "titel": "Abholen",
+        "text": "Abholen, sobald das Fahrzeug fertig ist."
+      }
+    ]
+  },
   "termin": {
-    "titel": "Termin buchen",
-    "text": "Anliegen, Tag und Uhrzeit wählen. Wir bestätigen kurz per Telefon oder E-Mail.",
+    "titel": "Anfrage",
+    "text": "Anliegen wählen und kurz beschreiben. Antwort per Telefon oder E-Mail.",
     "vorlauf_tage": 90,
-    "danke_titel": "Danke, Ihr Terminwunsch ist bei uns.",
-    "danke_text": "Wir bestätigen den Termin per Telefon oder E-Mail.",
+    "danke_titel": "Danke, Ihre Anfrage ist bei uns.",
+    "danke_text": "Wir melden uns per Telefon oder E-Mail.",
     "zusatz_anliegen": [
       {
         "titel": "Transporter mieten",
@@ -218,7 +249,7 @@
       "Haben Sie heute offen?",
       "Was kostet ein Transporter?",
       "Verkaufen Sie Gebrauchtwagen?",
-      "Wie buche ich einen Termin?"
+      "Wie stelle ich eine Anfrage?"
     ],
     "zusatzwissen": "Kundenparkplätze gibt es direkt auf dem Hof."
   },

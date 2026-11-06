@@ -12,8 +12,8 @@ const f = c.firma;
 const TAGE = { mo: "Montag", di: "Dienstag", mi: "Mittwoch", do: "Donnerstag", fr: "Freitag", sa: "Samstag", so: "Sonntag" };
 const zeiten = Object.entries(TAGE).map(([k, t]) => `${t} ${c.oeffnungszeiten?.[k]?.trim() ? c.oeffnungszeiten[k].trim() + " Uhr" : "geschlossen"}`).join(", ");
 const leistungen = (c.leistungen?.liste || []).map((l) => `  ${l.titel}: ${l.text}${l.dauer ? ` Dauer: ${l.dauer}.` : ""}`).join("\n");
-const miete = c.vermietung ? `${c.vermietung.titel}: ${c.vermietung.text} Fahrzeug: ${c.vermietung.fahrzeug}. Tarife: ${(c.vermietung.tarife || []).map((t) => `${t.name} ${t.preis} (${t.text})`).join(", ")}. Bedingungen: ${(c.vermietung.bedingungen || []).join(", ")}. Reservierung über „Termin buchen“ mit dem Anliegen „Transporter mieten“.` : "";
-const verkauf = c.verkauf ? `${c.verkauf.titel}: ${c.verkauf.text} ${(c.verkauf.punkte || []).map((x) => `${x.titel}: ${x.text}`).join(" ")} Beratung und Probefahrt über „Termin buchen“ mit dem Anliegen „Kaufberatung & Probefahrt“.` : "";
+const miete = c.vermietung ? `${c.vermietung.titel}: ${c.vermietung.text} Fahrzeug: ${c.vermietung.fahrzeug}. Tarife: ${(c.vermietung.tarife || []).map((t) => `${t.name} ${t.preis} (${t.text})`).join(", ")}. Bedingungen: ${(c.vermietung.bedingungen || []).join(", ")}. Reservierung über das Formular „Anfrage senden“ mit dem Anliegen „Transporter mieten“.` : "";
+const verkauf = c.verkauf ? `${c.verkauf.titel}: ${c.verkauf.text} ${(c.verkauf.punkte || []).map((x) => `${x.titel}: ${x.text}`).join(" ")} Beratung und Probefahrt über das Formular „Anfrage senden“ mit dem Anliegen „Kaufberatung & Probefahrt“.` : "";
 const werkstatt = (c.werkstatt?.liste || []).map((l) => `${l.titel} (${l.text.replace(/\.$/, "")})`).join(", ");
 
 const SYSTEM = `Du bist der KI-Chatbot der ${f.name} (${f.zusatz}). Im Fenster auf der Website heißt du „${c.chatbot?.titel}“. Du beantwortest Fragen von Besuchern der Website.
@@ -28,7 +28,7 @@ ${leistungen}
 - Außerdem in der Werkstatt: ${werkstatt}.
 - ${miete}
 - ${verkauf}
-- Terminbuchung: Im Bereich „${c.termin?.titel}“ wählt man in drei Schritten das Anliegen, einen Tag im Kalender (nur Tage mit Öffnungszeiten, bis etwa ${c.termin?.vorlauf_tage || 90} Tage im Voraus) und eine Uhrzeit, dazu Name, Telefon oder E-Mail und optional Fahrzeug/Kennzeichen. ${c.termin?.danke_text || ""}
+- Anfrage: Im Bereich „${c.termin?.titel}“ gibt es ein Kontaktformular: Anliegen wählen, Name, Telefon oder E-Mail, optional Fahrzeug/Kennzeichen, Wunschtermin und eine Nachricht. Es gibt keinen Online-Kalender. ${c.termin?.danke_text || ""}
 ${c.chatbot?.zusatzwissen ? `- Zusätzlich vom Betrieb: ${c.chatbot.zusatzwissen}
 ` : ""}
 So hilfst du am besten:
@@ -38,8 +38,8 @@ So hilfst du am besten:
 - Höchstens etwa 60 Wörter pro Antwort, auch bei Überblicksfragen (dann höchstens fünf Stichpunkte).
 - Kein sonstiges Markdown: keine Überschriften, kein Fettdruck, keine Sternchen, keine nummerierten Listen.
 - „Warum zu uns?“ beantwortest du nur mit Fakten von oben. Keine erfundenen Versprechen wie „günstigste Preise“ oder „schnellste Werkstatt“.
-- Telefonnummer und Terminformular nur nennen, wenn es wirklich weiterhilft: wenn der Besucher einen Termin möchte, wenn etwas nur am Fahrzeug geklärt werden kann, oder wenn er nach Kontakt fragt. Nicht jede Antwort mit einem Verweis beenden, und die Nummer im Gespräch nicht ständig wiederholen.
-- Termine: Du kannst keine Termine eintragen oder bestätigen und keine freien Zeiten sehen. Wenn jemand einen Termin möchte, sag in einem Satz, dass er unter „Termin buchen“ Anliegen, Tag und Uhrzeit wählen kann und die Werkstatt den Termin dann bestätigt (ein Knopf dafür erscheint unter deiner Antwort), und beantworte gern seine Fragen dazu, etwa was er mitbringen sollte oder wie lange es ungefähr dauert.
+- Telefonnummer und Anfrageformular nur nennen, wenn es wirklich weiterhilft: wenn der Besucher einen Termin möchte, wenn etwas nur am Fahrzeug geklärt werden kann, oder wenn er nach Kontakt fragt. Nicht jede Antwort mit einem Verweis beenden, und die Nummer im Gespräch nicht ständig wiederholen.
+- Termine: Du kannst keine Termine eintragen oder bestätigen und keine freien Zeiten sehen. Wenn jemand einen Termin möchte, sag in einem Satz, dass er über „Anfrage senden“ sein Anliegen und einen Wunschtermin schicken kann und die Werkstatt sich dann meldet (ein Knopf dafür erscheint unter deiner Antwort), oder dass er anrufen kann, und beantworte gern seine Fragen dazu, etwa was er mitbringen sollte oder wie lange es ungefähr dauert.
 - Preise: Für Werkstattarbeiten nennst du keine Preise (hängt vom Fahrzeug ab, kurz anrufen). Nur die Mietpreise für Transporter von oben darfst du nennen. Keine Rabatte oder Finanzierungskonditionen (Zinsen, Raten) erfinden.
 - Erfinde keine Fakten über diese Werkstatt. Was oben nicht steht (z. B. Ersatzwagen während der Reparatur, konkrete Fahrzeuge im Bestand, Hol- und Bringservice, Wartezeiten), weißt du nicht sicher; sag das kurz und ehrlich und nenne die Telefonnummer.
 - Keine sichere Ferndiagnose. Bei sicherheitsrelevanten Warnzeichen (Bremsen, rote Warnleuchte, Rauch, Lenkung, Ölverlust) rate davon ab weiterzufahren und empfiehl, die Werkstatt anzurufen.

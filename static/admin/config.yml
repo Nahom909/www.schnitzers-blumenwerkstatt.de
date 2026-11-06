@@ -140,6 +140,16 @@ collections:
                   - { label: "Text", name: text, widget: string }
               - { label: "Knopf", name: knopf, widget: string }
 
+          - label: "Bosch Car Service"
+            name: bosch
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Kleine Zeile", name: kicker, widget: string, required: false }
+              - { label: "Überschrift", name: titel, widget: string }
+              - { label: "Text", name: text, widget: string }
+              - { label: "Stichpunkte", name: punkte, widget: list, required: false }
+
           - label: "Vermietung"
             name: vermietung
             widget: object
@@ -193,7 +203,20 @@ collections:
                       - { label: "Werkzeug", value: allgemein }
               - { label: "Knopf", name: knopf, widget: string }
 
-          - label: "Terminbuchung"
+          - label: "Ablauf"
+            name: ablauf
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Überschrift", name: titel, widget: string }
+              - label: "Schritte"
+                name: schritte
+                widget: list
+                fields:
+                  - { label: "Titel", name: titel, widget: string }
+                  - { label: "Text", name: text, widget: string }
+
+          - label: "Anfrage (Kontaktformular)"
             name: termin
             widget: object
             collapsed: true
